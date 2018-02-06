@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.ptu.sharepicture.dao.UserMapper">
+	<sql id="usercol">
+		user.userId,user.userName,user.account,user.password,
+		user.sex,user.email,user.createTime,user.userImage,user.isLock
+	</sql>
+	<sql id="albumscol">
+		albums.albumId,albums.albumName,albums.albumImage,albums.createTime,
+		albums.isLock
+	</sql>
+
+	<!-- <select id="getUserAndAlbum" resultMap="UserAndAlbum">
+		SELECT
+		<include refid="usercol"></include>
+		,
+		albums.albumId,albums.albumName,albums.albumImage,
+		albums.createTime
+		AS al_createTime,albums.isLock AS al_isLock
+		FROM user LEFT JOIN
+		albums
+		ON user.userId=albums.userId WHERE
+		<bind name="userName" value="'%'+userName+'%'" />
+		userName LIKE #{userName}
+	</select> -->
+
+	<select id="getAll" resultType="cn.edu.ptu.sharepicture.entity.User">
+		SELECT
+		<include refid="usercol"></include>
+		FROM user
+	</select>
+
+	<select id="login" resultType="String">
+		SELECT ISLOCK FROM user WHERE
+		ACCOUNT=#{account}
+		AND PASSWORD=#{password}
+	</select>
+
+	<insert id="insertUser">
+		INSERT INTO user
+		(userId,userName,account,password,email,createTime)
+		values(#{userId},#{userName},#{account},#{password},#{email},#{createTime})
+	</insert>
+
+	<update id="updateUser">
+		UPDATE user
+		<set>
+			<if test="sex!='' and sex!=null">SEX=#{sex},</if>
+			<if test="userImage!='' and userImage!=null">USERIMAGE=#{userImage}</if>
+		</set>
+		WHERE USERID=#{userId}
+	</update>
+
+	<update id="updatePassword">
+		UPDATE user SET PASSWORD=#{new_pwd}
+		WHERE USERID=#{userId} AND PASSWORD=#{password}
+	</update>
+
+
+	<resultMap type="cn.edu.ptu.sharepicture.entity.User" id="UserAndAlbum">
+		<id property="userId" column="userId" jdbcType="VARCHAR" />
+		<result property="userName" column="userName" jdbcType="VARCHAR" />
+		<result property="account" column="account" jdbcType="VARCHAR" />
+		<result property="password" column="password" jdbcType="VARCHAR" />
+		<result property="sex" column="sex" jdbcType="VARCHAR" />
+		<result property="email" column="email" jdbcType="VARCHAR" />
+		<result property="createTime" column="createTime" jdbcType="VARCHAR" />
+		<result property="userImage" column="userImage" jdbcType="VARCHAR" />
+		<result property="isLock" column="isLock" jdbcType="VARCHAR" />
+		<collection property="albums" ofType="cn.edu.ptu.sharepicture.entity.Album">
+			<id property="albumId" column="albumId" jdbcType="VARCHAR" />
+			<result property="albumName" column="albumName" jdbcType="VARCHAR" />
+			<result property="albumImage" column="albumImage" jdbcType="VARCHAR" />
+			<result property="createTime" column="al_createTime" jdbcType="VARCHAR" />
+			<result property="isLock" column="al_isLock" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+</mapper>

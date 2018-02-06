@@ -1,0 +1,94 @@
+package cn.edu.ptu.sharepicture.entity;
+
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Picture {
+
+	private String pictureId;
+	private String albumId;
+	private String pictureName;
+	private String picturePath;
+	private String remark;
+	private String createTime;
+	private String isLock;
+	private List<Message> msgs;
+
+	public Picture() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getPictureId() {
+		return pictureId;
+	}
+
+	public void setPictureId(String pictureId) {
+		this.pictureId = pictureId;
+	}
+
+	public String getAlbumId() {
+		return albumId;
+	}
+
+	public void setAlbumId(String albumId) {
+		this.albumId = albumId;
+	}
+
+	public String getPictureName() {
+		return pictureName;
+	}
+
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
+
+	public String getPicturePath() {
+		return picturePath;
+	}
+
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getIsLock() {
+		return isLock;
+	}
+
+	public void setIsLock(String isLock) {
+		this.isLock = isLock;
+	}
+
+	public List<Message> getMsgs() {
+		return msgs;
+	}
+
+	public void setMsgs(List<Message> msgs) {
+		this.msgs = msgs;
+	}
+
+	@Override
+	public String toString() {
+		return "Picture [pictureId=" + pictureId + ", albumId=" + albumId + ", pictureName=" + pictureName
+				+ ", picturePath=" + picturePath + ", remark=" + remark + ", createTime=" + createTime + ", isLock="
+				+ isLock + ", msgs=" + msgs + "]";
+	}
+
+}
