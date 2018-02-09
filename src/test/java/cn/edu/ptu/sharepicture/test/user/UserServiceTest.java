@@ -29,8 +29,8 @@ public class UserServiceTest {
 
 	@Test
 	public void loginTest() {
-		String isLock = userService.login("WWW", "123");
-		System.out.println(isLock);
+		User u = userService.login("512370345@qq.com", "123456");
+		System.out.println(u);
 	}
 
 	@Test

@@ -91,13 +91,15 @@
 					return;
 				}
 				$.post("userLogin",{"email":email,"password":password},function(data,status){
-					if(data=="N")
+					console.log(data);
+					if(data.isLock==null){
+						alert("用户信息不匹配");
+					}
+					else if(data.isLock=="N")
 					{
 						alert("登录成功!");
-					}else if(data=="Y"){
+					}else if(data.isLock=="Y"){
 						alert("帐号被锁定!");
-					}else {
-						alert("用户信息不匹配");
 					}
 				})
 			})

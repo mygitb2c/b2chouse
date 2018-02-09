@@ -49,7 +49,7 @@ $.validator.addMethod("isrepeat", function(value, element, params) {
 		data:data,
 		cache:false,
 		success: function(data) {
-			if(data == "true") {
+			if(data == true) {
 				msg = "<i class=\"fa fa-exclamation-circle\"> 该" + params[0] + "已被占用</i>";
 			} else {
 				result = true;

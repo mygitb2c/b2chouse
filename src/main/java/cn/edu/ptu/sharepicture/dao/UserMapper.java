@@ -44,7 +44,7 @@ public interface UserMapper {
 	 * @param password
 	 * @return isLock
 	 */
-	String login(@Param(value = "email") String email, @Param(value = "password") String password);
+	User login(@Param(value = "email") String email, @Param(value = "password") String password);
 
 	/**
 	 * 更新用户信息

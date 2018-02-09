@@ -24,8 +24,8 @@
 		FROM user
 	</select>
 
-	<select id="login" resultType="String">
-		SELECT ISLOCK FROM user WHERE
+	<select id="login" resultType="cn.edu.ptu.sharepicture.entity.User">
+		SELECT USERID,ISLOCK FROM user WHERE
 		EMAIL=#{email}
 		AND PASSWORD=#{password}
 	</select>

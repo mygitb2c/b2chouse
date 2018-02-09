@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.ptu.sharepicture.dao.UserMapper;
 import cn.edu.ptu.sharepicture.entity.User;
+import cn.edu.ptu.sharepicture.util.MD5Util;
 
 @Service
 public class UserService {
@@ -28,8 +29,10 @@ public class UserService {
 		String userId = UUID.randomUUID().toString().replaceAll("-", "");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		String createTime = dateFormat.format(new Date());
+		String password = user.getPassword();
 		user.setUserId(userId);
 		user.setCreateTime(createTime);
+		user.setPassword(MD5Util.getMD5Str(password));
 		return userMapper.insertUser(user);
 	}
 
@@ -40,8 +43,15 @@ public class UserService {
 	 * @param password
 	 * @return
 	 */
-	public String login(String email, String password) {
-		return userMapper.login(email, password);
+	public User login(String email, String password) {
+		password = MD5Util.getMD5Str(password);
+		User u = userMapper.login(email, password);
+		if (u != null) {
+			if (u.getIsLock() == "Y") {
+				u.setUserId(null);
+			}
+		}
+		return u;
 	}
 
 	/**
@@ -69,7 +79,7 @@ public class UserService {
 	}
 
 	public boolean isRepeat(String email, String userName) {
-		return userMapper.isRepeat(email,userName);
+		return userMapper.isRepeat(email, userName);
 	}
 
 }
