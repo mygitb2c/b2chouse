@@ -1,4 +1,10 @@
-D:\workSpace\sharepicture\src\main\java\cn\edu\ptu\sharepicture\entity\Picture.java
-D:\workSpace\sharepicture\src\main\java\cn\edu\ptu\sharepicture\entity\Album.java
-D:\workSpace\sharepicture\src\main\java\cn\edu\ptu\sharepicture\entity\User.java
-D:\workSpace\sharepicture\src\main\java\cn\edu\ptu\sharepicture\entity\Message.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\entity\User.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\dao\PictureMapper.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\service\UserService.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\dao\AlbumMapper.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\dao\UserMapper.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\controller\UserController.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\entity\Picture.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\entity\Album.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\dao\MessageMapper.java
+D:\git\b2chouse\src\main\java\cn\edu\ptu\sharepicture\entity\Message.java

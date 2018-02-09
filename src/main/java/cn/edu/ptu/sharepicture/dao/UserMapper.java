@@ -44,7 +44,7 @@ public interface UserMapper {
 	 * @param password
 	 * @return isLock
 	 */
-	String login(@Param(value = "account") String account, @Param(value = "password") String password);
+	String login(@Param(value = "email") String email, @Param(value = "password") String password);
 
 	/**
 	 * 更新用户信息
@@ -66,4 +66,5 @@ public interface UserMapper {
 	 */
 	boolean updatePassword(User user, @Param(value = "new_pwd") String new_pwd);
 
+	boolean isRepeat(@Param(value = "email") String email, @Param(value = "userName") String userName);
 }

@@ -31,7 +31,7 @@ public class GetAllResultMap {
 
 	@Test
 	public void demo() {
-		List list = new ArrayList();
+		List<Object> list = new ArrayList();
 		list.add(new User());
 		list.add(new Album());
 		list.add(new Picture());

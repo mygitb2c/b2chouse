@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.edu.ptu.sharepicture.entity.User;
@@ -17,16 +18,32 @@ public class UserController {
 	@Resource
 	private UserService userService;
 
+	@RequestMapping(value = "login")
+	public String toLoginWeb() {
+		return "forward:login.jsp";
+	}
+
+	@RequestMapping(value = "register")
+	public String toRegisterWeb() {
+		return "forward:register.jsp";
+	}
 	@ResponseBody
-	@RequestMapping(value = "userRegistered", method = RequestMethod.POST)
+	@RequestMapping(value = "isRepeat",method=RequestMethod.GET)
+	public String isRepeat(@RequestParam(value = "email",required=false) String email, @RequestParam(value = "email",required=false) String userName) {
+		boolean flag=userService.isRepeat(email, userName);
+		return String.valueOf(flag);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "userRegister", method = RequestMethod.POST)
 	public boolean registered(User user) {
 		return userService.insertUser(user);
 	}
 
+	@RequestMapping(value = "userLogin", method = RequestMethod.POST)
 	@ResponseBody
-	@RequestMapping(value = "userLogin", method = RequestMethod.GET)
-	public String login(String account, String password) {
-		return userService.login(account, password);
+	public String login(@Param(value = "email") String email, @Param(value = "password") String password) {
+		return userService.login(email, password);
 	}
 
 	@ResponseBody

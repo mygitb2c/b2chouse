@@ -41,5 +41,11 @@ public class UserServiceTest {
 		boolean flag = userService.updateUser(user);
 		System.out.println(flag);
 	}
+	
+	@Test
+	public void isRepeatTest() {
+		boolean n=userService.isRepeat(null, "王王");
+		System.out.println(n);
+	}
 
 }

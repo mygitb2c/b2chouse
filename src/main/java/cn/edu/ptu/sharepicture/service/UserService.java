@@ -40,8 +40,8 @@ public class UserService {
 	 * @param password
 	 * @return
 	 */
-	public String login(String account, String password) {
-		return userMapper.login(account, password);
+	public String login(String email, String password) {
+		return userMapper.login(email, password);
 	}
 
 	/**
@@ -66,6 +66,10 @@ public class UserService {
 	 */
 	public boolean updatePassword(User user, String new_pwd) {
 		return userMapper.updatePassword(user, new_pwd);
+	}
+
+	public boolean isRepeat(String email, String userName) {
+		return userMapper.isRepeat(email,userName);
 	}
 
 }

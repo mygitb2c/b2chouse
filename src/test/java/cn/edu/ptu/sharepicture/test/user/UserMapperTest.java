@@ -33,7 +33,7 @@ public class UserMapperTest {
 	public void getAll(){
 		List<User> list=userMapper.getAll();
 		for (User user : list) {
-			System.out.println(user.getUserImage()==null);
+			System.out.println(user);
 		}
 	}
 	
@@ -58,6 +58,11 @@ public class UserMapperTest {
 		boolean flag = userMapper.insertUser(user);
 		System.out.println(flag);
 
+	}
+	@Test
+	public void isRepeatTest() {
+		boolean n=userMapper.isRepeat(null, "王王");
+		System.out.println(n);
 	}
 
 }

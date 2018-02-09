@@ -12,19 +12,11 @@
 		albums.isLock
 	</sql>
 
-	<!-- <select id="getUserAndAlbum" resultMap="UserAndAlbum">
-		SELECT
-		<include refid="usercol"></include>
-		,
-		albums.albumId,albums.albumName,albums.albumImage,
-		albums.createTime
-		AS al_createTime,albums.isLock AS al_isLock
-		FROM user LEFT JOIN
-		albums
-		ON user.userId=albums.userId WHERE
-		<bind name="userName" value="'%'+userName+'%'" />
-		userName LIKE #{userName}
-	</select> -->
+	<!-- <select id="getUserAndAlbum" resultMap="UserAndAlbum"> SELECT <include 
+		refid="usercol"></include> , albums.albumId,albums.albumName,albums.albumImage, 
+		albums.createTime AS al_createTime,albums.isLock AS al_isLock FROM user LEFT 
+		JOIN albums ON user.userId=albums.userId WHERE <bind name="userName" value="'%'+userName+'%'" 
+		/> userName LIKE #{userName} </select> -->
 
 	<select id="getAll" resultType="cn.edu.ptu.sharepicture.entity.User">
 		SELECT
@@ -34,8 +26,20 @@
 
 	<select id="login" resultType="String">
 		SELECT ISLOCK FROM user WHERE
-		ACCOUNT=#{account}
+		EMAIL=#{email}
 		AND PASSWORD=#{password}
+	</select>
+
+	<select id="isRepeat" resultType="boolean">
+		SELECT COUNT(1) FROM user
+		<where>
+			<if test="email!=null and userName==null">
+				EMAIL=#{email}
+			</if>
+			<if test="userName!=null and email==null">
+				USERNAME=#{userName}
+			</if>
+		</where>
 	</select>
 
 	<insert id="insertUser">
@@ -55,7 +59,8 @@
 
 	<update id="updatePassword">
 		UPDATE user SET PASSWORD=#{new_pwd}
-		WHERE USERID=#{userId} AND PASSWORD=#{password}
+		WHERE
+		USERID=#{userId} AND PASSWORD=#{password}
 	</update>
 
 
