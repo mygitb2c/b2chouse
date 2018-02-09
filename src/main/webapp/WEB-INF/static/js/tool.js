@@ -37,12 +37,23 @@ $.validator.addMethod("rex_checked", function(value, element, params) {
 
 $.validator.addMethod("isrepeat", function(value, element, params) {
 	var msg = "";
-	var result = true;
-	$.get("isRepeat","{"+element.name+":"+element.value+"}",function  (data,status) {
-		if(data == "true")
-		{
-			result = false;
-			msg= "<i class=\"fa fa-exclamation-circle\"> 该"+params[0]+"已被占用</i>";
+	var result = false;
+	var data={};
+	var name=element.name;
+	value=element.value;
+	data[name]=value;
+	$.ajax({
+		type: "GET",
+		url: "isRepeat",
+		async: false,
+		data:data,
+		cache:false,
+		success: function(data) {
+			if(data == "true") {
+				msg = "<i class=\"fa fa-exclamation-circle\"> 该" + params[0] + "已被占用</i>";
+			} else {
+				result = true;
+			}
 		}
 	})
 	$.validator.messages.isrepeat = msg;
