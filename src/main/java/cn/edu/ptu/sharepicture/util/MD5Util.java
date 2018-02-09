@@ -27,7 +27,7 @@ public class MD5Util {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new BigInteger(1, md.digest()).toString(16);
+		return new BigInteger(1, md.digest()).toString(16).toUpperCase();
 	}
 	
 }
