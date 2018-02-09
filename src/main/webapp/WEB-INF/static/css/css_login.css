@@ -1,0 +1,65 @@
+i {
+	width: 10%;
+}
+
+.form-control:focus {
+	box-shadow: none;
+	border: none;
+}
+
+.form-control {
+	border: none;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.div_email,
+.div_password {
+	border: 1px solid #888888;
+	align-content: center;
+	margin-top: 40px;
+}
+
+#password,
+#email {
+	width: 80%;
+}
+
+.div_info {
+	position: relative;
+	top: -10px;
+	border-radius: 0.35rem;
+	border: 1px solid #888888;
+	box-shadow: -10px 10px 10px #888888;
+	height: 363px;
+}
+
+.div_info_footer,
+.button,
+.div_email,
+.div_password {
+	border-radius: 0.35rem;
+	box-shadow: -10px 10px 10px #888888;
+}
+
+.button:active {
+	position: relative;
+	top: 10px;
+	right: 10px;
+}
+
+a:hover {
+	color: #007bff;
+	text-decoration: none;
+}
+
+a {
+	color: #343a40;
+	cursor: pointer;
+}
+
+#btn_login {
+	margin-bottom: 20px;
+}
