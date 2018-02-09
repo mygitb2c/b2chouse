@@ -61,8 +61,15 @@ public class UserMapperTest {
 	}
 	@Test
 	public void isRepeatTest() {
-		boolean n=userMapper.isRepeat(null, "王王");
+		boolean n=userMapper.isRepeat("512370345@qq.co", "");
 		System.out.println(n);
 	}
+	@Test
+	public void demo() {
+		boolean email=false;
+		System.out.println("email:"+(email==false));
+	}
+	
+	
 
 }

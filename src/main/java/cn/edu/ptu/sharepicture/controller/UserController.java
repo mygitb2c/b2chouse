@@ -1,6 +1,9 @@
 package cn.edu.ptu.sharepicture.controller;
 
+import java.util.Enumeration;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -19,7 +22,10 @@ public class UserController {
 	private UserService userService;
 
 	@RequestMapping(value = "login")
-	public String toLoginWeb() {
+	public String toLoginWeb(HttpServletRequest request) {
+		String addr = request.getRemoteAddr() + ":" + request.getRemotePort() + request.getContextPath();
+		System.out.println("addr:" + addr);
+		System.out.println("referer:" + request.getHeader("referer"));
 		return "forward:login.jsp";
 	}
 
@@ -27,17 +33,19 @@ public class UserController {
 	public String toRegisterWeb() {
 		return "forward:register.jsp";
 	}
+
 	@ResponseBody
-	@RequestMapping(value = "isRepeat",method=RequestMethod.GET)
-	public String isRepeat(@RequestParam(value = "email",required=false) String email, @RequestParam(value = "email",required=false) String userName) {
-		boolean flag=userService.isRepeat(email, userName);
+	@RequestMapping(value = "isRepeat", method = RequestMethod.GET)
+	public String isRepeat(@Param(value = "email") String email, @Param(value = "userName") String userName) {
+		boolean flag = userService.isRepeat(email, userName);
 		return String.valueOf(flag);
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "userRegister", method = RequestMethod.POST)
-	public boolean registered(User user) {
-		return userService.insertUser(user);
+	public String registered(User user) {
+		boolean flag = userService.insertUser(user);
+		return String.valueOf(flag);
 	}
 
 	@RequestMapping(value = "userLogin", method = RequestMethod.POST)
@@ -48,14 +56,16 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping(value = "updateUser", method = RequestMethod.PUT)
-	public boolean updateUser(User user) {
-		return userService.updateUser(user);
+	public String updateUser(User user) {
+		boolean flag = userService.updateUser(user);
+		return String.valueOf(userService.updateUser(user));
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "updatePWD", method = RequestMethod.PUT)
-	public boolean updatePassword(User user, @Param(value = "new_pwd") String new_pwd) {
-		return userService.updatePassword(user, new_pwd);
+	public String updatePassword(User user, @Param(value = "new_pwd") String new_pwd) {
+		boolean flag = userService.updatePassword(user, new_pwd);
+		return String.valueOf(flag);
 	}
 
 }

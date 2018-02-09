@@ -35,7 +35,7 @@
 					</div>
 					<div class="col-md-2"></div>
 					<div class="formdiv">
-						<form action="www.baidu.com" method="post" id="form_reg">
+						<form action="userRegister" method="post" id="form_reg">
 							<div class="form-inline form-group">
 								<label class="col-md-2" for="email">邮箱：</label>
 								<input type="text" name="email" id="email" class="form-control col-md-4" />

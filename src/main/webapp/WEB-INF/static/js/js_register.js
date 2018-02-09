@@ -1,11 +1,11 @@
 $(function() {
 	getCheckedCode();
 
-	$.validator.setDefaults({
+	/*$.validator.setDefaults({
 		submitHandler: function() {
 			alert("提交");
 		}
-	})
+	})*/
 	/*表单验证*/
 	$("#form_reg").validate({
 		errorPlacement: function(error, element) { //错误信息位置设置方法
