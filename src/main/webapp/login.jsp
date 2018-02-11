@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>登录</title>
+	<title>登 录</title>
 		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="static/css/font-awesome.css" />
 		<link rel="stylesheet" type="text/css" href="static/css/buttons.css" />

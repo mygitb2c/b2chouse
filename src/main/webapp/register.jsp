@@ -27,7 +27,6 @@
 
 				</div>
 				<div class="col-md-9 column">
-
 					<div class="col-md-7">
 						<label class="title"><i class="fa fa-envelope"></i> 邮箱号注册</label>
 						<a class="title pull-right" href="login"><i class="fa fa-wheelchair-alt "></i> 去登录 </a>
@@ -71,7 +70,5 @@
 				</div>
 			</div>
 		</div>
-
 	</body>
-
 </html>
