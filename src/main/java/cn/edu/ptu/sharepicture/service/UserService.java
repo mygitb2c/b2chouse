@@ -13,6 +13,8 @@ import cn.edu.ptu.sharepicture.dao.UserMapper;
 import cn.edu.ptu.sharepicture.entity.User;
 import cn.edu.ptu.sharepicture.util.MD5Util;
 
+
+
 @Service
 public class UserService {
 
