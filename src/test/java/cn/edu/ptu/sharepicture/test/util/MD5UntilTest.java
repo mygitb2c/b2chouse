@@ -18,7 +18,7 @@ public class MD5UntilTest {
 	@Test
 	public void getStr() {
 		String result=md5.getMD5Str("123456");
-		System.out.println(result.length());
+		System.out.println(result);
 		System.out.println(result.equals("1679091C5A880FAF6FB5E6087EB1B2DC"));
 	}
 	
