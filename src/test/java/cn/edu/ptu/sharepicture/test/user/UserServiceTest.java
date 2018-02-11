@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +32,7 @@ public class UserServiceTest {
 
 	@Test
 	public void loginTest() {
-		User u = userService.login("512370345@qq.com", "123456");
+		User u = userService.login("512370345@qq.com", "123456",null);
 		System.out.println(u);
 	}
 

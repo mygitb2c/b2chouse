@@ -4,6 +4,7 @@ import java.util.Enumeration;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -51,15 +52,17 @@ public class UserController {
 
 	@RequestMapping(value = "userLogin", method = RequestMethod.POST)
 	@ResponseBody
-	public User login(@Param(value = "email") String email, @Param(value = "password") String password) {
-		return userService.login(email, password);
+	public User login(@Param(value = "email") String email, @Param(value = "password") String password,
+			HttpSession session) {
+		User u = userService.login(email, password,session);
+		return u;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "updateUser", method = RequestMethod.PUT)
 	public boolean updateUser(User user) {
 		boolean flag = userService.updateUser(user);
-		return userService.updateUser(user);
+		return flag;
 	}
 
 	@ResponseBody
