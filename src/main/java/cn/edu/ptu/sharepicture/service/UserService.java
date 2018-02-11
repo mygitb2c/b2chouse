@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,11 @@ public class UserService {
 	 * 录入用户信息
 	 * 
 	 * @param user
-	 *            (userName,account,passwor,email)
+	 *            (userName,account,password,email)
 	 * @return
 	 */
 	public boolean insertUser(User user) {
-		String userId = UUID.randomUUID().toString().replaceAll("-", "");
+		String userId = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		String createTime = dateFormat.format(new Date());
 		String password = user.getPassword();
@@ -43,12 +44,14 @@ public class UserService {
 	 * @param password
 	 * @return
 	 */
-	public User login(String email, String password) {
+	public User login(String email, String password, HttpSession session) {
 		password = MD5Util.getMD5Str(password);
 		User u = userMapper.login(email, password);
 		if (u != null) {
 			if (u.getIsLock() == "Y") {
 				u.setUserId(null);
+			} else {
+				session.setAttribute("userId", u.getUserId());
 			}
 		}
 		return u;
@@ -75,6 +78,9 @@ public class UserService {
 	 * @return
 	 */
 	public boolean updatePassword(User user, String new_pwd) {
+		String password = MD5Util.getMD5Str(user.getPassword());
+		user.setPassword(password);
+		new_pwd = MD5Util.getMD5Str(new_pwd);
 		return userMapper.updatePassword(user, new_pwd);
 	}
 
