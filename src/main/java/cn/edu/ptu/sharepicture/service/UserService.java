@@ -23,7 +23,7 @@ public class UserService {
 	 * 录入用户信息
 	 * 
 	 * @param user
-	 *            (userName,account,passwor,email)
+	 *            (userName,account,password,email)
 	 * @return
 	 */
 	public boolean insertUser(User user) {
