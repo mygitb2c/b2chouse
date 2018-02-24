@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class Picture {
 
 	private String pictureId;
-	private String albumId;
+	private String userId;
 	private String pictureName;
 	private String picturePath;
 	private String remark;
@@ -28,12 +28,12 @@ public class Picture {
 		this.pictureId = pictureId;
 	}
 
-	public String getAlbumId() {
-		return albumId;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setAlbumId(String albumId) {
-		this.albumId = albumId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getPictureName() {
@@ -86,9 +86,11 @@ public class Picture {
 
 	@Override
 	public String toString() {
-		return "Picture [pictureId=" + pictureId + ", albumId=" + albumId + ", pictureName=" + pictureName
+		return "Picture [pictureId=" + pictureId + ", userId=" + userId + ", pictureName=" + pictureName
 				+ ", picturePath=" + picturePath + ", remark=" + remark + ", createTime=" + createTime + ", isLock="
 				+ isLock + ", msgs=" + msgs + "]";
 	}
+
+	
 
 }

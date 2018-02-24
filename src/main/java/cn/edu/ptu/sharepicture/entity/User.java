@@ -16,7 +16,7 @@ public class User {
 	private String createTime;
 	private String userImage;
 	private String isLock;
-	private List<Album> albums;
+	private List<Picture> pictures;
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -94,19 +94,12 @@ public class User {
 		this.isLock = isLock;
 	}
 
-	public List<Album> getAlbums() {
-		return albums;
+	public List<Picture> getPictures() {
+		return pictures;
 	}
 
-	public void setAlbums(List<Album> albums) {
-		this.albums = albums;
-	}
-
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", account=" + account + ", password=" + password
-				+ ", sex=" + sex + ", email=" + email + ", createTime=" + createTime + ", userImage=" + userImage
-				+ ", isLock=" + isLock + ", albums=" + albums + "]";
+	public void setPictures(List<Picture> pictures) {
+		this.pictures = pictures;
 	}
 
 	public User(String userName, String account, String password, String email) {
@@ -115,6 +108,13 @@ public class User {
 		this.account = account;
 		this.password = password;
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", userName=" + userName + ", account=" + account + ", password=" + password
+				+ ", sex=" + sex + ", email=" + email + ", createTime=" + createTime + ", userImage=" + userImage
+				+ ", isLock=" + isLock + ", pictures=" + pictures + "]";
 	}
 
 }

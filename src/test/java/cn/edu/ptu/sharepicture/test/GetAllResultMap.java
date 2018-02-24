@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import cn.edu.ptu.sharepicture.entity.Album;
 import cn.edu.ptu.sharepicture.entity.Message;
 import cn.edu.ptu.sharepicture.entity.Picture;
 import cn.edu.ptu.sharepicture.entity.User;
@@ -33,7 +32,6 @@ public class GetAllResultMap {
 	public void demo() {
 		List<Object> list = new ArrayList();
 		list.add(new User());
-		list.add(new Album());
 		list.add(new Picture());
 		list.add(new Message());
 		for (Object object : list) {

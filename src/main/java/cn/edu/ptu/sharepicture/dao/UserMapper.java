@@ -67,4 +67,7 @@ public interface UserMapper {
 	boolean updatePassword(User user, @Param(value = "new_pwd") String new_pwd);
 
 	boolean isRepeat(@Param(value = "email") String email, @Param(value = "userName") String userName);
+
+	User getUserInfo(String userId);
+
 }

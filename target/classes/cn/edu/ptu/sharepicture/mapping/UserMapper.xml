@@ -25,9 +25,15 @@
 	</select>
 
 	<select id="login" resultType="cn.edu.ptu.sharepicture.entity.User">
-		SELECT USERID,ISLOCK FROM user WHERE
+		SELECT USERID,ISLOCK FROM user
+		WHERE
 		EMAIL=#{email}
 		AND PASSWORD=#{password}
+	</select>
+
+	<select id="getUserInfo" resultType="cn.edu.ptu.sharepicture.entity.User">
+		SELECT USERNAME,SEX,EMAIL,USERIMAGE,ISLOCK FROM
+		user WHERE USERID=#{userId}
 	</select>
 
 	<select id="isRepeat" resultType="boolean">
@@ -67,19 +73,13 @@
 	<resultMap type="cn.edu.ptu.sharepicture.entity.User" id="UserAndAlbum">
 		<id property="userId" column="userId" jdbcType="VARCHAR" />
 		<result property="userName" column="userName" jdbcType="VARCHAR" />
-		<result property="account" column="account" jdbcType="VARCHAR" />
-		<result property="password" column="password" jdbcType="VARCHAR" />
 		<result property="sex" column="sex" jdbcType="VARCHAR" />
 		<result property="email" column="email" jdbcType="VARCHAR" />
 		<result property="createTime" column="createTime" jdbcType="VARCHAR" />
 		<result property="userImage" column="userImage" jdbcType="VARCHAR" />
 		<result property="isLock" column="isLock" jdbcType="VARCHAR" />
-		<collection property="albums" ofType="cn.edu.ptu.sharepicture.entity.Album">
-			<id property="albumId" column="albumId" jdbcType="VARCHAR" />
-			<result property="albumName" column="albumName" jdbcType="VARCHAR" />
-			<result property="albumImage" column="albumImage" jdbcType="VARCHAR" />
-			<result property="createTime" column="al_createTime" jdbcType="VARCHAR" />
-			<result property="isLock" column="al_isLock" jdbcType="VARCHAR" />
+		<collection property="pictures"
+			ofType="cn.edu.ptu.sharepicture.entity.Picture">
 		</collection>
 	</resultMap>
 </mapper>

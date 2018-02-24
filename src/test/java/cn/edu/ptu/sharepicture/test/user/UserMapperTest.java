@@ -70,6 +70,12 @@ public class UserMapperTest {
 		System.out.println("email:"+(email==false));
 	}
 	
+	@Test
+	public void getUserNameByUserIdTest() {
+		User u=userMapper.getUserInfo("BA7138C26B0544329F0CDDD931055CAF");
+		System.out.println(u.toString());
+	}
+	
 	
 
 }

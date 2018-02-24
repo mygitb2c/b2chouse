@@ -144,7 +144,7 @@
 					</a>
 				</div>
 				<div class="a_group bgroup col-md-12" >
-					<a class="userinfo_a " href="userinfo.html">
+					<a class="userinfo_a " href="my">
 						<i class="fa fa-user-o fa-fw"></i> 我的
 					</a>
 					<a class="exit_a " >

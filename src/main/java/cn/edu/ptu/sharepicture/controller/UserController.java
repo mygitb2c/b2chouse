@@ -35,7 +35,22 @@ public class UserController {
 	@RequestMapping(value = "exit")
 	public String exit(HttpSession session) {
 		session.removeAttribute("userId");
-		return "forward:main.jsp";
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "my")
+	public String showUserInfo(HttpSession session, HttpServletRequest request) {
+		String path = "redirect:login";
+		String userId = String.valueOf(session.getAttribute("userId"));
+		if (userId != null && userId.trim().length() > 0) {
+			User user = userService.getUserInfo(userId);
+			if (user != null) {
+				user.setUserId(userId);
+				request.setAttribute("user", user);
+				path = "userInfo";
+			}
+		}
+		return path;
 	}
 
 	@ResponseBody
@@ -47,7 +62,7 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping(value = "userRegister", method = RequestMethod.POST)
-	public boolean registered(User user,HttpSession session) {
+	public boolean registered(User user, HttpSession session) {
 		boolean flag = userService.insertUser(user);
 		return flag;
 	}

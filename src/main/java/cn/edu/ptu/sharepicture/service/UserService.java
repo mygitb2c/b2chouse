@@ -13,8 +13,6 @@ import cn.edu.ptu.sharepicture.dao.UserMapper;
 import cn.edu.ptu.sharepicture.entity.User;
 import cn.edu.ptu.sharepicture.util.MD5Util;
 
-
-
 @Service
 public class UserService {
 
@@ -86,8 +84,25 @@ public class UserService {
 		return userMapper.updatePassword(user, new_pwd);
 	}
 
+	/**
+	 * 判断用户名或用户邮箱是否已存在
+	 * 
+	 * @param email
+	 * @param userName
+	 * @return
+	 */
 	public boolean isRepeat(String email, String userName) {
 		return userMapper.isRepeat(email, userName);
+	}
+
+	/**
+	 * 获取用户基础信息
+	 * @param userId
+	 * @return
+	 */
+	public User getUserInfo(String userId) {
+		User user = userMapper.getUserInfo(userId);
+		return user;
 	}
 
 }

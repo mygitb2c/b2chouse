@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PictureController {
 
-	@RequestMapping(value = "index")
+	@RequestMapping(value = "/")
 	public String index() {
 		return "forward:main.jsp";
 	}
