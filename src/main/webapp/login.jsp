@@ -97,7 +97,7 @@
 					}
 					else if(data.isLock=="N")
 					{
-						alert("登录成功!");
+						location.href="main.jsp";
 					}else if(data.isLock=="Y"){
 						alert("帐号被锁定!");
 					}

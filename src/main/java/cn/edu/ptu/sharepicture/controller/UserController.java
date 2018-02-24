@@ -32,6 +32,12 @@ public class UserController {
 		return "forward:register.jsp";
 	}
 
+	@RequestMapping(value = "exit")
+	public String exit(HttpSession session) {
+		session.removeAttribute("userId");
+		return "forward:main.jsp";
+	}
+
 	@ResponseBody
 	@RequestMapping(value = "isRepeat", method = RequestMethod.GET)
 	public boolean isRepeat(@Param(value = "email") String email, @Param(value = "userName") String userName) {
@@ -41,7 +47,7 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping(value = "userRegister", method = RequestMethod.POST)
-	public boolean registered(User user) {
+	public boolean registered(User user,HttpSession session) {
 		boolean flag = userService.insertUser(user);
 		return flag;
 	}
@@ -50,7 +56,7 @@ public class UserController {
 	@ResponseBody
 	public User login(@Param(value = "email") String email, @Param(value = "password") String password,
 			HttpSession session) {
-		User u = userService.login(email, password,session);
+		User u = userService.login(email, password, session);
 		return u;
 	}
 
