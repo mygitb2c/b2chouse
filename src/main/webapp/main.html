@@ -1,17 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>首页</title>
-		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="static/css/font-awesome.css" />
 		<link rel="stylesheet" type="text/css" href="static/css/buttons.css" />
 		<script src="static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
 		<script src="static/js/popper.js" type="text/javascript" charset="utf-8"></script>
 		<script src="static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
+			body{
+				
+			}
 			.content_row {
 				margin: 20px 0 20px 0;
 			}
@@ -51,6 +52,7 @@
 			
 			.card_div {
 				padding: 15px;
+				background: #FFFFFF;
 			}
 			
 			.card_div:hover,
@@ -112,8 +114,8 @@
 				border: 1px solid #868e96;
 				padding: 2px 15px 2px 15px;
 				background: white;
-				width: 300px;
 				margin-left: 20px;
+				font-size: 150%;
 			}
 			/*搜索框样式*/
 			
@@ -125,12 +127,16 @@
 			a:hover {
 				text-decoration: none;
 			}
+			.bgnor{
+				background: rgb(232,237,237);
+				
+			}
 		</style>
 	</head>
 	<!---->
 
-	<body>
-		<div class="container">
+	<body class="bgnor">
+		<div class="container-fluid">
 			<!--导航-->
 
 			<div class="navbar_div  ">
@@ -162,20 +168,19 @@
 			<hr />
 			<!--搜索框-->
 			<div id="" class="search_row row">
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
+
+				<div class="col-md-12">
 					<div class="input_div form-inline">
 						<input type="text" placeholder="搜索" class="form-control col-md-11 search_input" />
 						<i class="fa fa-search col-md-1"></i>
 					</div>
 				</div>
 
-				<div class="col-md-4"></div>
 			</div>
 			<!--搜索框-->
 
 			<!--图片显示区域-->
-			<div id="content_div">
+			<div id="content_div container">
 
 				<div class="row content_row">
 					<div class="col-md-4 card_div" >
@@ -261,7 +266,7 @@
 		})
 			/*初始化 */
 			function ini() {
-				if(${userId!=null})
+				if(/*${userId!=null}*/true)
 				{
 				$(".a_group.agroup").css("display", "none");
 				$(".a_group.bgroup").css("display","block");

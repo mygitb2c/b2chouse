@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>图片详情</title>
+		<link rel="stylesheet" type="text/css" href="/sharepicture/static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/buttons.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.css" />
+		<script src="../static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/js/popper.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body {}
+			
+			.container {
+				width: 80%
+			}
+			
+			.userinfo_date,
+			.userinfo_text_div,
+			.userinfo_username,
+			.title_div {
+				padding: 0px;
+			}
+			
+			.userinfo_div {
+				padding: 5px;
+			}
+			
+			.userinfo_div,
+			.picture_div {
+				display: flex;
+				align-items: center;
+			}
+			
+			.picture_div {
+				justify-content: center;
+				padding: 1%;
+				/*border: 1px solid rgb(68, 68, 68);
+				background: #FFFFFF;*/
+			}
+			
+			.userimg_img {
+				height: 4em;
+				width: 4em;
+				border-radius: 50% !important;
+			}
+			
+			.picture_img {
+				max-width: 100%;
+			}
+			
+			.navbar_div {
+				text-align: right;
+				margin: 10px;
+			}
+			
+			.back_a,
+			.exit_a,
+			.register_a,
+			.userinfo_a,
+			.login_a,
+			.sharepic_a {
+				margin-left: 25px;
+				margin-right: 25px;
+			}
+			
+			.exit_a {
+				color: rgb(255, 100, 100);
+			}
+			
+			a:hover {
+				text-decoration: none;
+			}
+			
+			.title_div {
+				font-size: 2em;
+				white-space: normal !important;
+				-webkit-line-clamp: 1;
+				margin: 0px;
+				padding: 0px 0.5em 0px 0px;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+			}
+			
+			.header_div {
+				margin: 0.5em 0px;
+				display: flex;
+				align-items: center;
+			}
+			
+			.userinfo_text_div {
+				margin-left: 1em;
+				height: 64px;
+				width: 90%;
+			}
+			
+			.userinfo_username {
+				border-bottom: 1px solid rgb(220, 220, 220);
+			}
+			
+			.userinfo_date,
+			.userinfo_username {
+				height: 32px;
+				line-height: 32px;
+			}
+			
+			.userinfo_date {
+				font-size: 90%;
+				color: #999999;
+			}
+			
+			.content_div {
+				margin-top: 3em;
+			}
+			
+			.bor {
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+
+			<!--<div class="navbar_div  ">
+
+				<div class="a_group agroup  col-md-12">
+					<a class="register_a " href="register">
+						<i class="fa fa-registered"></i> 注册
+					</a>
+					<a class="login_a " href="login">
+						<i class="fa fa-map-marker "></i> 登录
+					</a>
+				</div>
+				<div class="a_group bgroup col-md-12" >
+					<a class="userinfo_a " href="my">
+						<i class="fa fa-user-o fa-fw"></i> 我的
+					</a>
+					<a class="exit_a " >
+						<i class="fa fa-power-off fa-fw"></i> 注销
+					</a>
+					<a class="sharepic_a " href="userinfo.html">
+						<i class="fa fa-share-alt fa-fw"></i> 发图
+					</a>
+
+				</div>
+
+			</div>-->
+
+			<hr />
+			<div class="header_div row">
+				<div class="title_div col-md-8">
+					这是一个大标题，大标题,这是一个大标题，大标题,这是一个大标题，大标题,这是一个大标题，大标题,
+				</div>
+				<div class="col-md-4 userinfo_div">
+					<img src="../static/img/4.png" class="userimg_img" />
+					<!--<div class="userimg_div col-md-4" style="border: 1px solid black;">
+						
+					</div>-->
+					<div class="userinfo_text_div">
+						<div class="col-md-12 userinfo_username">
+							用户名
+						</div>
+						<div class="col-md-12 userinfo_date">
+							发表时间：<span>2018年3月20日 16:52:44</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="picture_div row">
+				<img src="../static/img/6.png" class="picture_img rounded" />
+			</div>
+			<div class="content_div row">
+				<div class="">
+					
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			iniUserImg();
+		})
+
+		function iniUserImg() {
+			var now = new Date();
+			console.log(now.getDate() - 22)
+			var z_start = now.setDate(now.getDate() - now.getDay() + 1);
+
+		}
+	</script>
+
+</html>
