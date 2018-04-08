@@ -18,7 +18,7 @@
 			/*让div中的图片能水平垂直居中且大小自适应*/
 			
 			.img_div {
-				height: 300px;
+				height: 200px;
 				display: table-cell;
 				vertical-align: middle;
 			}
@@ -34,13 +34,13 @@
 			.fa-search:active {
 				color: #007bff;
 			}
-			
-			.card_div:hover {
+			/*.card_div:hover {
 				color: #007bff;
 				position: relative;
 				top: -10px;
 				box-shadow: 0px 10px 10px #888888;
-			}
+			}*/
+			
 			a,
 			.fa-search,
 			.card-img-top,
@@ -50,10 +50,11 @@
 			}
 			
 			.card_div {
-				padding: 15px;
+				margin: 0.25em;
+				background: #FFFFFF;
 			}
+			/*.card_div:hover,*/
 			
-			.card_div:hover,
 			.card-title,
 			.card-text {
 				/*自动隐藏文字*/
@@ -85,8 +86,9 @@
 				margin-left: 25px;
 				margin-right: 25px;
 			}
-			.exit_a{
-				color: rgb(255,100,100);
+			
+			.exit_a {
+				color: rgb(255, 100, 100);
 			}
 			/*搜索框样式*/
 			
@@ -125,11 +127,34 @@
 			a:hover {
 				text-decoration: none;
 			}
+			.source_window{
+				width: 100vw;
+				position: absolute;
+				display: none;
+				float: left;
+				z-index: 1;
+			}
+			.source_img_div{
+				width: 100%;
+				height:100%;
+				display: flex;
+				align-items:center;
+				justify-content:center;
+				padding: 1em;
+			}
+			.source_img{
+				max-width: 100%;
+			}
 		</style>
 	</head>
 	<!---->
 
 	<body>
+		<div class="source_window">
+			<div class="source_img_div">
+				<img data-imgid="csf" class="source_img" src="" />
+			</div>
+		</div>
 		<div class="container">
 			<!--导航-->
 
@@ -143,11 +168,11 @@
 						<i class="fa fa-map-marker "></i> 登录
 					</a>
 				</div>
-				<div class="a_group bgroup col-md-12" >
+				<div class="a_group bgroup col-md-12">
 					<a class="userinfo_a " href="my">
 						<i class="fa fa-user-o fa-fw"></i> 我的
 					</a>
-					<a class="exit_a " >
+					<a class="exit_a ">
 						<i class="fa fa-power-off fa-fw"></i> 注销
 					</a>
 					<a class="sharepic_a " href="userinfo.html">
@@ -178,65 +203,77 @@
 			<div id="content_div">
 
 				<div class="row content_row">
-					<div class="col-md-4 card_div" >
-						<div class="img_div">
-							<img data-imgid="asd" class="card-img-top simple_img" src="static/img/无标题3.png">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John DoeJohn DoeJohn DoeJohn DoeJohn
+					<div class="col-md-4">
+						<div class="card_div ">
+							<div class="img_div">
+								<img data-imgid="asd" class="card-img-top simple_img" src="static/img/萨尔茨卡默古特地区_10.jpg">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">John DoeJohn DoeJohn DoeJohn DoeJohn
 							DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn
 							DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn Doe</h4>
-							<p class="card-text">啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊</p>
+								<p class="card-text">啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊</p>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-4 card_div" >
-						<div class="img_div">
-							<img data-imgid="bsc" class="card-img-top simple_img" src="static/img/5.png">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John Doe</h4>
-							<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+					<div class="col-md-4 ">
+						<div class="card_div">
+							<div class="img_div">
+								<img data-imgid="bsc" class="card-img-top simple_img" src="static/img/萨尔茨卡默古特地区_11.jpg">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">John Doe</h4>
+								<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-4 card_div" >
-						<div class="img_div">
-							<img data-imgid="csf" class="card-img-top simple_img" src="static/img/无标题2.png">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John Doe</h4>
-							<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+					<div class="col-md-4 ">
+						<div class="card_div ">
+							<div class="img_div">
+								<img data-imgid="csf" class="card-img-top simple_img" src="static/img/萨尔茨卡默古特地区_12.jpg">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">John Doe</h4>
+								<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="row content_row">
-					<div class="col-md-4 card_div" >
-						<div class="img_div">
-							<img data-imgid="asd" class="card-img-top simple_img" src="static/img/无标题4.png">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John DoeJohn DoeJohn DoeJohn DoeJohn
+					<div class="col-md-4 ">
+						<div class="card_div">
+							<div class="img_div">
+								<img data-imgid="asd" class="card-img-top simple_img" src="static/img/萨尔茨卡默古特地区_13.jpg">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">John DoeJohn DoeJohn DoeJohn DoeJohn
 							DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn
 							DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn Doe</h4>
-							<p class="card-text">啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊</p>
+								<p class="card-text">啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊</p>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-4 card_div" >
-						<div class="img_div">
-							<img data-imgid="bsc" class="card-img-top simple_img" src="static/img/无标题5.png">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John Doe</h4>
-							<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+					<div class="col-md-4 ">
+						<div class="card_div">
+							<div class="img_div">
+								<img data-imgid="bsc" class="card-img-top simple_img" src="static/img/萨尔茨卡默古特地区_14.jpg">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">John Doe</h4>
+								<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-4 card_div" >
-						<div class="img_div">
-							<img data-imgid="csf" class="card-img-top simple_img" src="static/img/无标题2.png">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John Doe</h4>
-							<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+					<div class="col-md-4 ">
+						<div class="card_div">
+							<div class="img_div">
+								<img data-imgid="csf" class="card-img-top simple_img" src="static/img/萨尔茨卡默古特地区_15.jpg">
+							</div>
+							<div class="card-body">
+								<h4 class="card-title">John Doe</h4>
+								<p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -277,6 +314,11 @@
 			function center() {
 				$(".card_div").attr("align", "center");
 			}
+			
+			$(".simple_img").hover(function(){
+				$(".source_img").attr("src",$(this).attr("src"));
+				$(".source_window").css("disable","inline");
+			})
 	</script>
 
 </html>
