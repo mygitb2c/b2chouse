@@ -10,9 +10,11 @@ public class Picture {
 	private String pictureId;
 	private String userId;
 	private String pictureName;
+	private String pictureType;
 	private String picturePath;
 	private String remark;
 	private String createTime;
+	private String clickCount;
 	private String isLock;
 	private List<Message> msgs;
 
@@ -84,12 +86,33 @@ public class Picture {
 		this.msgs = msgs;
 	}
 
+	public String getClickCount() {
+		return clickCount;
+	}
+
+	public void setClickCount(String clickCount) {
+		this.clickCount = clickCount;
+	}
+
+	public String getPictureType() {
+		return pictureType;
+	}
+
+	public void setPictureType(String pictureType) {
+		this.pictureType = pictureType;
+	}
+
 	@Override
 	public String toString() {
 		return "Picture [pictureId=" + pictureId + ", userId=" + userId + ", pictureName=" + pictureName
-				+ ", picturePath=" + picturePath + ", remark=" + remark + ", createTime=" + createTime + ", isLock="
-				+ isLock + ", msgs=" + msgs + "]";
+				+ ", pictureType=" + pictureType + ", picturePath=" + picturePath + ", remark=" + remark
+				+ ", createTime=" + createTime + ", clickCount=" + clickCount + ", isLock=" + isLock + ", msgs=" + msgs
+				+ "]";
 	}
+
+	
+	
+	
 
 	
 

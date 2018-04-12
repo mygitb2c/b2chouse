@@ -7,10 +7,6 @@
 		user.userId,user.userName,user.account,user.password,
 		user.sex,user.email,user.createTime,user.userImage,user.isLock
 	</sql>
-	<sql id="albumscol">
-		albums.albumId,albums.albumName,albums.albumImage,albums.createTime,
-		albums.isLock
-	</sql>
 
 	<!-- <select id="getUserAndAlbum" resultMap="UserAndAlbum"> SELECT <include 
 		refid="usercol"></include> , albums.albumId,albums.albumName,albums.albumImage, 

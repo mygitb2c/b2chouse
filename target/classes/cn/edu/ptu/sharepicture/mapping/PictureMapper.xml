@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.ptu.sharepicture.dao.PictureMapper">
+	<select id="getPictures" resultType="cn.edu.ptu.sharepicture.entity.Picture">
+		<bind name="key" value="'%'+key+'%'" />
+		SELECT * FROM pictures LEFT JOIN user ON (pictures.userId=user.userId)
+		RIGHT JOIN pictureType ON pictures.pictureType=pictureType.typeId
+		WHERE userName LIKE #{key} OR pictureName LIKE #{key} ORDER BY
+		clickCount DESC
+	</select>
+
+	<insert id="insertPicture">
+		INSERT INTO pictures
+		VALUES(#{pictureId},#{userId},#{pictureName},#{pictureType},#{picturePath},#{remark},#{createTime},0,"N")
+	</insert>
+</mapper>
