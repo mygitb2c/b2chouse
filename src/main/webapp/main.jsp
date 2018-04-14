@@ -15,6 +15,10 @@
 <script src="static/js/bootstrap.js" type="text/javascript"
 	charset="utf-8"></script>
 <style type="text/css">
+body{
+	
+}
+
 .content_row {
 	margin: 20px 0 20px 0;
 }
@@ -46,9 +50,23 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 }
 
 .card_div {
+	/* margin: 0.25em;
+	background: #FFFFFF; */
 	margin: 0.25em;
 	background: #FFFFFF;
+	padding: 0.5em;
+	border: 1px solid rgb(230, 230, 230);
 }
+
+.width_30 {
+	width: 30%;
+}
+
+.card_img {
+	max-width: 100%;
+	max-height: 12em;
+}
+
 /*.card_div:hover,*/
 .card-title, .card-text {
 	/*自动隐藏文字*/
@@ -80,10 +98,6 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	color: rgb(255, 100, 100);
 }
 /*搜索框样式*/
-.search_row {
-	margin: 20px;
-}
-
 .search_input:focus {
 	box-shadow: none;
 	border: none;
@@ -91,10 +105,13 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 
 .search_input {
 	border: none;
+	height: 90%;
+	margin: auto 0px;
 }
 
 .fa-search {
 	padding: 0px;
+	font-size: 1.5em;
 }
 
 .input_div {
@@ -102,187 +119,223 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	border: 1px solid #868e96;
 	padding: 2px 15px 2px 15px;
 	background: white;
-	width: 300px;
 	margin-left: 20px;
-}
-/*搜索框样式*/
-.navbar_div {
-	text-align: right;
-	margin: 10px;
+	height: 100%;
 }
 
-a:hover {
+/*搜索框样式*/
+
+.nav_menu{
+	text-align: right;
+	font-size:1.2em;
+	line-height: 3.33em;
+	padding-right: 6.7%;
+}
+
+a:hover{
 	text-decoration: none;
 }
 
-.source_window {
-	width: 100vw;
-	position: absolute;
-	display: none;
-	float: left;
+.navbar_div {
 	z-index: 1;
-}
-
-.source_img_div {
+	background: rgb(242,242,242);
 	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 1em;
-}
-
-.source_img {
-	max-width: 100%;
+	height: 6em;
+	top: 0;
+	line-height: 6em;
+	margin: 0px;
+	padding: 1em 0px;
+	border-bottom: 1px solid rgb(230, 230, 230);
+	position: fixed;
 }
 
 .content {
 	margin-left: 5%;
 	margin-right: 5%;
 	width: 90%;
+	margin-top: 8em;
+}
+/*瀑布流  */
+.waterfall {
+	/*瀑布内列数*/
+	-moz-column-count: 4;
+	-webkit-column-count: 4;
+	column-count: 4;
+	/*瀑布内子元素左右margin*/
+	-moz-column-gap: 1em;
+	-webkit-column-gap: 1em;
+	column-gap: 1em;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+/*一个内容层*/
+.item {
+	padding: 1em;
+	margin: 0 0 1em 0;
+	/*防止子元素被切割*/
+	-moz-page-break-inside: avoid;
+	-webkit-column-break-inside: avoid;
+	break-inside: avoid;
+	border: 1px solid rgb(230,230,230);
+	/* border-radius: 0.5em;
+	border-bottom-left-radius: 0.5em;
+	border-bottom-right-radius: 0.5em; 
+	box-shadow: 0px 3px 3px rgba(150, 150, 150, 0.5);*/
+	background: #fff;
+}
+
+.item img {
+	width: 100%;
+	margin-bottom: 10px;
+	max-height: 12em;
 }
 </style>
 </head>
 <!---->
 
 <body>
-	<div class="source_window">
-		<div class="source_img_div">
-			<img data-imgid="csf" class="source_img" src="" />
+
+	<div class="row navbar_div">
+		<div class="col-md-4 search_div">
+			<div class="input_div form-inline">
+				<input type="text" placeholder="搜索"
+					class="form-control col-md-11 search_input" /> <i
+					class="fa fa-search col-md-1"></i>
+			</div>
 		</div>
+		<div class="col-md-8 nav_menu login_menu  ">
+			<a class="register_a " href="register"> <i
+				class="fa fa-registered"></i> 注册
+			</a> <a class="login_a " href="login"> <i class="fa fa-map-marker "></i>
+				登录
+			</a>
+		</div>
+		<div class="col-md-8 nav_menu user_menu ">
+			<a class="userinfo_a " href="my"> <i class="fa fa-user-o fa-fw"></i>
+				我的
+			</a> <a class="exit_a "> <i class="fa fa-power-off fa-fw"></i> 注销
+			</a> <a class="sharepic_a " href="userinfo.html"> <i
+				class="fa fa-share-alt fa-fw"></i> 发图
+			</a>
+
+		</div>
+
 	</div>
+
 	<div class="container-fluid content">
-		<!--导航-->
-
-		<div class="navbar_div  ">
-
-			<div class="a_group agroup  col-md-12">
-				<a class="register_a " href="register"> <i
-					class="fa fa-registered"></i> 注册
-				</a> <a class="login_a " href="login"> <i class="fa fa-map-marker "></i>
-					登录
-				</a>
-			</div>
-			<div class="a_group bgroup col-md-12">
-				<a class="userinfo_a " href="my"> <i class="fa fa-user-o fa-fw"></i>
-					我的
-				</a> <a class="exit_a "> <i class="fa fa-power-off fa-fw"></i> 注销
-				</a> <a class="sharepic_a " href="userinfo.html"> <i
-					class="fa fa-share-alt fa-fw"></i> 发图
-				</a>
-
-			</div>
-
-		</div>
-
-		<!--导航-->
-		<hr />
-		<!--搜索框-->
-		<div id="" class="search_row row">
-			<div class="col-md-4"></div>
-			<div class="col-md-4" align="center">
-				<div class="input_div form-inline">
-					<input type="text" placeholder="搜索"
-						class="form-control col-md-11 search_input" /> <i
-						class="fa fa-search col-md-1"></i>
-				</div>
-			</div>
-
-			<div class="col-md-4"></div>
-		</div>
-		<!--搜索框-->
 
 		<!--图片显示区域-->
 		<div id="content_div">
 
-			<div class="row content_row">
-				<div class="col-md-4">
-					<div class="card_div ">
-						<div class="img_div">
-							<img data-imgid="asd" class="card-img-top simple_img"
-								src="static/img/萨尔茨卡默古特地区_10.jpg">
+			<!-- <div class="width_30 pull-left card_div" align="center">
+				<div></div>
+				<div class="card_content_div">
+					<div class="card_img_div">
+						<img src="static/img/无标题3.png" class="card_img">
+					</div>
+					<div class="card_info_div">
+						<div class="img_title_div">
+							图片标题1
 						</div>
-						<div class="card-body">
-							<h4 class="card-title">John DoeJohn DoeJohn DoeJohn DoeJohn
-								DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn
-								DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn Doe</h4>
-							<p class="card-text">啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊</p>
+						<div class="">
+						
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 ">
-					<div class="card_div">
-						<div class="img_div">
-							<img data-imgid="bsc" class="card-img-top simple_img"
-								src="static/img/萨尔茨卡默古特地区_11.jpg">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John Doe</h4>
-							<p class="card-text">Some example text some example text.
-								John Doe is an architect and engineer</p>
-						</div>
-					</div>
+			</div>
+			<div class="clearfix"></div> -->
+			<div class="waterfall">
+				<div class="item">
+					<img src="static/img/无标题1.png">
 				</div>
-				<div class="col-md-4 ">
-					<div class="card_div ">
-						<div class="img_div">
-							<img data-imgid="csf" class="card-img-top simple_img"
-								src="static/img/萨尔茨卡默古特地区_12.jpg">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John Doe</h4>
-							<p class="card-text">Some example text some example text.
-								John Doe is an architect and engineer</p>
-						</div>
-					</div>
+
+				<div class="item">
+					<img src="static/img/无标题2.png">
+					<p>2 convallis timestamp 2 Donec a fermentum nisi.</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题3.png">
+					<p>3 Nullam eget lectus augue. Donec eu sem sit amet ligula
+						faucibus suscipit. Suspendisse rutrum turpis quis nunc convallis
+						quis aliquam mauris suscipit.</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题4.png">
+					<p>4 Donec a fermentum nisi. Integer dolor est, commodo ut
+						sagittis vitae, egestas at augue.</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题5.png">
+					<p>5 Donec a fermentum nisi. Integer dolor est, commodo ut
+						sagittis vitae, egestas at augue.</p>
+				</div>
+				<div class="item">
+					<img src="static/img/无标题1.png">
+					<p>1 convallis timestamp</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题2.png">
+					<p>2 convallis timestamp 2 Donec a fermentum nisi.</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题3.png">
+					<p>3 Nullam eget lectus augue. Donec eu sem sit amet ligula
+						faucibus suscipit. Suspendisse rutrum turpis quis nunc convallis
+						quis aliquam mauris suscipit.</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题4.png">
+					<p>4 Donec a fermentum nisi. Integer dolor est, commodo ut
+						sagittis vitae, egestas at augue.</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题5.png">
+					<p>5 Donec a fermentum nisi. Integer dolor est, commodo ut
+						sagittis vitae, egestas at augue.</p>
+				</div>
+				<div class="item">
+					<img src="static/img/无标题1.png">
+					<p>1 convallis timestamp</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题2.png">
+					<p>2 convallis timestamp 2 Donec a fermentum nisi.</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题3.png">
+					<p>3 Nullam eget lectus augue. Donec eu sem sit amet ligula
+						faucibus suscipit. Suspendisse rutrum turpis quis nunc convallis
+						quis aliquam mauris suscipit.</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题4.png">
+					<p>4 Donec a fermentum nisi. Integer dolor est, commodo ut
+						sagittis vitae, egestas at augue.</p>
+				</div>
+
+				<div class="item">
+					<img src="static/img/无标题5.png">
+					<p>5 Donec a fermentum nisi. Integer dolor est, commodo ut
+						sagittis vitae, egestas at augue.</p>
 				</div>
 			</div>
 
-			<div class="row content_row">
-				<div class="col-md-4 ">
-					<div class="card_div">
-						<div class="img_div">
-							<img data-imgid="asd" class="card-img-top simple_img"
-								src="static/img/萨尔茨卡默古特地区_13.jpg">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John DoeJohn DoeJohn DoeJohn DoeJohn
-								DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn
-								DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn DoeJohn Doe</h4>
-							<p class="card-text">啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊啊哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈啊</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 ">
-					<div class="card_div">
-						<div class="img_div">
-							<img data-imgid="bsc" class="card-img-top simple_img"
-								src="static/img/萨尔茨卡默古特地区_14.jpg">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John Doe</h4>
-							<p class="card-text">Some example text some example text.
-								John Doe is an architect and engineer</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 ">
-					<div class="card_div">
-						<div class="img_div">
-							<img data-imgid="csf" class="card-img-top simple_img"
-								src="static/img/萨尔茨卡默古特地区_15.jpg">
-						</div>
-						<div class="card-body">
-							<h4 class="card-title">John Doe</h4>
-							<p class="card-text">Some example text some example text.
-								John Doe is an architect and engineer</p>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		<!--图片显示区域-->
-		<div id="demo"></div>
+		
+		
+		
 	</div>
 </body>
 <script type="text/javascript">
@@ -304,11 +357,11 @@ a:hover {
 			function ini() {
 				if(${userId!=null})
 				{
-				$(".a_group.agroup").css("display", "none");
-				$(".a_group.bgroup").css("display","block");
+				$(".nav_menu.login_menu").css("display", "none");
+				$(".nav_menu.user_menu").css("display","block");
 				}else{
-					$(".a_group.bgroup").css("display", "none");
-					$(".a_group.agroup").css("display","block");
+					$(".nav_menu.user_menu").css("display", "none");
+					$(".nav_menu.login_menu").css("display","block");
 				}
 				center();
 				
