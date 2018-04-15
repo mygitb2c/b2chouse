@@ -97,7 +97,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 }
 
 .navbar_div {
-	z-index: 1;
+	z-index: 2;
 	background: #343a40;
 	width: 100%;
 	height: 6em;
