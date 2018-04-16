@@ -1,6 +1,9 @@
 $.validator.addMethod("length_limit", function(value, element, params) {
+	//验证的反馈消息
 	var msg = "";
+	//验证结果
 	var result = false;
+	//验证逻辑
 	if(value.length < params[0]) {
 		msg = "<i class=\"fa fa-exclamation-circle\"> " + params[2] + "的长度不能小于" + params[0] + "位</i>";
 	} else if(value.length > params[1]) {
@@ -8,6 +11,7 @@ $.validator.addMethod("length_limit", function(value, element, params) {
 	} else {
 		result = true;
 	}
+	//修改默认反馈消息
 	$.validator.messages.length_limit = msg;
 	return result;
 });
@@ -45,7 +49,7 @@ $.validator.addMethod("isrepeat", function(value, element, params) {
 	$.ajax({
 		type: "GET",
 		url: "isRepeat",
-		async: false,
+		async: true,
 		data:data,
 		cache:false,
 		success: function(data) {

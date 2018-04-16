@@ -56,12 +56,17 @@ $(function() {
 		var radom = 0;
 		var codes = "";
 		for(var i = 0; i < 4; i++) {
+			//遍历获取对象
 			$code = $(".span_checkedcode").eq(i);
-			radom = parseInt(Math.random() * 9);
+			//生成随机数并进行字符串拼接
+			radom = parseInt(Math.random() * 10);
 			codes += radom;
+			//存放单个字符串
 			$code.text(radom);
+			//旋转部分数字
 			$code.css("transform", "rotate(" + radom * 10 + "deg)");
 		}
+		//存放完整验证码值
 		$("#codes").val(codes);
 		return codes;
 	}

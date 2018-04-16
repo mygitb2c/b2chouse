@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.edu.ptu.sharepicture.dao.PictureMapper;
 import cn.edu.ptu.sharepicture.entity.Picture;
+import cn.edu.ptu.sharepicture.entity.SearchForm;
+import cn.edu.ptu.sharepicture.entity.User;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {"classpath:applicationContext.xml","classpath:mybatis-config.xml"})
 public class PictureDaoTest {
@@ -32,14 +34,14 @@ public class PictureDaoTest {
 	
 	@Test
 	public void select() {
-		List<Picture> list=pm.getPictures("王王王");
-		for (Picture picture : list) {
-			System.out.println(picture);
+		List<User> list=pm.getPicturesByKey(new SearchForm());
+		for (User user : list) {
+			System.out.println(user);
 		}
 	}
 	
 	public void getPicture(File file) {
-		
+
 		Picture picture=null;
 		File[] files = file.listFiles();
 		for (File f : files) {

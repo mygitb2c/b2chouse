@@ -3,16 +3,56 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.ptu.sharepicture.dao.PictureMapper">
-	<select id="getPictures" resultType="cn.edu.ptu.sharepicture.entity.Picture">
+	<select id="getPicturesByKey" resultMap="pictures_User">
 		<bind name="key" value="'%'+key+'%'" />
-		SELECT * FROM pictures LEFT JOIN user ON (pictures.userId=user.userId)
-		RIGHT JOIN pictureType ON pictures.pictureType=pictureType.typeId
-		WHERE userName LIKE #{key} OR pictureName LIKE #{key} ORDER BY
-		clickCount DESC
+		SELECT pictureId,pictureName,picturePath,userName,pictures.createTime
+		createTime FROM pictures LEFT JOIN user ON
+		(pictures.userId=user.userId)
+		RIGHT JOIN pictureType ON
+		pictures.pictureType=pictureType.typeId
+		WHERE userName LIKE #{key} OR
+		pictureName LIKE #{key} AND pictures.isLock ="N" ORDER BY
+		${orderType} ${orderValue} LIMIT #{start},#{pageSize}
+	</select>
+	<select id="getPictureById" resultMap="pictures_User">
+		SELECT
+		pictureId,pictureName,picturePath,remark,pictures.createTime
+		createTime,clickCount,user.userId userId,userName FROM pictures
+		RIGHT
+		JOIN user ON pictures.userId=user.userId WHERE pictureId=#{pictureId}
+	</select>
+
+	<select id="getPicturesByUserId" resultMap="pictures_User">
+		SELECT
+		pictureId,pictureName,picturePath,remark,pictures.createTime
+		createTime,clickCount,user.userId userId,userName FROM pictures
+		RIGHT
+		JOIN user ON pictures.userId=user.userId WHERE
+		pictures.userId=#{key}
+		${orderType} ${orderValue} LIMIT #{start},#{pageSize}
 	</select>
 
 	<insert id="insertPicture">
 		INSERT INTO pictures
 		VALUES(#{pictureId},#{userId},#{pictureName},#{pictureType},#{picturePath},#{remark},#{createTime},0,"N")
 	</insert>
+
+	<resultMap type="cn.edu.ptu.sharepicture.entity.User"
+		id="pictures_User">
+		<id property="userId" javaType="String" column="userId" />
+		<result property="userName" javaType="String" column="userName" />
+		<collection property="pictures"
+			ofType="cn.edu.ptu.sharepicture.entity.Picture">
+			<id property="pictureId" javaType="String" column="pictureId" />
+			<result property="pictureName" javaType="String"
+				column="pictureName" />
+			<result property="picturePath" javaType="String"
+				column="picturePath" />
+			<result property="createTime" javaType="String"
+				column="createTime" />
+			<result property="remark" javaType="String" column="remark" />
+			<result property="clickCount" javaType="String"
+				column="clickCount" />
+		</collection>
+	</resultMap>
 </mapper>

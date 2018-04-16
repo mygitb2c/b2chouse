@@ -160,7 +160,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	/*防止子元素被切割*/
 	-moz-page-break-inside: avoid;
 	-webkit-column-break-inside: avoid;
-	break-inside: avoid;
+	page-break-inside: avoid;
 	border: 1px solid rgb(230, 230, 230);
 	/* border-radius: 0.5em;
 	border-bottom-left-radius: 0.5em;
@@ -217,7 +217,8 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	height: 8em;
 	padding: 1em 5%;
 }
-.order_col_div.active{
+
+.order_col_div.active {
 	color: #007bff;
 }
 
@@ -250,7 +251,8 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	width: 5em;
 	position: relative;
 }
-.order_col_div.active{
+
+.order_col_div.active {
 	
 }
 
@@ -264,13 +266,12 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	line-height: 2em;
 }
 
-.order_col_div:not(.active) .order_type_value {
+.order_type_value {
 	cursor: pointer;
 }
 
-.order_col_div.active  .order_type_value{
+.order_col_div.active  .order_type_value {
 	cursor: default;
-
 }
 
 .order_btn_div {
@@ -286,7 +287,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	line-height: 2em;
 }
 
-.order_col_div:not(.active ) .order_btn_span {
+.order_col_div:not (.active ) .order_btn_span {
 	display: none;
 }
 
@@ -300,8 +301,6 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	display: inline;
 }
 /*排序菜单栏*/
-
-
 </style>
 </head>
 <!---->
@@ -352,8 +351,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 		</div>
 	</div>
 
-<style type="text/css">
-
+	<style type="text/css">
 </style>
 
 	<div class="content">
@@ -372,7 +370,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 					</div>
 				</div>
 				<div class="order_type_div">
-					<span class="order_type_value active">热度</span>
+					<span class="order_type_value">热度</span>
 				</div>
 			</div>
 			<div class="order_col_div">
@@ -470,82 +468,167 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 
 				<div class="card_div">
 					<img src="static/img/无标题2.png">
-					<p>2 convallis timestamp 2 Donec a fermentum nisi.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题3.png">
-					<p>3 Nullam eget lectus augue. Donec eu sem sit amet ligula
-						faucibus suscipit. Suspendisse rutrum turpis quis nunc convallis
-						quis aliquam mauris suscipit.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题4.png">
-					<p>4 Donec a fermentum nisi. Integer dolor est, commodo ut
-						sagittis vitae, egestas at augue.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题5.png">
-					<p>5 Donec a fermentum nisi. Integer dolor est, commodo ut
-						sagittis vitae, egestas at augue.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 				<div class="card_div">
 					<img src="static/img/无标题1.png">
-					<p>1 convallis timestamp</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题2.png">
-					<p>2 convallis timestamp 2 Donec a fermentum nisi.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题3.png">
-					<p>3 Nullam eget lectus augue. Donec eu sem sit amet ligula
-						faucibus suscipit. Suspendisse rutrum turpis quis nunc convallis
-						quis aliquam mauris suscipit.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题4.png">
-					<p>4 Donec a fermentum nisi. Integer dolor est, commodo ut
-						sagittis vitae, egestas at augue.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题5.png">
-					<p>5 Donec a fermentum nisi. Integer dolor est, commodo ut
-						sagittis vitae, egestas at augue.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 				<div class="card_div">
 					<img src="static/img/无标题1.png">
-					<p>1 convallis timestamp</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题2.png">
-					<p>2 convallis timestamp 2 Donec a fermentum nisi.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题3.png">
-					<p>3 Nullam eget lectus augue. Donec eu sem sit amet ligula
-						faucibus suscipit. Suspendisse rutrum turpis quis nunc convallis
-						quis aliquam mauris suscipit.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
-
 				<div class="card_div">
 					<img src="static/img/无标题4.png">
-					<p>4 Donec a fermentum nisi. Integer dolor est, commodo ut
-						sagittis vitae, egestas at augue.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 
 				<div class="card_div">
 					<img src="static/img/无标题5.png">
-					<p>5 Donec a fermentum nisi. Integer dolor est, commodo ut
-						sagittis vitae, egestas at augue.</p>
+					<div class="card_title_div text-left">
+						<span class="card_title">标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1标题1</span>
+					</div>
+					<div class="card_info_div">
+						<span class="pull-left img_author">作者</span> <span
+							class="pull-right img_createdate">2018-04-15</span>
+						<div class="clearfix"></div>
+					</div>
 				</div>
 			</div>
 
@@ -572,10 +655,15 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 			})
 			
 			$(document).on("click",".order_col_div:not('.active')",function(){
+				//移除所有排序列块的active类
 				$(".order_col_div,.order_btn_span").removeClass("active");
+				//为自己添加active类
 				$(this).addClass("active");
+				//获取子类下的排序按钮块
 				var $order_btn=$(this).find(".order_btn_div");
+				//将按钮块初始化为底部
 				$order_btn.css("top","2em");
+				//执行按钮块的上升动画
 				orderUpAnimate($order_btn.find(".asc_div span"));
 			})
 			
@@ -656,18 +744,22 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 		
 
 		function orderUpAnimate($el){
+			//获取到点击按钮的父类按钮块
 			var $parent=$el.parents(".order_btn_div")
-			$parent.find(".order_btn_span").eq(0).addClass("active");
+			//激活降序按钮
+			$parent.find(".desc_div .order_btn_span").addClass("active");
+			//执行上升动画
 			$parent.animate({
 				top:"0em"
 			},1000,function(){
+				//完成后移除降序按钮的激活
 				$el.removeClass("active");
 			});
-			
 		}
+		
 		function orderDonwAnimate($el){
 			var $parent=$el.parents(".order_btn_div")
-			$parent.find(".order_btn_span").eq(1).addClass("active");
+			$parent.find(".asc_div .order_btn_span").addClass("active");
 			$parent.animate({
 				top:"2em"
 			},1000,function(){

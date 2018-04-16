@@ -9,6 +9,7 @@
 	<context:property-placeholder location="classpath:db.properties"/>
 	<context:annotation-config></context:annotation-config>
 	<!-- 自动扫描(自动注入)，扫描包以及它的子包的所有使用@Service注解标注的类 -->
-	<context:component-scan base-package="cn.edu.ptu.sharepicture"></context:component-scan>
+	<context:component-scan base-package="cn.edu.ptu.sharepicture">
+	</context:component-scan>
 
 </beans>
