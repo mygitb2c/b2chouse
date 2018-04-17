@@ -3,12 +3,16 @@ package cn.edu.ptu.sharepicture.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +48,7 @@ public class PictureController {
 	@RequestMapping(value = "picList_key")
 	@ResponseBody
 	public List<User> getPictureByKey(SearchForm sf) {
+		System.out.println(sf);
 		return ps.getPicturesByKey(sf);
 	}
 
@@ -55,9 +60,12 @@ public class PictureController {
 
 	@RequestMapping(value = "insert")
 	@ResponseBody
+	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
 	public boolean insert(Picture picture, @RequestParam(value = "img") MultipartFile img, HttpServletRequest request) {
-		String path = request.getRealPath("static/picture") + "/" + img.getOriginalFilename();
-		File file = new File(path);
+		String fileName= UUID.randomUUID().toString().replaceAll("-", "").toUpperCase() + "." + img.getContentType();
+		String realPath = request.getRealPath("static/picture") + "/"+fileName;
+		String path="/static/picture/"+fileName;
+		File file = new File(realPath);
 		try {
 			FileUtils.copyInputStreamToFile(img.getInputStream(), file);
 		} catch (IOException e) {

@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class SearchForm {
 
-	private String key;
-	private String orderType;
-	private String orderValue;
-	private int page;
-	private int start;
-	private int pageSize;
+	private String key;// 搜索关键字
+	private String orderType;// 排序字段名称
+	private String orderValue;// 排序值
+	private int page;// 页码
+	private int start;// 起始位置
+	private int pageSize;// 单页下数据最大行数。
 
 	public String getKey() {
 		if (key == null) {
@@ -59,6 +59,9 @@ public class SearchForm {
 	}
 
 	public int getPageSize() {
+		if (pageSize == 0) {
+			pageSize = 10;
+		}
 		return pageSize;
 	}
 

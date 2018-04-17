@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 
-	private String userId;
-	private String userName;
+	private String userId;//编号
+	private String userName;//用户名
 	private String account;
-	private String password;
-	private String sex;
-	private String email;
-	private String createTime;
-	private String userImage;
-	private String isLock;
-	private List<Picture> pictures;
+	private String password;//密码
+	private String sex;//性别
+	private String email;//邮箱
+	private String createTime;//注册时间
+	private String userImage;//用户头像
+	private String isLock;//是否被锁定
+	private List<Picture> pictures;//图片集合
 
 	public User() {
 		// TODO Auto-generated constructor stub

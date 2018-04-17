@@ -110,7 +110,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 }
 
 .content {
-	margin: 6em 10% 6em 10%;
+	margin: 6em 10%;
 	width: 80%;
 }
 
@@ -121,8 +121,9 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 .page_area_div {
 	position: fixed;
 	right: 0;
-	top: 30%;
+	top: 50vh;
 	width: 10%;
+	transform: translateY(-50%);
 }
 
 .page_menu_div {
@@ -140,7 +141,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 }
 
 /*瀑布流  */
-.waterfall {
+#waterfall {
 	/*瀑布内列数*/
 	-moz-column-count: 4;
 	-webkit-column-count: 4;
@@ -285,20 +286,20 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 .order_btn_part_div {
 	height: 50%;
 	line-height: 2em;
+	visibility:hidden;
 }
 
-.order_col_div:not (.active ) .order_btn_span {
+.order_col_div:not (.active ) .order_btn_part_div{
 	display: none;
 }
 
 .order_btn_span {
 	padding: 0.1em 0.5em;
 	cursor: pointer;
-	display: none;
 }
 
-.order_btn_span.active {
-	display: inline;
+.order_btn_part_div.active {
+	visibility:visible;
 }
 /*排序菜单栏*/
 </style>
@@ -358,8 +359,8 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 		<div class="order_menu_div">
 			<div class="order_col_div active">
 				<div class="order_btn_div">
-					<div class="order_btn_part_div desc_div ">
-						<span class="order_btn_span active"> <i
+					<div class="order_btn_part_div desc_div active">
+						<span class="order_btn_span"> <i
 							class="fa fa-sort-amount-desc"></i>
 						</span>
 					</div>
@@ -404,7 +405,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 					</div>
 				</div>
 				<div class="order_type_div">
-					<span class="order_type_value">点击量</span>
+					<span class="order_type_value">收藏量</span>
 				</div>
 			</div>
 			<div class="order_col_div">
@@ -435,25 +436,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 
 		<!--图片显示区域-->
 		<div id="content_div">
-
-			<!-- <div class="width_30 pull-left card_div" align="center">
-				<div></div>
-				<div class="card_content_div">
-					<div class="card_img_div">
-						<img src="static/img/无标题3.png" class="card_img">
-					</div>
-					<div class="card_info_div">
-						<div class="img_title_div">
-							图片标题1
-						</div>
-						<div class="">
-						
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="clearfix"></div> -->
-			<div class="waterfall">
+			<div id="waterfall">
 				<div class="card_div">
 					<img src="static/img/无标题1.png">
 					<div class="card_title_div text-left">
@@ -656,7 +639,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 			
 			$(document).on("click",".order_col_div:not('.active')",function(){
 				//移除所有排序列块的active类
-				$(".order_col_div,.order_btn_span").removeClass("active");
+				$(".order_col_div,.order_btn_part_div").removeClass("active");
 				//为自己添加active类
 				$(this).addClass("active");
 				//获取子类下的排序按钮块
@@ -669,16 +652,18 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 			
 			
 			$(document).on("click",".page_menu_div .page_up_span:not('.disabled')",function(){
-				upPageAnimate($(".waterfall"));
+				var key=$(".search_input").val();
+				
+				picListByKey("N",key,page,25,orderType,orderValue);
 			})
 			$(document).on("click",".page_menu_div .page_down_span:not('.disabled')",function(){
-				downPageAnimate($(".waterfall"));
+				picListByKey("Y");
 			})
 						
-			$(document).on("click",".desc_div span.active",function(){
+			$(document).on("click",".desc_div.active span",function(){
 				orderDonwAnimate($(this));
 			})
-			$(document).on("click",".asc_div span.active",function(){
+			$(document).on("click",".asc_div.active span",function(){
 				orderUpAnimate($(this));
 			})
 			
@@ -697,7 +682,29 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 
 				
 			}
-	
+		picListByKey("Y");
+		function picListByKey(isDown,key,page,pageSize,orderType,orderValue){
+			$.ajax({
+				url:"picList_key",
+				data:{"key":key,"page":page,"pageSize":pageSize,"orderType":orderType,"orderValue":orderValue},
+				dataType:"json",
+				beforeSend:function(){
+					
+				},success:function(json){
+					console.log(json);
+				},complete:function(){
+					if(isDown=="Y")
+					{
+						downPageAnimate($("#waterfall"));
+					}else if(isDown=="N"){
+						upPageAnimate($("#waterfall"));
+					}
+				}
+				
+			})
+			
+		}
+		
 		
 		
 		function upPageAnimate($el){
@@ -745,25 +752,25 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 
 		function orderUpAnimate($el){
 			//获取到点击按钮的父类按钮块
-			var $parent=$el.parents(".order_btn_div")
+			var $parent=$el.parent();
 			//激活降序按钮
-			$parent.find(".desc_div .order_btn_span").addClass("active");
+			$parent.siblings().eq(0).addClass("active");
 			//执行上升动画
-			$parent.animate({
+			$parent.parent().animate({
 				top:"0em"
 			},1000,function(){
 				//完成后移除降序按钮的激活
-				$el.removeClass("active");
+				$parent.removeClass("active");
 			});
 		}
 		
 		function orderDonwAnimate($el){
-			var $parent=$el.parents(".order_btn_div")
-			$parent.find(".asc_div .order_btn_span").addClass("active");
-			$parent.animate({
+			var $parent=$el.parent();
+			$parent.siblings().eq(0).addClass("active");
+			$parent.parent().animate({
 				top:"2em"
 			},1000,function(){
-				$el.removeClass("active");
+				$parent.removeClass("active");
 			});			
 		}
 		

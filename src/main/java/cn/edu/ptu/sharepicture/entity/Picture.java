@@ -7,16 +7,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class Picture {
 
-	private String pictureId;
-	private String userId;
-	private String pictureName;
-	private String pictureType;
-	private String picturePath;
-	private String remark;
-	private String createTime;
-	private String clickCount;
-	private String isLock;
-	private List<Message> msgs;
+	private String pictureId;//编号
+	private String userId;//用户编号
+	private String pictureName;//图片名
+	private String pictureType;//图片类型
+	private String picturePath;//图片路径
+	private String remark;//图片介绍
+	private String createTime;//上传时间
+	private String clickCount;//点击量
+	private String download;//下载量
+	private String isLock;//是否被锁定
+	private List<Message> msgs;//消息集合
+
+	public String getDownload() {
+		return download;
+	}
+
+	public void setDownload(String download) {
+		this.download = download;
+	}
 
 	public Picture() {
 		// TODO Auto-generated constructor stub
@@ -106,14 +115,8 @@ public class Picture {
 	public String toString() {
 		return "Picture [pictureId=" + pictureId + ", userId=" + userId + ", pictureName=" + pictureName
 				+ ", pictureType=" + pictureType + ", picturePath=" + picturePath + ", remark=" + remark
-				+ ", createTime=" + createTime + ", clickCount=" + clickCount + ", isLock=" + isLock + ", msgs=" + msgs
-				+ "]";
+				+ ", createTime=" + createTime + ", download=" + download + ", clickCount=" + clickCount + ", isLock="
+				+ isLock + ", msgs=" + msgs + "]";
 	}
-
-	
-	
-	
-
-	
 
 }
