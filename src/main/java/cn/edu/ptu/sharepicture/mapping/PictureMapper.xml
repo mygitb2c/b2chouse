@@ -34,7 +34,7 @@
 
 	<insert id="insertPicture">
 		INSERT INTO pictures
-		VALUES(#{pictureId},#{userId},#{pictureName},#{pictureType},#{picturePath},#{remark},#{createTime},0,"N")
+		VALUES(#{pictureId},#{userId},#{pictureName},#{pictureType},#{picturePath},#{remark},#{createTime},#{clickCount},#{download},"N")
 	</insert>
 
 	<resultMap type="cn.edu.ptu.sharepicture.entity.User"

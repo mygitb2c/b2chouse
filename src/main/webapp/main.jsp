@@ -156,7 +156,8 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 }
 /*一个内容层*/
 .card_div {
-	padding: 1em;
+	border-radius: 0.5em;
+	padding-bottom: 1em;
 	margin: 0 0 1em 0;
 	/*防止子元素被切割*/
 	-moz-page-break-inside: avoid;
@@ -179,11 +180,12 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 
 .card_div img {
 	max-width: 100%;
-	max-height: 20em;
+	border-radius: inherit;
+	box-shadow: 0px 8px 10px #999999;
 }
 
 .card_title_div {
-	padding: 0.5em 0em;
+	padding: 0.5em 1em;
 }
 
 .card_title {
@@ -203,6 +205,10 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	-webkit-line-clamp: 2;
 	/*首行缩进*/
 	text-indent: 2em;
+}
+
+.card_info_div {
+	padding: 0em 1em;
 }
 
 .card_info_div .img_author {
@@ -286,10 +292,10 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 .order_btn_part_div {
 	height: 50%;
 	line-height: 2em;
-	visibility:hidden;
+	visibility: hidden;
 }
 
-.order_col_div:not (.active ) .order_btn_part_div{
+.order_col_div:not (.active ) .order_btn_part_div {
 	display: none;
 }
 
@@ -299,7 +305,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 }
 
 .order_btn_part_div.active {
-	visibility:visible;
+	visibility: visible;
 }
 /*排序菜单栏*/
 </style>
@@ -682,7 +688,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 
 				
 			}
-		picListByKey("Y");
+		picListByKey("Y","","1",25);
 		function picListByKey(isDown,key,page,pageSize,orderType,orderValue){
 			$.ajax({
 				url:"picList_key",
@@ -691,7 +697,16 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 				beforeSend:function(){
 					
 				},success:function(json){
-					console.log(json);
+					var j=1;
+					$("#waterfall .card_div").remove();
+					for(var i=0;i<json.length;j++)
+					{
+						var row=json[i];
+						$("#waterfall").append(cardHTML(row,i));
+						i=getNextCardIndex(i,json.length);  
+						  
+					}
+					console.log(j);
 				},complete:function(){
 					if(isDown=="Y")
 					{
@@ -702,6 +717,21 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 				}
 				
 			})
+			
+		}
+		
+		function cardHTML(row,i){
+			var html='<div class="card_div">'
+					+'<img src="'+row.pictures[0].picturePath+'">'
+					+'<div class="card_title_div text-left">'
+					+'<span class="card_title">'+row.pictures[0].pictureName+"_"+i+'</span>'
+					+'</div>'
+					+'<div class="card_info_div">'
+					+'<span class="pull-left img_author">'+row.userName+'</span>'
+					+'<span class="pull-right img_createdate">2018-04-15</span>'
+					+'<div class="clearfix"></div>'
+					+'</div></div>';
+				return html;
 			
 		}
 		
@@ -772,6 +802,22 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 			},1000,function(){
 				$parent.removeClass("active");
 			});			
+		}
+		
+		function getNextCardIndex(n,pageSize){
+			var num=Number(n);
+			var total=Number(pageSize);
+			var col=Number($("#waterfall").css("column-count"));
+			var row=Math.ceil(pageSize/col);
+			var next;
+			if((num+col)>=total){
+				next=num%col+1;
+			}else if(num==15){
+				next=total;
+			}else{
+				next=num+col;
+			}
+			return next;
 		}
 		
 		

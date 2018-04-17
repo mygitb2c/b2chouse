@@ -26,7 +26,7 @@ public class PictureDaoTest {
 	
 	@Test
 	public void insert() {
-		String fSPath = "D://image/";
+		String fSPath = "D://potp截图/";
 		File file=new File(fSPath);
 		getPicture(file);
 		
@@ -48,10 +48,16 @@ public class PictureDaoTest {
 			if (f.isFile()) {
 				picture = new Picture();
 				String id = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+				int clickCount=(int) (Math.random()*99)+1;
+				picture.setClickCount(clickCount+"");
+				int download=(int) (Math.random()*99)+1;
+				picture.setDownload(download+"");
 				picture.setPictureId(id);
 				picture.setUserId("8EA7EDE3A8AB4CBFB9819C5ED28460FB");
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-				String createTime = dateFormat.format(new Date());
+				String createTime = dateFormat.format(new Date()).substring(12, 14);
+				int ss=(int) (Math.random()*51)+10;
+				createTime+=ss+"";
 				picture.setCreateTime(createTime);
 				if(f.getName().indexOf(" ")>0)
 				{
