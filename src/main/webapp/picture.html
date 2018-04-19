@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="static/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="css/nav.css" />
+		<script src="static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="static/js/popper.js" type="text/javascript" charset="utf-8"></script>
+		<script src="static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			/*body {
+				background: rgb(110, 110, 110);
+				color: #FFF;
+			}*/
+			
+			.nofix {
+				position: static;
+			}
+			
+			.bor {
+				border: 1px solid black;
+			}
+			
+			.picture_area_div {
+				height: 50vh;
+				position: relative;
+			}
+			
+			.up_page_area_div,
+			.down_page_area_div {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 5%;
+			}
+			
+			.down_page_area_div {
+				right: 0px;
+			}
+			
+			.page_btn_div {
+				text-align: center;
+				cursor: pointer;
+			}
+			
+			.picture_container {
+				width: 90%;
+				margin: 0px 5%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mynavbar"></div>
+		<!--<div class="row navbar_div nofix">
+			<div class="col-md-4 search_div">
+				<div class="input_div form-inline">
+					<input type="text" placeholder="搜索" class="form-control col-md-11 search_input" /> <i class="fa fa-search fa-lg col-md-1"></i>
+				</div>
+			</div>
+			<div class="col-md-4 logo_div">
+				<span class="logo_value">Share Picture</span>
+			</div>
+			<div class="col-md-4 nav_menu login_menu  ">
+				<a class="register_a " href="register"> <i class="fa fa-registered fa-lg"></i> 注册
+				</a>
+				<a class="login_a " href="login"> <i class="fa fa-map-marker fa-lg"></i> 登录
+				</a>
+			</div>
+			<div class="col-md-4 nav_menu user_menu ">
+				<a class="userinfo_a " href="my"> <i class="fa fa-user-o fa-fw fa-lg"></i> 我的
+				</a>
+				<a class="exit_a "> <i class="fa fa-sign-out fa-fw fa-lg"></i> 注销
+				</a>
+				<a class="sharepic_a " href="userinfo.html"> <i class="fa fa-share-alt fa-fw fa-lg"></i> 发图
+				</a>
+			</div>
+		</div>-->
+
+		<div class="picture_area_div bor">
+			<div class="up_page_area_div">
+				<div class="page_btn_div up_page_div">
+					<i class="fa fa-angle-left fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="down_page_area_div">
+				<div class="page_btn_div down_page_div">
+					<i class="fa fa-angle-right fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="picture_container">
+				
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function  () {
+			$(".mynavbar").load("nav.html .navbar_div");
+		})
+	</script>
+	
+
+</html>
