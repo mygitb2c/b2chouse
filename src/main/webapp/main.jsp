@@ -754,7 +754,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 		
 		function cardHTML(row,i){
 			var html='<div class="card_div">'
-					+'<img src="'+row.pictures[0].pictureName+'">'
+					+'<img src="picture/'+row.pictures[0].pictureName+'">'
 					+'<div class="card_title_div text-left">'
 					+'<span class="card_title">'+row.pictures[0].pictureTitle+"_"+i+'</span>'
 					+'</div>'

@@ -77,19 +77,19 @@ public class PictureController {
 	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
 	public boolean insert(Picture picture, @RequestParam(value = "img") MultipartFile img, HttpServletRequest request) {
 		int i = img.getOriginalFilename().lastIndexOf(".");
-		String filePre = img.getOriginalFilename().substring(i);
-		String fileName = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase() + filePre;
-		String realPath = request.getRealPath("/static/picture") + "/" + fileName;
-		String path = "/static/picture/" + fileName;
-		File file = new File(realPath);
-
+		String type = img.getOriginalFilename().substring(i);
+		String fileName = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase() + type;
+		String path = prePath + fileName;
+		File file = new File(path);
 		try {
 			FileUtils.copyInputStreamToFile(img.getInputStream(), file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(fileName);
 		picture.setPictureName(path);
+		picture.setPictureName(fileName);
 		/* ps.insertPicture(picture); */
 		return true;
 	}
@@ -97,11 +97,11 @@ public class PictureController {
 	@RequestMapping(value = "picture/{name}")
 	public void getPictureFromHD(@PathVariable(value = "name") String fileName, HttpServletRequest request,
 			HttpServletResponse response) {
-		String picturePaht = prePath + fileName + ".jpg";
+		String picturePath = prePath + fileName + ".jpg";
 		FileInputStream fis = null;
 		BufferedOutputStream bos = null;
 		try {
-			fis = new FileInputStream(new File(picturePaht));
+			fis = new FileInputStream(new File(picturePath));
 			int i = fis.available();
 			byte[] data = new byte[i];
 			fis.read(data);
@@ -110,7 +110,8 @@ public class PictureController {
 			bos.flush();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Mapping{picture/" + fileName + "}:" + picturePath + " 下未找到文件");
+			/* e.printStackTrace(); */
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
