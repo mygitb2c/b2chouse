@@ -109,12 +109,13 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	position: fixed;
 }
 
-.content {
-	margin: 6em 10%;
+#mycontainer {
+	margin: 0em 10%;
 	width: 80%;
+	padding: 6em 0em 2em 0em;
 }
 
-#content_div {
+#content {
 	overflow: hidden;
 }
 
@@ -153,6 +154,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	position: relative;
 	left: 0px;
 	top: 0px;
+	min-height: 100vh;
 }
 /*一个内容层*/
 .card_div {
@@ -181,7 +183,8 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 .card_div img {
 	max-width: 100%;
 	border-radius: inherit;
-	box-shadow: 0px 8px 10px #999999;
+	box-shadow: 0px 5px 5px #999999;
+	max-height: 40em;
 }
 
 .card_title_div {
@@ -308,10 +311,21 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	visibility: visible;
 }
 /*排序菜单栏*/
+/*加载中区域  */
+.footer_loading_div{
+	margin:0.5em 0em 2em 0em;
+	/* display: none; */
+}
+.footer_loading_content_div
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.5em 0em;
+}
+
 </style>
 </head>
-<!---->
-
 <body>
 
 	<div class="row navbar_div">
@@ -358,10 +372,8 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 		</div>
 	</div>
 
-	<style type="text/css">
-</style>
 
-	<div class="content">
+	<div id="mycontainer">
 		<div class="order_menu_div">
 			<div class="order_col_div active">
 				<div class="order_btn_div">
@@ -441,8 +453,8 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 
 
 		<!--图片显示区域-->
-		<div id="content_div">
-			<div id="waterfall">
+		<div id="content">
+			<div id="waterfall" isover="N">
 				<div class="card_div">
 					<img src="static/img/无标题1.png">
 					<div class="card_title_div text-left">
@@ -620,10 +632,18 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 					</div>
 				</div>
 			</div>
-
+	
 		</div>
+		<div class="clearfix"></div>
 		<!--图片显示区域-->
-
+		<div class="footer_loading_div">
+			<div class="footer_loading_content_div">
+				<span><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></span>
+				<span>加载中...</span>
+			</div>
+		</div>
+		
+		
 
 
 	</div>
@@ -663,7 +683,8 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 				picListByKey("N",key,page,25,orderType,orderValue);
 			})
 			$(document).on("click",".page_menu_div .page_down_span:not('.disabled')",function(){
-				picListByKey("Y");
+				downPageAnimate($("#waterfall"));
+				/* picListByKey("Y"); */
 			})
 						
 			$(document).on("click",".desc_div.active span",function(){
@@ -672,6 +693,17 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 			$(document).on("click",".asc_div.active span",function(){
 				orderUpAnimate($(this));
 			})
+			
+			 $(document).scroll(function() {
+				if($("#waterfall").attr("isover")=="N")
+				{
+					var height=$(document).height()-$(window).height();
+					var scrollTop=$(this).scrollTop()
+					if(scrollTop>=height){
+						picListByKey("N","","2",25);
+					}
+				}
+			}); 
 			
 			
 		})
@@ -688,32 +720,35 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 
 				
 			}
-		picListByKey("Y","","1",25);
-		function picListByKey(isDown,key,page,pageSize,orderType,orderValue){
+		 picListByKey("","","1",10); 
+		function picListByKey(isIni,key,page,pageSize,orderType,orderValue){
 			$.ajax({
 				url:"picList_key",
 				data:{"key":key,"page":page,"pageSize":pageSize,"orderType":orderType,"orderValue":orderValue},
 				dataType:"json",
 				beforeSend:function(){
-					
+					if(isIni){
+						$(".footer_loading_div").css("display","inline"); 
+					}
 				},success:function(json){
-					var j=1;
-					$("#waterfall .card_div").remove();
-					for(var i=0;i<json.length;j++)
+					/* $("#waterfall .card_div").remove(); */
+					for(var i=0;i<json.length;i++)
 					{
 						var row=json[i];
 						$("#waterfall").append(cardHTML(row,i));
-						i=getNextCardIndex(i,json.length);  
+						/* i=getNextCardIndex(i,json.length);   */
 						  
 					}
-					console.log(j);
-				},complete:function(){
-					if(isDown=="Y")
-					{
-						downPageAnimate($("#waterfall"));
-					}else if(isDown=="N"){
-						upPageAnimate($("#waterfall"));
+				},complete:function(XMLHttpRequest,textStatus){
+					if(isIni)
+					{	
+						$(".footer_loading_div").css("display","none"); 
 					}
+					if(textStatus=="success"&&XMLHttpRequest.responseJSON.length==0)
+					{
+						showOver();
+					}
+					
 				}
 				
 			})
@@ -820,6 +855,9 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 			return next;
 		}
 		
+		function showOver(){
+			/* $().animate({}) */
+		}
 		
 	</script>
 
