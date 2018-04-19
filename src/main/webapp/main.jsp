@@ -327,7 +327,6 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 </style>
 </head>
 <body>
-
 	<div class="row navbar_div">
 		<div class="col-md-4 search_div">
 			<div class="input_div form-inline">
@@ -696,10 +695,10 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 			
 			 $(document).scroll(function() {
 				if($("#waterfall").attr("isover")=="N")
-				{
+				{	var scrollTop=$(this).scrollTop();
 					var height=$(document).height()-$(window).height();
-					var scrollTop=$(this).scrollTop()
 					if(scrollTop>=height){
+						$(this).scrollTop(scrollTop-5);
 						picListByKey("N","","2",25);
 					}
 				}
@@ -716,9 +715,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 				}else{
 					$(".nav_menu.user_menu").css("display", "none");
 					$(".nav_menu.login_menu").css("display","block");
-				}
-
-				
+				}	
 			}
 		 picListByKey("","","1",10); 
 		function picListByKey(isIni,key,page,pageSize,orderType,orderValue){
@@ -757,9 +754,9 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 		
 		function cardHTML(row,i){
 			var html='<div class="card_div">'
-					+'<img src="'+row.pictures[0].picturePath+'">'
+					+'<img src="'+row.pictures[0].pictureName+'">'
 					+'<div class="card_title_div text-left">'
-					+'<span class="card_title">'+row.pictures[0].pictureName+"_"+i+'</span>'
+					+'<span class="card_title">'+row.pictures[0].pictureTitle+"_"+i+'</span>'
 					+'</div>'
 					+'<div class="card_info_div">'
 					+'<span class="pull-left img_author">'+row.userName+'</span>'

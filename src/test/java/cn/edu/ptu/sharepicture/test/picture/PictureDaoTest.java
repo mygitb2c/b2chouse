@@ -65,9 +65,9 @@ public class PictureDaoTest {
 				}else {
 					picture.setPictureType("1");
 				}
-				String name=f.getName().split(" ")[0].split("_")[0];
-				picture.setPictureName(name);
-				picture.setPicturePath("static/image/"+f.getName());
+				String title=f.getName().split(" ")[0].split("_")[0];
+				picture.setPictureTitle(title);
+				picture.setPictureName("static/image/"+f.getName());
 				pm.insertPicture(picture);
 			} else {
 				getPicture(f);

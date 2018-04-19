@@ -5,7 +5,7 @@
 <mapper namespace="cn.edu.ptu.sharepicture.dao.PictureMapper">
 	<select id="getPicturesByKey" resultMap="pictures_User">
 		<bind name="key" value="'%'+key+'%'" />
-		SELECT pictureId,pictureName,picturePath,userName,pictures.createTime
+		SELECT pictureId,pictureTitle,pictureName,userName,pictures.createTime
 		createTime FROM pictures LEFT JOIN user ON
 		(pictures.userId=user.userId)
 		RIGHT JOIN pictureType ON
@@ -16,7 +16,7 @@
 	</select>
 	<select id="getPictureById" resultMap="pictures_User">
 		SELECT
-		pictureId,pictureName,picturePath,remark,pictures.createTime
+		pictureId,pictureTitle,pictureName,remark,pictures.createTime
 		createTime,clickCount,user.userId userId,userName FROM pictures
 		RIGHT
 		JOIN user ON pictures.userId=user.userId WHERE pictureId=#{pictureId}
@@ -24,7 +24,7 @@
 
 	<select id="getPicturesByUserId" resultMap="pictures_User">
 		SELECT
-		pictureId,pictureName,picturePath,remark,pictures.createTime
+		pictureId,pictureTitle,pictureName,remark,pictures.createTime
 		createTime,clickCount,user.userId userId,userName FROM pictures
 		RIGHT
 		JOIN user ON pictures.userId=user.userId WHERE
@@ -34,7 +34,7 @@
 
 	<insert id="insertPicture">
 		INSERT INTO pictures
-		VALUES(#{pictureId},#{userId},#{pictureName},#{pictureType},#{picturePath},#{remark},#{createTime},#{clickCount},#{download},"N")
+		VALUES(#{pictureId},#{userId},#{pictureTitle},#{pictureType},#{pictureName},#{remark},#{createTime},#{clickCount},#{download},"N")
 	</insert>
 
 	<resultMap type="cn.edu.ptu.sharepicture.entity.User"
@@ -44,10 +44,10 @@
 		<collection property="pictures"
 			ofType="cn.edu.ptu.sharepicture.entity.Picture">
 			<id property="pictureId" javaType="String" column="pictureId" />
+			<result property="pictureTitle" javaType="String"
+				column="pictureTitle" />
 			<result property="pictureName" javaType="String"
 				column="pictureName" />
-			<result property="picturePath" javaType="String"
-				column="picturePath" />
 			<result property="createTime" javaType="String"
 				column="createTime" />
 			<result property="remark" javaType="String" column="remark" />
