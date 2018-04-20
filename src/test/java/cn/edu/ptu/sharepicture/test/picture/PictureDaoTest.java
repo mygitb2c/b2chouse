@@ -64,7 +64,7 @@ public class PictureDaoTest {
 				picture.setPictureId(id);
 				picture.setUserId("8EA7EDE3A8AB4CBFB9819C5ED28460FB");
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-				String createTime = dateFormat.format(new Date()).substring(12, 14);
+				String createTime = dateFormat.format(new Date()).substring(0, 13);
 				int ss = (int) (Math.random() * 51) + 10;
 				createTime += ss + "";
 				picture.setCreateTime(createTime);
@@ -98,6 +98,12 @@ public class PictureDaoTest {
 				getPicture(f);
 			}
 		}
+	}
+	
+	@Test
+	public void getPictureName() {
+		String name=pm.getPictureName("246D9F870CD24994ABE88E6C9B2C91B9");
+		System.out.println(name);
 	}
 
 }

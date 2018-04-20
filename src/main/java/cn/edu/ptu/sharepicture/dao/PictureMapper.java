@@ -22,4 +22,6 @@ public interface PictureMapper {
 
 	boolean updatePicture(Picture picture);
 
+	String getPictureName(@Param(value = "pictureId") String pictureId);
+
 }

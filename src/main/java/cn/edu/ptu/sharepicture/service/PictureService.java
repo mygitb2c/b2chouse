@@ -37,5 +37,9 @@ public class PictureService {
 		picture.setPictureId(pictureId);
 		return pm.insertPicture(picture);
 	}
+	
+	public String getPictureName(String pictureId) {
+		return pm.getPictureName(pictureId);
+	}
 
 }

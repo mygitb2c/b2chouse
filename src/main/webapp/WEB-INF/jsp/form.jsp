@@ -11,5 +11,6 @@
 			<input type="file" name="img" />
 			<input type="submit" value="提交"/>
 		</form>
+		<a href="picture/246D9F870CD24994ABE88E6C9B2C91B9/true" download="">下载</a>
 	</body>
 </html>

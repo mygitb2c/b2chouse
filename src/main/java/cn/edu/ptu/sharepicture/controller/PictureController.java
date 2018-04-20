@@ -94,12 +94,19 @@ public class PictureController {
 		return true;
 	}
 
-	@RequestMapping(value = "picture/{name}")
-	public void getPictureFromHD(@PathVariable(value = "name") String fileName, HttpServletRequest request,
+	// 通过图片编号获取图片名，并通过图片名从本地硬盘上获取图片返回给页面
+	@RequestMapping(value = "picture/{pictureId}/{download}")
+	public void getPictureFromHD(@PathVariable(value = "pictureId") String pictureId,
+			@PathVariable(value = "download") boolean download, HttpServletRequest request,
 			HttpServletResponse response) {
-		String picturePath = prePath + fileName + ".jpg";
+		String pictureName = ps.getPictureName(pictureId);
+		String picturePath = prePath + pictureName;
 		FileInputStream fis = null;
 		BufferedOutputStream bos = null;
+		if (download == true) {
+			response.setContentType("application/file-download");
+			response.addHeader("Content-Disposition", "attachment; filename=" + pictureName);
+		}
 		try {
 			fis = new FileInputStream(new File(picturePath));
 			int i = fis.available();
@@ -110,7 +117,7 @@ public class PictureController {
 			bos.flush();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Mapping{picture/" + fileName + "}:" + picturePath + " 下未找到文件");
+			System.err.println("Mapping{picture/" + pictureId + "/" + download + "}:" + picturePath + " 下未找到文件");
 			/* e.printStackTrace(); */
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

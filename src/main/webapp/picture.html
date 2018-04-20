@@ -7,15 +7,17 @@
 		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="static/css/font-awesome.css" />
 		<link rel="stylesheet" type="text/css" href="css/nav.css" />
+		<link rel="stylesheet" type="text/css" href="css/colorPicker.css" />
 		<script src="static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
 		<script src="static/js/popper.js" type="text/javascript" charset="utf-8"></script>
 		<script src="static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/nav.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.colorPicker.min.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
-			/*body {
-				background: rgb(110, 110, 110);
-				color: #FFF;
-			}*/
+			body {
+				background: rgb(240, 240, 240);
+				/*color: #FFF;*/
+			}
 			
 			.nofix {
 				position: static;
@@ -51,11 +53,100 @@
 				width: 90%;
 				margin: 0px 5%;
 			}
+			
+			.msg_area_div {
+				width: 65%;
+				margin: 1em 10%;
+			}
+			
+			.edit_btn_list_div {
+				margin-bottom: 0.2em;
+				display: inline-block;
+				/*border-radius: 0.25em 0.25em 0em 0em;
+				border-bottom: 1px solid #fff;
+				margin-top: -1px;
+				display: inline-block;
+				border-left: 1px solid #333333;
+				border-top: 1px solid;
+				border-right: 1px solid;*/
+			}
+			
+			.edit_btn_div {
+				border-radius: 0.2em;
+				text-align: center;
+				height: 2em;
+				width: 2em;
+				display: inline-block;
+				line-height: 2em;
+			}
+			
+			.edit_btn_div:active {
+				background: #fff;
+			}
+			
+			.comment_list_div {
+				display: inline-block;
+				float: right;
+			}
+			
+			.star_btn_div {
+				height: 2em;
+				line-height: 2em;
+				display: inline-block;
+				text-align: center;
+				padding: 0em 1em;
+			}
+			
+			#msg_edit_content_div {
+				height: 12em;
+				border: 1px solid #333333;
+				border-radius: 0.25em 0.25em 0.25em 0.25em;
+				outline: none;
+				padding: 0.3em 0.5em;
+				/*margin-top: -1px;*/
+				background: #fff;
+			}
+			
+			.edit_btn_list_div .edit_btn_span button {
+				padding: 0px;
+				background: inherit;
+				border: none;
+				outline: none;
+			}
+			
+			div.colorPicker-picker {
+				background-color: rgb(255, 255, 255);
+				display: inline-block;
+				width: 1em;
+				height: 1em;
+				border-radius: 0.25em;
+				border: 1px solid #CCC;
+			}
+			
+			.star_btn_div {
+				direction: rtl;
+			}
+			
+			.star_btn_div .edit_btn_span i:hover:before,
+			.star_btn_div .edit_btn_span i:hover~i:before,
+			.star_btn_div .edit_btn_span .fa_isselect:before,
+			.star_btn_div .edit_btn_span .fa_isselect~i:before {
+				content: "\f005";
+			}
+			
+			.sjx {
+				width:50px;  
+  height:50px;  
+ border:25px solid;
+ border-right-color: red;
+ border-top-color: red;
+ border-bottom-color: transparent;
+ border-left-color: transparent;
+			}
 		</style>
 	</head>
 
 	<body>
-		<div class="mynavbar"></div>
 		<!--<div class="row navbar_div nofix">
 			<div class="col-md-4 search_div">
 				<div class="input_div form-inline">
@@ -93,15 +184,103 @@
 				</div>
 			</div>
 			<div class="picture_container">
-				
+				<div class="sjx"></div>
+			</div>
+		</div>
+		<div class="msg_area_div">
+			<div class="msg_panel_div">
+
+			</div>
+			<div class="msg_edit_div">
+				<div class="edit_btn_list_div fa-lg">
+					<div class="edit_btn_div">
+						<span class="edit_btn_span ">
+						<button class="fa fa-font" aria-hidden="true" data-exetype=""></button>
+					</span>
+					</div>
+					<div class="edit_btn_div">
+						<span class="edit_btn_span">
+						<button class="fa fa-bold" aria-hidden="true" data-exetype="bold"></button>
+					</span>
+					</div>
+					<div class="edit_btn_div">
+						<span class="edit_btn_span">
+						<button class="fa fa-underline" aria-hidden="true" data-exetype="underline"></button>
+					</span>
+					</div>
+					<div class="edit_btn_div">
+						<span class="edit_btn_span">
+						<button class="fa fa-italic" aria-hidden="true" data-exetype="italic"></button>
+					</span>
+					</div>
+					<div class="edit_btn_div">
+						<span class="edit_btn_span">
+						<button class="fa fa-pencil-square" aria-hidden="true"></button>
+						</span>
+					</div>
+					<input id="colorboard" />
+				</div>
+				<div class="comment_list_div fa-lg">
+
+					<div class="star_btn_div">
+						<span class="edit_btn_span">
+							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
+							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
+							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
+							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
+							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
+						</span>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div id="msg_edit_content_div" contenteditable="true">
+
+				</div>
 			</div>
 		</div>
 	</body>
+
 	<script type="text/javascript">
-		$(function  () {
-			$(".mynavbar").load("nav.html .navbar_div");
+		$(function() {
+			/*var  editor=iniEdit();*/
+			$(".edit_btn_span .fa").click(function() {
+				if($(this).hasClass("fa_isselect")) {
+					$(".edit_btn_span .fa").removeClass("fa_isselect");
+				} else {
+					$(".edit_btn_span .fa").removeClass("fa_isselect");
+					$(this).addClass("fa_isselect");
+				}
+			})
+			$(".edit_btn_span button:not('.fa-pencil-square')").click(function() {
+				fontStyle($(this).attr("data-exetype"));
+			})
+
+			$(".edit_btn_span button.fa-pencil-square").click(function() {
+				var val = $(this).attr("data-exevalue");
+				$(this).css("color", val);
+				color(val);
+			})
+			$("#colorboard").colorPicker({
+				onColorChange: function(id, newValue) {
+					$(".edit_btn_span .fa-pencil-square").attr("data-exevalue", newValue);
+				}
+			});
 		})
+
+		function fontStyle(style, val) {
+			document.execCommand(style, false, null);
+		}
+
+		function color(val) {
+			document.execCommand("foreColor", false, val);
+		}
+		/*function iniEdit(){
+			var ele=document.getElementById("msg_edit_content_div");
+			
+			ele.designMode="on";
+			editor.document.contentEditable = true;
+			return ele;
+		}*/
 	</script>
-	
 
 </html>

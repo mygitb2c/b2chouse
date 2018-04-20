@@ -15,8 +15,23 @@
 <script src="static/js/bootstrap.js" type="text/javascript"
 	charset="utf-8"></script>
 <style type="text/css">
-body {
+html {
+  scroll-behavior: smooth;
+}
+ body {
 	background: rgb(242, 242, 242);
+	/* -ms-overflow-style: none; */
+} 
+body::-webkit-scrollbar {
+  /* display: none; */
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 4px;
 }
 
 /*让div中的图片能水平垂直居中且大小自适应*/
@@ -112,7 +127,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 #mycontainer {
 	margin: 0em 10%;
 	width: 80%;
-	padding: 6em 0em 2em 0em;
+	padding: 6em 0em 8em 0em;
 }
 
 #content {
@@ -176,8 +191,10 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 }
 
 .card_div:hover {
-	border-color: rgb(213, 233, 161);
-	opacity: 0.8;
+	/* border-color: rgb(213, 233, 161);
+	opacity: 0.8; */
+	-webkit-filter: brightness(105%); /* Chrome, Safari, Opera */
+    filter: brightness(105%);
 }
 
 .card_div img {
@@ -321,7 +338,7 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0.5em 0em;
+	padding: 1em 0em;
 }
 
 </style>
@@ -699,7 +716,8 @@ a, .fa-search, .card-img-top, .card-title, .card-text {
 					var height=$(document).height()-$(window).height();
 					if(scrollTop>=height){
 						$(this).scrollTop(scrollTop-5);
-						picListByKey("N","","2",25);
+						picListByKey("N","","2",25); 
+						/* $(".footer_loading_div").css("display","inline");  */
 					}
 				}
 			}); 
