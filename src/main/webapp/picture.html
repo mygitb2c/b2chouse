@@ -17,6 +17,16 @@
 			body {
 				background: rgb(240, 240, 240);
 				/*color: #FFF;*/
+				overflow-x: hidden;
+			}
+			
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+			
+			::-webkit-scrollbar-thumb {
+				background-color: #c1c1c1;
+				border-radius: 4px;
 			}
 			
 			.nofix {
@@ -28,8 +38,8 @@
 			}
 			
 			.picture_area_div {
-				height: 50vh;
 				position: relative;
+				margin: 2em 0em;
 			}
 			
 			.up_page_area_div,
@@ -54,21 +64,9 @@
 				margin: 0px 5%;
 			}
 			
-			.msg_area_div {
-				width: 65%;
-				margin: 1em 10%;
-			}
-			
 			.edit_btn_list_div {
-				margin-bottom: 0.2em;
+				padding: 0.3em;
 				display: inline-block;
-				/*border-radius: 0.25em 0.25em 0em 0em;
-				border-bottom: 1px solid #fff;
-				margin-top: -1px;
-				display: inline-block;
-				border-left: 1px solid #333333;
-				border-top: 1px solid;
-				border-right: 1px solid;*/
 			}
 			
 			.edit_btn_div {
@@ -78,11 +76,10 @@
 				width: 2em;
 				display: inline-block;
 				line-height: 2em;
-			}
-			
-			.edit_btn_div:active {
 				background: #fff;
 			}
+			
+			.edit_btn_div:active {}
 			
 			.comment_list_div {
 				display: inline-block;
@@ -99,12 +96,11 @@
 			
 			#msg_edit_content_div {
 				height: 12em;
-				border: 1px solid #333333;
-				border-radius: 0.25em 0.25em 0.25em 0.25em;
+				border-top: 1px solid rgb(230, 230, 230);
+				border-bottom: 1px solid rgb(230, 230, 230);
+				/* border-radius: 0.25em 0.25em 0.25em 0.25em; */
 				outline: none;
-				padding: 0.3em 0.5em;
-				/*margin-top: -1px;*/
-				background: #fff;
+				padding: 0.6em 0.5em;
 			}
 			
 			.edit_btn_list_div .edit_btn_span button {
@@ -115,7 +111,7 @@
 			}
 			
 			div.colorPicker-picker {
-				background-color: rgb(255, 255, 255);
+				/*background-color: #212529;*/
 				display: inline-block;
 				width: 1em;
 				height: 1em;
@@ -123,25 +119,263 @@
 				border: 1px solid #CCC;
 			}
 			
-			.star_btn_div {
+			.star_btn_div,
+			.comment_value {
 				direction: rtl;
 			}
 			
-			.star_btn_div .edit_btn_span i:hover:before,
-			.star_btn_div .edit_btn_span i:hover~i:before,
-			.star_btn_div .edit_btn_span .fa_isselect:before,
-			.star_btn_div .edit_btn_span .fa_isselect~i:before {
+			.edit_btn_span .fa-star-o:hover:before,
+			.edit_btn_span .fa-star-o:hover~i:before,
+			.fa-star-o.fa_isselect:before,
+			.fa-star-o.fa_isselect~i:before {
 				content: "\f005";
+				color: yellow;
 			}
 			
-			.sjx {
-				width:50px;  
-  height:50px;  
- border:25px solid;
- border-right-color: red;
- border-top-color: red;
- border-bottom-color: transparent;
- border-left-color: transparent;
+			.hot_tag_div {
+				width: 3em;
+				height: 3em;
+				border: 1.5em solid;
+				border-left-color: red;
+				border-top-color: red;
+				border-bottom-color: transparent;
+				border-right-color: transparent;
+				color: #fff;
+				position: absolute;
+			}
+			
+			.hot_text_span {
+				float: left;
+				margin-top: -20px;
+				margin-left: -20px;
+				font-family: Prestige Elite Std;
+				transform: rotate(-45deg);
+			}
+			
+			.msg_panel_area_div {
+				position: absolute;
+				width: 45%;
+				padding-left: 1em;
+				left: -45%;
+				top: 15%;
+			}
+			
+			.msg_panel_div {
+				width: 100%;
+			}
+			
+			/*.msg_panel_content_div:hover {
+				opacity: 1;
+			}
+			*/
+			.msg_panel_content_div {
+				overflow: hidden;
+				min-height: 9em;
+				/*opacity: 0.1;*/
+				background: #fff;
+				padding: 0.5em;
+				border-radius: 0.5em;
+				border-color: #999999;
+			}
+			
+			.table_div {
+				margin-top: 0.5em;
+				margin-bottom: 0.5em;
+				width: 100%;
+				/*border-left: 1px solid;
+				border-right: 1px solid;
+				border-bottom: 1px solid;
+				border-color: inherit;*/
+				position: relative;
+				color: #4d4d4d;
+			}
+			
+			.table_tr {
+				/*margin: 0px 0px 0px -1px;*/
+				height: 6em;
+				width: 100%;
+				display: table;
+				padding: 0em;
+				border-bottom: 1px solid rgb(220, 220, 220);
+			}
+			
+			.td_name,
+			.td_value {
+				text-align: center;
+				height: 100%;
+				/*border-top: 1px solid;
+				border-left: 1px solid;
+				border-color: inherit;*/
+				float: left;
+				padding: 0.5em 0.5em 0.5em 0.5em;
+			}
+			
+			.td_value>.cell_value {
+				text-align: left;
+			}
+			
+			.cell_value {
+				position: relative;
+				word-wrap: break-word;
+				height: 100%;
+				padding-bottom: 2em;
+			}
+			
+			.comment_value {
+				position: absolute;
+				bottom: 0em;
+				left: 0.5em;
+			}
+			
+			.date_value {
+				position: absolute;
+				bottom: 0em;
+				right: 0.5em;
+				font-size: 80%;
+				color: rgb(200, 200, 200);
+			}
+			
+			.send_name_value {
+				position: absolute;
+				bottom: 0em;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+			
+			.width_20 {
+				width: 20%;
+			}
+			
+			.width_80 {
+				width: 80%;
+			}
+			
+			.msg_panel_area_div.active .msg_panel_footer_div {
+				display: inline;
+			}
+			
+			.msg_panel_footer_div {
+				position: absolute;
+				right: -1.05em;
+				bottom: 0em;
+				font-size: 2em;
+				display: none;
+			}
+			
+			.fa-angle-down,
+			.fa-angle-up {
+				padding: 0em 0.25em;
+				border-radius: 0.25em
+			}
+			
+			.fa-angle-down:active,
+			.fa-angle-up:active {
+				background: #fff;
+			}
+			
+			.msg_panel_switch_div {
+				position: absolute;
+				right: -2em;
+				top: 0em;
+				width: 2em;
+				text-align: center;
+			}
+			
+			.msg_panel_switch_div[data-status=close] .fa-caret-right,
+			.msg_panel_switch_div[data-status=show] .fa-times {
+				display: inline;
+			}
+			
+			.msg_panel_switch_div[data-status=show] .fa-caret-right,
+			.msg_panel_switch_div[data-status=close] .fa-times {
+				display: none;
+			}
+			
+			.msg_edit_area_div {
+				position: fixed;
+				bottom: 1em;
+				right: -45%;
+				width: 45%;
+				padding: 0em 0.5em;
+				z-index: 1;
+			}
+			
+			.msg_edit_div:hover {
+				opacity: 1;
+			}
+			
+			.msg_edit_div {
+				width: 100%;
+				display: inline-block;
+				border: 1px solid #333333;
+				background: rgb(255, 255, 255);
+				border-radius: 0.25em 0.25em 0.25em 0.25em;
+				opacity: 0.1;
+			}
+			
+			.edit_switch_btn {
+				width: 2em;
+				display: inline-block;
+				float: left;
+				writing-mode: vertical-lr;
+				padding: 0.5em;
+				cursor: pointer;
+				margin-left: -2.5em;
+			}
+			
+			.edit_switch_btn[data-status=show] {
+				opacity: 0.3;
+			}
+			
+			.edit_switch_btn[data-status=show]:hover {
+				opacity: 1;
+			}
+			
+			.edit_switch_btn[data-status=close] .fa-caret-left,
+			.edit_switch_btn[data-status=show] .fa-times {
+				display: inline;
+			}
+			
+			.edit_switch_btn[data-status=show] .fa-caret-left,
+			.edit_switch_btn[data-status=close] .fa-times {
+				display: none;
+			}
+			
+			.switch_btn_value {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				font-size: 2em;
+			}
+			
+			.send_btn_div {
+				padding: 0.5em 1em;
+			}
+			
+			.send_btn_span {
+				padding: 0.3em 1.5em 0.3em 2.5em;
+				background: #343a40;
+				color: #fff;
+				border-radius: 0.25em;
+				float: right;
+				cursor: pointer;
+			}
+			
+			.send_btn_span.loading {
+				background: rgb(200, 200, 200);
+				cursor: wait;
+			}
+			
+			.send_btn_span.loading .btn_loading_text {
+				visibility: visible;
+			}
+			
+			.send_btn_span:not(.loading) .btn_loading_text {
+				visibility: hidden;
+			}
+			
+			.picture_container img {
+				max-width: 100%;
 			}
 		</style>
 	</head>
@@ -171,25 +405,10 @@
 				</a>
 			</div>
 		</div>-->
-
-		<div class="picture_area_div bor">
-			<div class="up_page_area_div">
-				<div class="page_btn_div up_page_div">
-					<i class="fa fa-angle-left fa-5x" aria-hidden="true"></i>
-				</div>
-			</div>
-			<div class="down_page_area_div">
-				<div class="page_btn_div down_page_div">
-					<i class="fa fa-angle-right fa-5x" aria-hidden="true"></i>
-				</div>
-			</div>
-			<div class="picture_container">
-				<div class="sjx"></div>
-			</div>
-		</div>
-		<div class="msg_area_div">
-			<div class="msg_panel_div">
-
+		<div class="msg_edit_area_div">
+			<div class="edit_switch_btn" data-status="close">
+				<span class="fa fa-caret-left switch_btn_value"></span>
+				<span class="fa fa-times switch_btn_value"></span>
 			</div>
 			<div class="msg_edit_div">
 				<div class="edit_btn_list_div fa-lg">
@@ -218,7 +437,7 @@
 						<button class="fa fa-pencil-square" aria-hidden="true"></button>
 						</span>
 					</div>
-					<input id="colorboard" />
+					<input id="colorboard" value="#212529" />
 				</div>
 				<div class="comment_list_div fa-lg">
 
@@ -235,6 +454,93 @@
 				<div class="clearfix"></div>
 				<div id="msg_edit_content_div" contenteditable="true">
 
+				</div>
+				<div class="send_btn_div">
+					<span class="send_btn_span">
+						<span class="btn_text">发送</span>
+					<span class="fa fa-spinner fa-spin  btn_loading_text"></span>
+					</span>
+					<div class="clearfix">
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="picture_area_div">
+			<div class="up_page_area_div">
+				<div class="page_btn_div up_page_div">
+					<i class="fa fa-angle-left fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="down_page_area_div">
+				<div class="page_btn_div down_page_div">
+					<i class="fa fa-angle-right fa-5x" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="picture_container">
+				<div class="hot_tag_div">
+					<span class="hot_text_span">Hot</span>
+				</div>
+				<img src="static/img/6.png" />
+			</div>
+		</div>
+		<!--	<div class="msg_area_div">
+			
+			
+		</div>-->
+		<div class="msg_panel_area_div">
+			<div class="msg_panel_div">
+				<div class="msg_panel_content_div">
+					<div class="table_div">
+
+					</div>
+					<div class="tr_modo" style="display: none;">
+						<div class="table_tr">
+							<div class="td_name width_20">
+								<div class="cell_value">
+									<img src="img/demo1.png" style="max-width: 100%;" />
+									<div class="send_name_value">
+										王王王
+									</div>
+								</div>
+							</div>
+							<div class="td_value width_80">
+								<div class="cell_value">
+									阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧
+									<div class="date_value">
+										发表于 2018-04-23 09:07:49
+									</div>
+									<div class="comment_value">
+										<i class="fa fa-star-o " aria-hidden="true" data-point="5">
+							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
+							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
+							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
+							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="msg_panel_footer_div">
+					<div class="page_menu_div text-center">
+						<span class="page_menu_span page_up_span"> 
+								<i class="fa fa-angle-up" aria-hidden="true"></i>
+							</span>
+					</div>
+					<div class="page_menu_div text-center">
+						<span></span>
+					</div>
+					<div class="page_menu_div text-center">
+						<span class="page_menu_span page_down_span"> 
+								<i class="fa fa-angle-down" aria-hidden="true"></i>
+							</span>
+					</div>
+				</div>
+				<div class="msg_panel_switch_div" data-status="close">
+					<span class="fa fa-caret-right fa-2x"></span>
+					<span class="fa fa-times fa-2x"></span>
 				</div>
 			</div>
 		</div>
@@ -265,7 +571,56 @@
 					$(".edit_btn_span .fa-pencil-square").attr("data-exevalue", newValue);
 				}
 			});
+
+			$(".fa-angle-down").click(function() {
+				var num = Math.random() * 5 + 1;
+				var html = $(".tr_modo").html();
+				$(".table_div .table_tr").remove();
+				for(var i = 0; i < num; i++) {
+					$(".table_div").append(html);
+				}
+				/*var height = $(".msg_panel_content_div").height();
+				$(".table_div").css("top", height);*/
+			})
+
+			$(document).on("click", ".edit_switch_btn[data-status='close']", (function() {
+				areaShow($(this), ".msg_edit_area_div", "right");
+			}))
+
+			$(document).on("click", ".edit_switch_btn[data-status='show']", (function() {
+				areaClose($(this), ".msg_edit_area_div", "right", "45%")
+			}))
+
+			$(document).on("click", ".msg_panel_switch_div[data-status='close']", (function() {
+				areaShow($(this), ".msg_panel_area_div", "left");
+			}))
+
+			$(document).on("click", ".msg_panel_switch_div[data-status='show']", (function() {
+				areaClose($(this), ".msg_panel_area_div", "left", "45%")
+			}))
+
+			$(document).on("click", ".send_btn_span", function() {
+				$(this).toggleClass("loading");
+			})
 		})
+
+		function areaShow($this, areaname, direction) {
+			var data = {};
+			data[direction] = "0em";
+			$(areaname).animate(data, 1000, function() {
+				$this.attr("data-status", "show");
+				$(this).addClass("active");
+			})
+		}
+
+		function areaClose($this, areaname, direction, width) {
+			var data = {};
+			data[direction] = "-" + width;
+			$(areaname).animate(data, 1000, function() {
+				$this.attr("data-status", "close");
+				$(this).removeClass("active");
+			})
+		}
 
 		function fontStyle(style, val) {
 			document.execCommand(style, false, null);
