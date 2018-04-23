@@ -39,7 +39,7 @@
 			
 			.picture_area_div {
 				position: relative;
-				margin: 2em 0em;
+				padding: 2em 0em;
 			}
 			
 			.up_page_area_div,
@@ -101,6 +101,7 @@
 				/* border-radius: 0.25em 0.25em 0.25em 0.25em; */
 				outline: none;
 				padding: 0.6em 0.5em;
+				color: #32383E;
 			}
 			
 			.edit_btn_list_div .edit_btn_span button {
@@ -158,6 +159,7 @@
 				padding-left: 1em;
 				left: -45%;
 				top: 15%;
+				z-index: 1;
 			}
 			
 			.msg_panel_div {
@@ -377,10 +379,31 @@
 			.picture_container img {
 				max-width: 100%;
 			}
+			.source_picture{
+				width: 100%;
+				min-height: 100vh;
+				position: absolute;
+				display: flex;
+				align-content: center;
+				justify-content: center;
+				display: none;
+				z-index: 1;
+				background: rgba(0,0,0,0.5);
+			}
+			.source_picture img{
+				max-width: 100%;
+				max-height: 100%;
+				padding: 10px;
+				background: #fff;
+				border-radius: 3px;
+			}
 		</style>
 	</head>
 
 	<body>
+		<div class="source_picture">
+			<img />
+		</div>
 		<!--<div class="row navbar_div nofix">
 			<div class="col-md-4 search_div">
 				<div class="input_div form-inline">
@@ -482,7 +505,10 @@
 				<div class="hot_tag_div">
 					<span class="hot_text_span">Hot</span>
 				</div>
-				<img src="static/img/6.png" />
+				<img src="img/萨尔茨卡默古特地区_9.jpg" />
+				<div style="display: inline-block;">
+					作者：萨达斯范德萨及福建省的
+				</div>
 			</div>
 		</div>
 		<!--	<div class="msg_area_div">
@@ -601,6 +627,9 @@
 
 			$(document).on("click", ".send_btn_span", function() {
 				$(this).toggleClass("loading");
+				var src=$(".picture_container img").eq(0).attr("src");
+				$(".source_picture img").eq(0).attr("src",src);
+				$(".source_picture").css("display","flex");
 			})
 		})
 
