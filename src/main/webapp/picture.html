@@ -15,9 +15,13 @@
 		<script src="js/jquery.colorPicker.min.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
 			body {
-				background: rgb(240, 240, 240);
-				/*color: #FFF;*/
+				background: rgb(240, 240, 240) url(static/img/bg.png);
 				overflow-x: hidden;
+			}
+			
+			.drak {
+				background: #32383E;
+				color: #fff;
 			}
 			
 			::-webkit-scrollbar {
@@ -59,13 +63,20 @@
 				cursor: pointer;
 			}
 			
+			.page_btn_div.disabled {
+				color: rgb(180, 180, 180);
+				cursor: default;
+			}
+			
 			.picture_container {
 				width: 90%;
 				margin: 0px 5%;
+				overflow: hidden;
+				white-space: nowrap;
 			}
 			
 			.edit_btn_list_div {
-				padding: 0.3em;
+				/*padding: 0.3em;*/
 				display: inline-block;
 			}
 			
@@ -79,11 +90,12 @@
 				background: #fff;
 			}
 			
-			.edit_btn_div:active {}
+			.edit_btn_div.active {
+				background: rgb(240, 240, 240);
+			}
 			
 			.comment_list_div {
 				display: inline-block;
-				float: right;
 			}
 			
 			.star_btn_div {
@@ -92,6 +104,17 @@
 				display: inline-block;
 				text-align: center;
 				padding: 0em 1em;
+			}
+			
+			.edit_power_off_div {
+				height: 2em;
+				line-height: 2em;
+				padding: 0em 0.2em;
+			}
+			
+			.edit_power_off_span {
+				cursor: pointer;
+				padding: 0em 0.2em;
 			}
 			
 			#msg_edit_content_div {
@@ -118,6 +141,7 @@
 				height: 1em;
 				border-radius: 0.25em;
 				border: 1px solid #CCC;
+				margin: 0em 0.5em;
 			}
 			
 			.star_btn_div,
@@ -155,28 +179,28 @@
 			
 			.msg_panel_area_div {
 				position: absolute;
-				width: 45%;
+				width: 50%;
 				padding-left: 1em;
-				left: -45%;
+				left: -50%;
 				top: 15%;
 				z-index: 1;
 			}
 			
 			.msg_panel_div {
 				width: 100%;
+				background: #fff;
+				border-radius: 0.2em;
 			}
-			
 			/*.msg_panel_content_div:hover {
 				opacity: 1;
 			}
 			*/
+			
 			.msg_panel_content_div {
 				overflow: hidden;
 				min-height: 9em;
-				/*opacity: 0.1;*/
-				background: #fff;
-				padding: 0.5em;
-				border-radius: 0.5em;
+				padding: 0.3em 0em 0.3em 0.3em;
+				margin-right: 2em;
 				border-color: #999999;
 			}
 			
@@ -252,21 +276,24 @@
 				width: 80%;
 			}
 			
+			.msg_panel_area_div.active .msg_area_power_off_div,
 			.msg_panel_area_div.active .msg_panel_footer_div {
 				display: inline;
 			}
 			
 			.msg_panel_footer_div {
 				position: absolute;
-				right: -1.05em;
+				right: 0em;
 				bottom: 0em;
 				font-size: 2em;
 				display: none;
+				width: 1em;
+				color: #32383E;
 			}
 			
 			.fa-angle-down,
 			.fa-angle-up {
-				padding: 0em 0.25em;
+				/*padding: 0em 0.25em;*/
 				border-radius: 0.25em
 			}
 			
@@ -275,22 +302,33 @@
 				background: #fff;
 			}
 			
-			.msg_panel_switch_div {
+			.msg_area_power_off_div,
+			.msg_area_power_div {
 				position: absolute;
-				right: -2em;
 				top: 0em;
 				width: 2em;
 				text-align: center;
 			}
 			
-			.msg_panel_switch_div[data-status=close] .fa-caret-right,
-			.msg_panel_switch_div[data-status=show] .fa-times {
-				display: inline;
+			.msg_area_power_div {
+				right: -2em;
 			}
 			
-			.msg_panel_switch_div[data-status=show] .fa-caret-right,
-			.msg_panel_switch_div[data-status=close] .fa-times {
+			.msg_area_power_off_div {
+				right: 0em;
+				padding: 0.3em;
 				display: none;
+				color: #32383E;
+			}
+			
+			.msg_panel_area_div.active .msg_area_power_div .fa-caret-right,
+			.msg_panel_area_div:not(.active) .msg_area_power_div .fa-times {
+				display: none;
+			}
+			
+			.msg_panel_area_div:not(.active) .msg_area_power_div .fa-caret-right,
+			.msg_panel_area_div.active .msg_area_power_div .fa-times {
+				display: inline;
 			}
 			
 			.msg_edit_area_div {
@@ -315,39 +353,34 @@
 				opacity: 0.1;
 			}
 			
-			.edit_switch_btn {
+			.edit_menu_div {
+				padding: 0.3em;
+				color: #32383E;
+			}
+			
+			.edit_area_power_div {
 				width: 2em;
 				display: inline-block;
-				float: left;
-				writing-mode: vertical-lr;
-				padding: 0.5em;
 				cursor: pointer;
-				margin-left: -2.5em;
-			}
-			
-			.edit_switch_btn[data-status=show] {
-				opacity: 0.3;
-			}
-			
-			.edit_switch_btn[data-status=show]:hover {
-				opacity: 1;
-			}
-			
-			.edit_switch_btn[data-status=close] .fa-caret-left,
-			.edit_switch_btn[data-status=show] .fa-times {
-				display: inline;
-			}
-			
-			.edit_switch_btn[data-status=show] .fa-caret-left,
-			.edit_switch_btn[data-status=close] .fa-times {
-				display: none;
-			}
-			
-			.switch_btn_value {
+				margin-left: -3em;
 				position: absolute;
 				top: 50%;
 				transform: translateY(-50%);
-				font-size: 2em;
+			}
+			
+			.msg_edit_area_div.active .edit_area_power_div {
+				display: none;
+			}
+			
+			.msg_edit_area_div:not(.active) .edit_area_power_div {
+				display: inline-block;
+			}
+			
+			.edit_area_power_span {
+				/*				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				font-size: 2em;*/
 			}
 			
 			.send_btn_div {
@@ -379,7 +412,8 @@
 			.picture_container img {
 				max-width: 100%;
 			}
-			.source_picture{
+			
+			.source_picture_div {
 				width: 100%;
 				min-height: 100vh;
 				position: absolute;
@@ -387,22 +421,47 @@
 				align-content: center;
 				justify-content: center;
 				display: none;
-				z-index: 1;
-				background: rgba(0,0,0,0.5);
+				z-index: 2;
+				background: rgba(0, 0, 0, 0.9);
 			}
-			.source_picture img{
+			
+			.source_picture {
 				max-width: 100%;
 				max-height: 100%;
-				padding: 10px;
+				padding: 5px;
 				background: #fff;
-				border-radius: 3px;
+				border-radius: 2px;
+			}
+			
+			.picture_container .picture_div {
+				width: 70%;
+				display: inline-block;
+				position: relative;
+			}
+			
+			.max_tag_div {
+				position: absolute;
+				right: 0em;
+				top: 0em;
+				color: rgb(220, 220, 220);
+				padding: 0.5em;
+				display: none;
+				cursor: pointer;
+			}
+			
+			.picture_div:hover .max_tag_div {
+				display: inline;
+			}
+			
+			.max_tag_div:hover {
+				color: #fff;
 			}
 		</style>
 	</head>
 
-	<body>
-		<div class="source_picture">
-			<img />
+	<body class="">
+		<div class="source_picture_div">
+			<img class="source_picture" />
 		</div>
 		<!--<div class="row navbar_div nofix">
 			<div class="col-md-4 search_div">
@@ -429,52 +488,58 @@
 			</div>
 		</div>-->
 		<div class="msg_edit_area_div">
-			<div class="edit_switch_btn" data-status="close">
-				<span class="fa fa-caret-left switch_btn_value"></span>
-				<span class="fa fa-times switch_btn_value"></span>
+			<div class="edit_area_power_div">
+				<span class="fa fa-pencil-square-o fa-2x edit_area_power_span"></span>
+				<!--<span class="fa fa-times edit_area_power_span"></span>-->
 			</div>
 			<div class="msg_edit_div">
-				<div class="edit_btn_list_div fa-lg">
-					<div class="edit_btn_div">
-						<span class="edit_btn_span ">
+				<div class="edit_menu_div fa-lg">
+					<div class="edit_btn_list_div">
+						<div class="edit_btn_div">
+							<span class="edit_btn_span ">
 						<button class="fa fa-font" aria-hidden="true" data-exetype=""></button>
 					</span>
-					</div>
-					<div class="edit_btn_div">
-						<span class="edit_btn_span">
+						</div>
+						<div class="edit_btn_div">
+							<span class="edit_btn_span">
 						<button class="fa fa-bold" aria-hidden="true" data-exetype="bold"></button>
 					</span>
-					</div>
-					<div class="edit_btn_div">
-						<span class="edit_btn_span">
+						</div>
+						<div class="edit_btn_div">
+							<span class="edit_btn_span">
 						<button class="fa fa-underline" aria-hidden="true" data-exetype="underline"></button>
 					</span>
-					</div>
-					<div class="edit_btn_div">
-						<span class="edit_btn_span">
+						</div>
+						<div class="edit_btn_div">
+							<span class="edit_btn_span">
 						<button class="fa fa-italic" aria-hidden="true" data-exetype="italic"></button>
 					</span>
-					</div>
-					<div class="edit_btn_div">
-						<span class="edit_btn_span">
+						</div>
+						<div class="edit_btn_div">
+							<span class="edit_btn_span">
 						<button class="fa fa-pencil-square" aria-hidden="true"></button>
 						</span>
+						</div>
+						<input id="colorboard" value="#212529" />
 					</div>
-					<input id="colorboard" value="#212529" />
-				</div>
-				<div class="comment_list_div fa-lg">
-
-					<div class="star_btn_div">
-						<span class="edit_btn_span">
+					<div class="comment_list_div">
+						<div class="star_btn_div">
+							<span class="edit_btn_span">
 							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
 						</span>
+						</div>
 					</div>
+					<div class="edit_power_off_div pull-right">
+						<span class="fa fa-power-off edit_power_off_span">
+						<!--<i class="fa fa-power-off" aria-hidden="true"></i>-->
+					</span>
+					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="clearfix"></div>
 				<div id="msg_edit_content_div" contenteditable="true">
 
 				</div>
@@ -491,7 +556,7 @@
 		</div>
 
 		<div class="picture_area_div">
-			<div class="up_page_area_div">
+			<!--<div class="up_page_area_div">
 				<div class="page_btn_div up_page_div">
 					<i class="fa fa-angle-left fa-5x" aria-hidden="true"></i>
 				</div>
@@ -500,16 +565,53 @@
 				<div class="page_btn_div down_page_div">
 					<i class="fa fa-angle-right fa-5x" aria-hidden="true"></i>
 				</div>
-			</div>
+			</div>-->
 			<div class="picture_container">
-				<div class="hot_tag_div">
-					<span class="hot_text_span">Hot</span>
+				<!---->
+				<div class="picture_div text-center">
+					<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+					<div class="max_tag_div fa-lg">
+						<span class="fa fa-search-plus">
+							
+						</span>
+					</div>
 				</div>
-				<img src="img/萨尔茨卡默古特地区_9.jpg" />
-				<div style="display: inline-block;">
-					作者：萨达斯范德萨及福建省的
+				<div class="picture_remark_div">
+					<span class="fa fa-quote-left fa-pull-left fa-3x fa-border" aria-hidden="true"></span>
+					<div class="remark_value">
+						asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd
+					</div>
+					<span class="fa fa-quote-right fa-pull-right fa-3x fa-border" aria-hidden="true"></span>
+
 				</div>
+
 			</div>
+
+			<style type="text/css">
+				.picture_remark_div {
+					width: 26%;
+					position: absolute;
+					right: 5%;
+					top: 50%;
+					transform: translateY(-50%);
+					white-space: normal;
+				}
+				
+				.picture_remark_div .fa-border {
+					border-color: #fff;
+				}
+				
+				.remark_value {
+					width: 100%;
+				}
+			</style>
+			<!--<div class="picture_remark_div">
+				<span class="fa fa-quote-left fa-pull-left fa-3x fa-border" aria-hidden="true"></span>
+				<div class="remark_value">
+					asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd
+				</div>
+				<span class="fa fa-quote-right fa-pull-right fa-3x fa-border" aria-hidden="true"></span>
+			</div>-->
 		</div>
 		<!--	<div class="msg_area_div">
 			
@@ -564,9 +666,11 @@
 							</span>
 					</div>
 				</div>
-				<div class="msg_panel_switch_div" data-status="close">
+				<div class="msg_area_power_off_div">
+					<span class="fa fa-power-off fa-lg"></span>
+				</div>
+				<div class="msg_area_power_div">
 					<span class="fa fa-caret-right fa-2x"></span>
-					<span class="fa fa-times fa-2x"></span>
 				</div>
 			</div>
 		</div>
@@ -575,15 +679,16 @@
 	<script type="text/javascript">
 		$(function() {
 			/*var  editor=iniEdit();*/
-			$(".edit_btn_span .fa").click(function() {
+			$(".edit_btn_span i.fa").click(function() {
 				if($(this).hasClass("fa_isselect")) {
-					$(".edit_btn_span .fa").removeClass("fa_isselect");
+					$(".edit_btn_span i.fa").removeClass("fa_isselect");
 				} else {
-					$(".edit_btn_span .fa").removeClass("fa_isselect");
+					$(".edit_btn_span i.fa").removeClass("fa_isselect");
 					$(this).addClass("fa_isselect");
 				}
 			})
 			$(".edit_btn_span button:not('.fa-pencil-square')").click(function() {
+				$(this).parent().parent().toggleClass("active");
 				fontStyle($(this).attr("data-exetype"));
 			})
 
@@ -609,35 +714,53 @@
 				$(".table_div").css("top", height);*/
 			})
 
-			$(document).on("click", ".edit_switch_btn[data-status='close']", (function() {
+			$(document).on("click", ".edit_area_power_div", (function() {
 				areaShow($(this), ".msg_edit_area_div", "right");
+				$("#msg_edit_content_div").focus();
 			}))
 
-			$(document).on("click", ".edit_switch_btn[data-status='show']", (function() {
+			$(document).on("click", ".edit_power_off_span", (function() {
 				areaClose($(this), ".msg_edit_area_div", "right", "45%")
 			}))
 
-			$(document).on("click", ".msg_panel_switch_div[data-status='close']", (function() {
+			$(document).on("click", ".msg_panel_area_div:not('.active') .msg_area_power_div", (function() {
 				areaShow($(this), ".msg_panel_area_div", "left");
 			}))
 
-			$(document).on("click", ".msg_panel_switch_div[data-status='show']", (function() {
-				areaClose($(this), ".msg_panel_area_div", "left", "45%")
+			$(document).on("click", ".msg_panel_area_div.active .msg_area_power_off_div", (function() {
+				areaClose($(this), ".msg_panel_area_div", "left", "50%")
 			}))
 
-			$(document).on("click", ".send_btn_span", function() {
+			$(document).on("click", ".max_tag_div", function() {
 				$(this).toggleClass("loading");
-				var src=$(".picture_container img").eq(0).attr("src");
-				$(".source_picture img").eq(0).attr("src",src);
-				$(".source_picture").css("display","flex");
+				var src = $(".picture_container img").eq(0).attr("src");
+				$(".source_picture").eq(0).attr("src", src);
+				$(".source_picture_div").css("display", "flex");
 			})
+
+			$(".source_picture_div").click(function() {
+				$(this).css("display", "none");
+			})
+
+			/*$(document).on("click",".page_btn_div.down_page_div:not('.disabled')",function() {
+				$(".page_btn_div").addClass("disabled");
+				$.when($(".picture_container div").animate({
+					left: "-100%"
+				}, 1000)).then(function  () {
+					$(".picture_container div").first().remove();
+					$(".picture_container div").first().css("left","0%");
+					$(".page_btn_div").removeClass("disabled");
+				})
+			})*/
+
+			/*	$(".picture_container div").first().find("img").animate({"opacity":"0"},1000);*/
+
 		})
 
 		function areaShow($this, areaname, direction) {
 			var data = {};
 			data[direction] = "0em";
 			$(areaname).animate(data, 1000, function() {
-				$this.attr("data-status", "show");
 				$(this).addClass("active");
 			})
 		}
@@ -646,7 +769,6 @@
 			var data = {};
 			data[direction] = "-" + width;
 			$(areaname).animate(data, 1000, function() {
-				$this.attr("data-status", "close");
 				$(this).removeClass("active");
 			})
 		}
