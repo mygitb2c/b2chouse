@@ -9,7 +9,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 	<context:property-placeholder
-		location="classpath:db.properties" ignore-unresolvable="true"/>
+		location="classpath:db.properties,classpath:value.properties" ignore-unresolvable="true"/>
 	<context:annotation-config></context:annotation-config>
 	<!-- 自动扫描(自动注入)，扫描包以及它的子包的所有使用@Service注解标注的类 -->
 	<context:component-scan

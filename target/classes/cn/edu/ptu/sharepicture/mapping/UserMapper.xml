@@ -46,7 +46,7 @@
 
 	<insert id="insertUser">
 		INSERT INTO user
-		(userId,userName,account,password,email,createTime)
+		(userId,userName,null,password,email,createTime)
 		values(#{userId},#{userName},#{account},#{password},#{email},#{createTime})
 	</insert>
 
