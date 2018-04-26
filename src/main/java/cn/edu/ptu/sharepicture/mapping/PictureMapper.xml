@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.ptu.sharepicture.dao.PictureMapper">
+	<!--通过关键字多图查询 -->
 	<select id="getPicturesByKey" resultMap="pictures_User">
 		<bind name="key" value="'%'+key+'%'" />
 		SELECT pictureId,pictureTitle,pictureName,userName,pictures.createTime
@@ -12,8 +13,10 @@
 		pictures.pictureType=pictureType.typeId
 		WHERE userName LIKE #{key} OR
 		pictureName LIKE #{key} AND pictures.isLock ="N" ORDER BY
-		${orderType} ${orderValue} LIMIT #{start},#{pageSize}
+		${orderType}
+		${orderValue} LIMIT #{start},#{pageSize}
 	</select>
+	<!--通过图片编号查询图片详细信息 -->
 	<select id="getPictureById" resultMap="pictures_User">
 		SELECT
 		pictureId,pictureTitle,pictureName,remark,pictures.createTime
@@ -21,7 +24,7 @@
 		RIGHT
 		JOIN user ON pictures.userId=user.userId WHERE pictureId=#{pictureId}
 	</select>
-
+	<!--通过用户编号多图查询 -->
 	<select id="getPicturesByUserId" resultMap="pictures_User">
 		SELECT
 		pictureId,pictureTitle,pictureName,remark,pictures.createTime
@@ -31,11 +34,17 @@
 		pictures.userId=#{key}
 		${orderType} ${orderValue} LIMIT #{start},#{pageSize}
 	</select>
+	<!--通过图片编号查询图片名 -->
+	<select id="getPictureName" resultType="String">
+		SELECT pictureName FROM
+		pictures WHERE pictureId=#{pictureId} AND isLock="N"
+	</select>
 
 	<insert id="insertPicture">
 		INSERT INTO pictures
 		VALUES(#{pictureId},#{userId},#{pictureTitle},#{pictureType},#{pictureName},#{remark},#{createTime},#{clickCount},#{download},"N")
 	</insert>
+
 
 	<resultMap type="cn.edu.ptu.sharepicture.entity.User"
 		id="pictures_User">
