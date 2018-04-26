@@ -49,7 +49,7 @@ $.validator.addMethod("isrepeat", function(value, element, params) {
 	$.ajax({
 		type: "GET",
 		url: "isRepeat",
-		async: true,
+		async: false,
 		data:data,
 		cache:false,
 		success: function(data) {
@@ -62,4 +62,5 @@ $.validator.addMethod("isrepeat", function(value, element, params) {
 	})
 	$.validator.messages.isrepeat = msg;
 	return result;
+	
 });
