@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import cn.edu.ptu.sharepicture.entity.Picture;
+import cn.edu.ptu.sharepicture.entity.ReturnForm;
 import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
 
@@ -24,4 +25,5 @@ public interface PictureMapper {
 
 	String getPictureName(@Param(value = "pictureId") String pictureId);
 
+	int getTotal(SearchForm sf);
 }

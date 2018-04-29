@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.ptu.sharepicture.entity.Picture;
+import cn.edu.ptu.sharepicture.entity.ReturnForm;
 import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
 import cn.edu.ptu.sharepicture.service.PictureService;
@@ -62,7 +63,7 @@ public class PictureController {
 
 	@RequestMapping(value = "picList_key")
 	@ResponseBody
-	public List<User> getPictureByKey(SearchForm sf) {
+	public ReturnForm<User> getPictureByKey(SearchForm sf) {
 		return ps.getPicturesByKey(sf);
 	}
 

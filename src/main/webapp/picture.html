@@ -73,6 +73,7 @@
 				margin: 0px 5%;
 				overflow: hidden;
 				white-space: nowrap;
+				position: relative;
 			}
 			
 			.edit_btn_list_div {
@@ -250,7 +251,7 @@
 			.comment_value {
 				position: absolute;
 				bottom: 0em;
-				left: 0.5em;
+				/*left: 0.5em;*/
 			}
 			
 			.date_value {
@@ -457,12 +458,17 @@
 				color: #fff;
 			}
 			
-			.picture_remark_div {
-				width: 26%;
+			.pos_center {
 				position: absolute;
-				right: 5%;
-				top: 50%;
-				transform: translateY(-50%);
+				right: 0%;
+				top: 0%;
+				/*transform: translateY(-50%);*/
+				width: 26%;
+				padding: 0em;
+			}
+			
+			.picture_remark_div {
+				padding: 1.5em 0.5em 0em 0.5em;
 				white-space: normal;
 			}
 			
@@ -592,12 +598,15 @@
 						</span>
 					</div>
 				</div>
-				<div class="picture_remark_div">
+				<div class="picture_remark_div pos_center">
 					<span class="fa fa-quote-left fa-pull-left fa-3x fa-border" aria-hidden="true"></span>
 					<div class="remark_value">
 						asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd
 					</div>
-					<span class="fa fa-quote-right fa-pull-right fa-3x fa-border" aria-hidden="true"></span>
+					<!--<span class="fa fa-quote-right fa-pull-right fa-3x fa-border" aria-hidden="true"></span>
+					<div class="clearfix">
+						
+					</div>-->
 				</div>
 			</div>
 		</div>
@@ -610,7 +619,8 @@
 			}
 			
 			.left_msg_area_div {
-				width: 60%;
+				width: 55%;
+				margin-right: 5%;
 				display: inline-block;
 			}
 			
@@ -675,7 +685,23 @@
 			.one_msg {
 				color: #1b1e21;
 				background-color: #d6d8d9;
-				border-color: #c6c8ca;
+				border-color: #d6d8d9;
+			}
+			
+			.left_caret {
+				position: absolute;
+				right: 100%;
+				top: 50%;
+				transform: translateY(-50%);
+				border: 1em solid;
+				border-top-color: transparent;
+				border-bottom-color: transparent;
+				border-left-color: transparent;
+				border-right-color: inherit;
+			}
+			
+			.msg_value_span {
+				font-size: 90%;
 			}
 		</style>
 
@@ -685,9 +711,12 @@
 					<div class="sender_img_div">
 						<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
 					</div>
-					<div class="alert alert-success">
+					<div class="alert four_msg">
+						<div class="left_caret">
+
+						</div>
 						<div class="sender_name"><strong>王王王：</strong></div>
-						<span>阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
+						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
 						<div class="date_value">
 							发表于 2018-04-23 09:07:49
 						</div>
@@ -704,9 +733,12 @@
 					<div class="sender_img_div">
 						<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
 					</div>
-					<div class="alert alert-primary">
+					<div class="alert three_msg">
+						<div class="left_caret">
+
+						</div>
 						<div class="sender_name"><strong>王王王：</strong></div>
-						<span>阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
+						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
 						<div class="date_value">
 							发表于 2018-04-23 09:07:49
 						</div>
@@ -723,9 +755,12 @@
 					<div class="sender_img_div">
 						<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
 					</div>
-					<div class="alert alert-danger">
+					<div class="alert two_msg">
+						<div class="left_caret">
+
+						</div>
 						<div class="sender_name"><strong>王王王：</strong></div>
-						<span>阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
+						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
 						<div class="date_value">
 							发表于 2018-04-23 09:07:49
 						</div>
@@ -742,9 +777,13 @@
 					<div class="sender_img_div">
 						<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
 					</div>
-					<div class="alert alert-info">
+
+					<div class="alert one_msg">
+						<div class="left_caret">
+
+						</div>
 						<div class="sender_name"><strong>王王王：</strong></div>
-						<span>阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
+						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
 						<div class="date_value">
 							发表于 2018-04-23 09:07:49
 						</div>
@@ -786,8 +825,34 @@
 					<a href="#" class="alert-link">这条信息</a>。
 				</div>-->
 			</div>
-			<div class="right_picture_info_area_div">
 
+			<style type="text/css">
+				.right_picture_info_area_div {
+					padding: 1em;
+				}
+				
+				.right_picture_info_area_div .info_head_div {
+					width: calc(100% - 4em);
+					border-top: 1px solid;
+					float: right;
+				}
+				
+				.info_head_div .fa-info {
+					padding: 0em 0.5em;
+					color: #6699CC;
+					float: left;
+					margin-left: -1em;
+					margin-top: -0.5em;
+				}
+				
+				.info_title_span {
+					word-break: break-word;
+				}
+			</style>
+			<div class="right_picture_info_area_div">
+				<div class="info_head_div">
+					<span class="fa fa-info fa-3x"></span>
+				</div>
 			</div>
 		</div>
 
@@ -906,10 +971,12 @@
 			}))
 
 			$(document).on("click", ".max_tag_div", function() {
-				$(this).toggleClass("loading");
+				/*$(this).toggleClass("loading");
 				var src = $(".picture_container img").eq(0).attr("src");
 				$(".source_picture").eq(0).attr("src", src);
-				$(".source_picture_div").css("display", "flex");
+				$(".source_picture_div").css("display", "flex");*/
+				/*demoAnimate();*/
+				animateReturn();
 			})
 
 			$(".source_picture_div").click(function() {
@@ -961,6 +1028,39 @@
 			editor.document.contentEditable = true;
 			return ele;
 		}*/
+		demoAnimate();
+
+		function demoAnimate() {
+			$(".picture_div").animate({
+				width: "100%"
+			}, 2000, function() {
+
+			})
+			$(".picture_remark_div").animate({
+				opacity: 0
+			}, 1000, function() {
+				$(".picture_remark_div").removeClass("pos_center");
+				$(".picture_remark_div").animate({
+					opacity: 1
+				}, 1000)
+			})
+		}
+
+		function animateReturn() {
+			$(".picture_div").animate({
+				width: "70%"
+			}, 2000, function() {
+				$(".picture_remark_div").addClass("pos_center");
+				$(".picture_remark_div").animate({
+					opacity: 1
+				}, 1000)
+			})
+			$(".picture_remark_div").animate({
+				opacity: 0
+			}, 1000, function() {
+
+			})
+		}
 	</script>
 
 </html>

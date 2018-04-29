@@ -34,7 +34,7 @@ public class PictureDaoTest {
 
 	@Test
 	public void insert() {
-		String fSPath = "D://potp截图/";
+		String fSPath = "D://image/";
 		File file = new File(fSPath);
 		getPicture(file);
 
@@ -64,7 +64,7 @@ public class PictureDaoTest {
 				picture.setPictureId(id);
 				picture.setUserId("8EA7EDE3A8AB4CBFB9819C5ED28460FB");
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-				String createTime = dateFormat.format(new Date()).substring(0, 13);
+				String createTime = dateFormat.format(new Date()).substring(0, 12);
 				int ss = (int) (Math.random() * 51) + 10;
 				createTime += ss + "";
 				picture.setCreateTime(createTime);
@@ -104,6 +104,12 @@ public class PictureDaoTest {
 	public void getPictureName() {
 		String name=pm.getPictureName("246D9F870CD24994ABE88E6C9B2C91B9");
 		System.out.println(name);
+	}
+	@Test
+	public void getTotal() {
+		SearchForm sf=new SearchForm();
+		int i=pm.getTotal(sf);
+		System.out.println(i);
 	}
 
 }

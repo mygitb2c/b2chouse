@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import cn.edu.ptu.sharepicture.dao.PictureMapper;
 import cn.edu.ptu.sharepicture.entity.Picture;
+import cn.edu.ptu.sharepicture.entity.ReturnForm;
 import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
 
@@ -24,8 +25,12 @@ public class PictureService {
 	}
 
 	// 模糊搜索分页得到图片信息
-	public List<User> getPicturesByKey(SearchForm sf) {
-		return pm.getPicturesByKey(sf);
+	public ReturnForm<User> getPicturesByKey(SearchForm sf) {
+		ReturnForm<User> rf=new ReturnForm<User>();
+		rf.setPageSize(sf.getPageSize());
+		rf.setData(pm.getPicturesByKey(sf));
+		rf.setTotal(pm.getTotal(sf));
+		return rf;
 	}
 
 	public List<User> getPicturesByUserId(SearchForm sf) {
