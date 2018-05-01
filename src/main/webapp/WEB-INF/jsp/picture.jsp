@@ -15,7 +15,7 @@
 <script src="../static/js/jquery.colorPicker.min.js" type="text/javascript" charset="utf-8"></script>
 <style type="text/css">
 			body {
-				background: rgb(240, 240, 240) url(static/img/bg.png);
+				background: rgb(240, 240, 240) url(../static/img/bg.png);
 				overflow-x: hidden;
 			}
 			
@@ -84,10 +84,10 @@
 			.edit_btn_div {
 				border-radius: 0.2em;
 				text-align: center;
-				height: 2em;
+				/* height:2em; */
+				padding: 0.5em;
 				width: 2em;
 				display: inline-block;
-				line-height: 2em;
 				background: #fff;
 			}
 			
@@ -100,22 +100,21 @@
 			}
 			
 			.star_btn_div {
-				height: 2em;
-				line-height: 2em;
+				/* height: 2em;
+				line-height: 2em; */
 				display: inline-block;
 				text-align: center;
 				padding: 0em 1em;
 			}
 			
 			.edit_power_off_div {
-				height: 2em;
-				line-height: 2em;
-				padding: 0em 0.2em;
+				
+				padding:0.5em;
 			}
 			
 			.edit_power_off_span {
 				cursor: pointer;
-				padding: 0em 0.2em;
+				padding:0.2em;
 			}
 			
 			#msg_edit_content_div {
@@ -441,7 +440,7 @@
 				position: relative;
 			}
 			
-			.max_tag_div {
+			.tool_tag_div {
 				position: absolute;
 				right: 0em;
 				top: 0em;
@@ -450,20 +449,28 @@
 				display: none;
 				cursor: pointer;
 			}
+			.tool_tag_div.loading span{
+				display: none !important;
+			}
+			.tool_tag_div span{
+				display: none;
+			}
+			.tool_tag_div span.active{
+				display:inline;
+			}
 			
-			.picture_div:hover .max_tag_div {
+			.picture_div:hover .tool_tag_div {
 				display: inline;
 			}
 			
-			.max_tag_div:hover {
+			.tool_tag_div:hover {
 				color: #fff;
 			}
 			
-			.pos_center {
+			.picture_remark_div.right_area {
 				position: absolute;
 				right: 0%;
 				top: 0%;
-				/*transform: translateY(-50%);*/
 				width: 26%;
 				padding: 0em;
 			}
@@ -593,13 +600,12 @@
 			<div class="picture_container">
 				<div class="picture_div text-center">
 					<img src="${pageContext.request.contextPath}/picture/${picture.pictureId}/false" />
-					<div class="max_tag_div fa-lg">
-						<span class="fa fa-search-plus">
-							
-						</span>
+					<div class="tool_tag_div fa-lg" >
+						<span class="fa fa-search-plus active" data-evalstr="maxPictureModel()"></span>
+						<span class="fa fa-search-minus" data-evalstr="minPictureModel()"></span>
 					</div>
 				</div>
-				<div class="picture_remark_div pos_center">
+				<div class="picture_remark_div right_area">
 					<span class="fa fa-quote-left fa-pull-left fa-3x fa-border" aria-hidden="true"></span>
 					<div class="remark_value">
 						asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd
@@ -971,13 +977,9 @@
 				areaClose($(this), ".msg_panel_area_div", "left", "50%")
 			}))
 
-			$(document).on("click", ".max_tag_div", function() {
-				/*$(this).toggleClass("loading");
-				var src = $(".picture_container img").eq(0).attr("src");
-				$(".source_picture").eq(0).attr("src", src);
-				$(".source_picture_div").css("display", "flex");*/
-				/*demoAnimate();*/
-				animateReturn();
+			$(document).on("click", ".tool_tag_div:not('.loading') span", function() {
+				eval($(this).attr("data-evalstr"));
+				$(".tool_tag_div span").toggleClass("active");
 			})
 
 			$(".source_picture_div").click(function() {
@@ -1029,37 +1031,42 @@
 			editor.document.contentEditable = true;
 			return ele;
 		}*/
-		demoAnimate();
-
-		function demoAnimate() {
+		
+		function maxPictureModel() {
+			$(".tool_tag_div").addClass("loading");
 			$(".picture_div").animate({
 				width: "100%"
-			}, 2000, function() {
-
+			}, 2000,function(){
+				$(".tool_tag_div").removeClass("loading");
 			})
 			$(".picture_remark_div").animate({
 				opacity: 0
 			}, 1000, function() {
-				$(".picture_remark_div").removeClass("pos_center");
+				$(".picture_remark_div").removeClass("right_area");
 				$(".picture_remark_div").animate({
 					opacity: 1
 				}, 1000)
 			})
 		}
 
-		function animateReturn() {
+		function minPictureModel() {
+			var $tool=$(".tool_tag_div");
+			var $remark=$(".picture_remark_div");
+			$tool.addClass("loading");
 			$(".picture_div").animate({
 				width: "70%"
-			}, 2000, function() {
-				$(".picture_remark_div").addClass("pos_center");
-				$(".picture_remark_div").animate({
-					opacity: 1
-				}, 1000)
+			}, 2000,function(){
+				$tool.removeClass("loading");
 			})
-			$(".picture_remark_div").animate({
+			$remark.animate({
 				opacity: 0
-			}, 1000, function() {
-
+			}, 1000,function(){
+				$remark.addClass("right_area");
+				$remark.css("right","-26%");
+				$remark.animate({
+					opacity: 1,
+					right:"0%"
+				}, 1000)
 			})
 		}
 	</script>

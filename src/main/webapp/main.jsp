@@ -141,29 +141,8 @@
 			#content {
 				overflow: hidden;
 			}
-			/* .page_area_div {
-				position: fixed;
-				right: 0;
-				top: 50vh;
-				width: 10%;
-				transform: translateY(-50%);
-			}
 			
-			.page_menu_div {
-				padding: 1.5em 0em;
-				margin: 0em auto;
-			}
-			
-			.page_menu_span {
-				cursor: pointer;
-			}
-			
-			.page_menu_span.disabled {
-				color: rgb(190, 190, 190);
-				cursor: default;
-			} */
 			/*瀑布流  */
-			
 			#waterfall {
 				/*瀑布内列数*/
 				-moz-column-count: 4;
@@ -404,6 +383,10 @@
 				background: #fff;
 				border:1px solid #333;
 			}
+			.key_font{
+				color: #f9fbf5;
+    			background: #acacf1;
+			}
 		</style>
 	</head>
 
@@ -444,28 +427,12 @@
 				</a>
 			</div>
 		</div>
-		<!-- <div class="page_area_div">
-			<div class="page_menu_div text-center">
-				<span class="page_menu_span page_up_span"> <i
-				class="fa fa-angle-up fa-5x" aria-hidden="true"></i>
-			</span>
-			</div>
-			<div class="page_menu_div text-center">
-				<span></span>
-			</div>
-			<div class="page_menu_div text-center">
-				<span class="page_menu_span page_down_span"> <i
-				class="fa fa-angle-down fa-5x" aria-hidden="true"></i>
-			</span>
-			</div>
-		</div> -->
 		<style type="text/css">
 			.page_area_div {
 				position: fixed;
 				right: 0;
-				bottom: 0.5em;
+				bottom: 0em;
 				padding-bottom: 0.5em;
-				height: 300px;
 				width: 10%;
 			}
 			
@@ -503,21 +470,11 @@
 		</style>
 		<div class="page_area_div">
 			<div class="page_content_div">
-				<div class="page_btn_div">
+				<!-- <div class="page_btn_div">
 					<span class="page_btn_span">
 						1
 					</span>
-				</div>
-				<div class="page_btn_div">
-					<span class="page_btn_span">
-						2
-					</span>
-				</div>
-				<div class="page_btn_div">
-					<span class="page_btn_span">
-						3
-					</span>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
@@ -536,7 +493,7 @@
 						</span>
 						</div>
 					</div>
-					<div class="order_type_div">
+					<div class="order_type_div" data-type="clickCount">
 						<span class="order_type_value">热度</span>
 					</div>
 				</div>
@@ -553,7 +510,7 @@
 						</span>
 						</div>
 					</div>
-					<div class="order_type_div">
+					<div class="order_type_div" data-type="createTime">
 						<span class="order_type_value ">最新</span>
 					</div>
 				</div>
@@ -570,7 +527,7 @@
 						</span>
 						</div>
 					</div>
-					<div class="order_type_div">
+					<div class="order_type_div" >
 						<span class="order_type_value">收藏量</span>
 					</div>
 				</div>
@@ -587,7 +544,7 @@
 						</span>
 						</div>
 					</div>
-					<div class="order_type_div">
+					<div class="order_type_div" data-type="download">
 						<span class="order_type_value">下载量</span>
 					</div>
 				</div>
@@ -645,6 +602,7 @@
 			$(document).on("click",".input_div .fa-search",function(){
 				var key=$(this).prev().val();
 				picListByKey("Y",key,1,"24","","");	
+				
 			})
 
 			$(document).on("click", ".order_col_div:not('.active')", function() {
@@ -697,7 +655,11 @@
 			
 			$(document).on("click",".page_content_div .page_btn_div",function(){
 				var page=$(this).attr("data-page");
-				picListByKey("Y","",page,"24","","");
+				var key=$(".input_div .search_input").val();
+				var $order=$(".order_col_div.active");
+				var orderValue=$order.find(".order_btn_part_div:not('.active')").attr("data-value");
+				var orderType=$order.children(".order_type_div").attr("data-type");
+				picListByKey("Y",key,page,"24",orderType,orderValue);
 			})
 
 		})
@@ -744,9 +706,11 @@
 				if(flag)
 				{
 					$("#waterfall .card_div").remove();
+					$("html,body").animate({scrollTop:0}, 1000);
 				}
 				cardHTML(json);
-				getPageArea(page,json.totalPage)
+				getPageArea(page,json.totalPage);
+				showKey(key)
 			}).always(function(){
 				$el.css("display","none");
 			});
@@ -756,14 +720,17 @@
 			var data=json.data;
 			for(var i = 0; i < data.length; i++) {
 				var row = data[i];
+				var title = row.pictures[0].pictureTitle;
+				var userName = row.userName;
+				var createTime = splitDate(row.pictures[0].createTime);
 				var html = '<div class="card_div" data-id="'+row.pictures[0].pictureId+'">' +
 					'<img src="picture/' + row.pictures[0].pictureId + '/false">' +
 					'<div class="card_title_div text-left">' +
-					'<span class="card_title">' + row.pictures[0].pictureTitle + "_" + i + '</span>' +
+					'<span class="card_title">' + title + "_" + i + '</span>' +
 					'</div>' +
 					'<div class="card_info_div">' +
-					'<span class="pull-left img_author">' + row.userName + '</span>' +
-					'<span class="pull-right img_createdate">2018-04-15</span>' +
+					'<span class="pull-left img_author">' + userName + '</span>' +
+					'<span class="pull-right img_createdate">'+createTime+'</span>' +
 					'<div class="clearfix"></div>' +
 					'</div></div>';
 				$("#waterfall").append(html);
@@ -774,10 +741,25 @@
 			var $content=$(".page_area_div .page_content_div");
 			 $content.children(".page_btn_div").remove();
 			page=Number(page);
-			var startPage=page-3>0?page-3:1;
-			var endPage=page+3>totalPage?totalPage:page+3;
+			var startPage=1;
+			var endPage=totalPage;
+			page=Number(page);
+			if(page + 3 < totalPage) {
+				endPage = page + 3;
+				if(page > 3) {
+					startPage = page - 3;
+				} else {
+					endPage = endPage + 4 - page;
+				}
+			} else {
+				startPage=totalPage - 6;
+				if(startPage<1)
+				{
+					startPage = 1;
+				}
+			}
 			var html="";
-			for(var i=startPage;i<=endPage;i++)
+			for(var i=startPage;i<=endPage && i<=totalPage ;i++)
 			{
 				html+='<div class="page_btn_div" data-page="'+i+'">'
 				+'<span class="page_btn_span">'
@@ -786,50 +768,32 @@
 			$content.append(html);
 			$content.children(".page_btn_div[data-page='"+page+"']").addClass("active");
 		}
-
-		function upPageAnimate($el) {
-			disabledPageMenu(".page_menu_div .page_menu_span");
-			var height = $el.height();
-			$el.animate({
-				top: height
-			}, 1000, function() {
-				$el.css("top", "-" + height + "px");
-				/*显示加载动画*/
-			})
-			$("html,body").animate({
-				scrollTop: 0
-			}, 900);
-			$el.animate({
-				top: "0px"
-			}, 1000, function() {
-				abledPageMenu(".page_menu_div .page_menu_span");
-
-			});
+		
+		function showKey(key){
+			if(key && key.trim().length>0){
+				var key_reg=new RegExp(key,"gm");
+				var $titles = $(".card_title");
+				var $userNames = $(".card_info_div .img_author");
+				for(var i = 0;i<$titles.length;i++)
+				{
+					var title=$titles.eq(i).text();
+					var userName=$userNames.eq(i).text();
+					title=title.replace(key_reg,"<span class='key_font'>"+key+"</span>");
+					userName=userName.replace(key_reg,"<span class='key_font'>"+key+"</span>");
+					$titles.eq(i).html(title);
+					$userNames.eq(i).html(userName);
+				}
+			}
 		}
-
-		function downPageAnimate($el) {
-			disabledPageMenu(".page_menu_div .page_menu_span");
-			var height = $el.height();
-			var height_2x = Number(height) * 2 + "px";
-			var scrollDown_h = $(document).height() - $(window).height();
-			$el.animate({
-				top: "-" + height
-			}, 1000, function() {
-				$el.css("top", height_2x);
-
-				$el.animate({
-					top: "0px"
-				}, 1000, function() {
-					abledPageMenu(".page_menu_div .page_menu_span");
-
-				});
-				$("html,body").animate({
-					scrollTop: 0
-				}, 1000);
-				/*显示加载动画*/
-			})
-			/* $("html,body").animate({scrollTop:scrollDown_h}, 900); */
-
+		
+		function splitDate(date){
+			if(date && date.length==19)
+			{
+				date=date.split(" ")[0];
+			}else{
+				date="暂无数据"
+			}
+			return date;
 		}
 
 		function disabledPageMenu(name) {

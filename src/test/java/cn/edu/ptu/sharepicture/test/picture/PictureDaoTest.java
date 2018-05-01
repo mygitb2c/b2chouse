@@ -63,8 +63,8 @@ public class PictureDaoTest {
 				picture.setDownload(download + "");
 				picture.setPictureId(id);
 				picture.setUserId("8EA7EDE3A8AB4CBFB9819C5ED28460FB");
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-				String createTime = dateFormat.format(new Date()).substring(0, 12);
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String createTime = dateFormat.format(new Date()).substring(0, 17);
 				int ss = (int) (Math.random() * 51) + 10;
 				createTime += ss + "";
 				picture.setCreateTime(createTime);
