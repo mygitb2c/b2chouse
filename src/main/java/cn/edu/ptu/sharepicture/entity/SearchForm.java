@@ -21,7 +21,7 @@ public class SearchForm extends Page {
 	}
 
 	public String getOrderType() {
-		if (orderType == null) {
+		if (orderType == null || orderType.trim().length() == 0) {
 			orderType = "clickCount";
 		}
 		return orderType;
@@ -32,7 +32,7 @@ public class SearchForm extends Page {
 	}
 
 	public String getOrderValue() {
-		if (orderValue == null) {
+		if (orderValue == null || orderValue.trim().length() == 0) {
 			orderValue = "desc";
 		}
 		return orderValue;

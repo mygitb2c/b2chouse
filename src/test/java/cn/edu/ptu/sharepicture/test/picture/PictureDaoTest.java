@@ -34,7 +34,7 @@ public class PictureDaoTest {
 
 	@Test
 	public void insert() {
-		String fSPath = "D://image/";
+		String fSPath = "D://potp截图/";
 		File file = new File(fSPath);
 		getPicture(file);
 
@@ -104,12 +104,6 @@ public class PictureDaoTest {
 	public void getPictureName() {
 		String name=pm.getPictureName("246D9F870CD24994ABE88E6C9B2C91B9");
 		System.out.println(name);
-	}
-	@Test
-	public void getTotal() {
-		SearchForm sf=new SearchForm();
-		int i=pm.getTotal(sf);
-		System.out.println(i);
 	}
 
 }

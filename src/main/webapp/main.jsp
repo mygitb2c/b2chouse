@@ -108,6 +108,7 @@
 				line-height: 3em;
 				padding-right: 6.7%;
 				color: #FFF;
+				display: none;
 			}
 			
 			.nav_menu a {
@@ -115,6 +116,7 @@
 				color: inherit;
 				margin-left: 25px;
 				margin-right: 25px;
+				
 			}
 			
 			.navbar_div {
@@ -187,10 +189,6 @@
 				-webkit-column-break-inside: avoid;
 				page-break-inside: avoid;
 				border: 1px solid rgb(230, 230, 230);
-				/* border-radius: 0.5em;
-	border-bottom-left-radius: 0.5em;
-	border-bottom-right-radius: 0.5em; 
-	box-shadow: 0px 3px 3px rgba(150, 150, 150, 0.5);*/
 				background: #fff;
 				text-align: center;
 				font-size: 12px;
@@ -201,13 +199,12 @@
 				border-color: rgb(213, 233, 161);
 				opacity: 0.8;
 				/* 	-webkit-filter: brightness(120%); 
-    filter: brightness(120%); */
+   				filter: brightness(120%); */
 			}
 			
 			.card_div img {
 				max-width: 100%;
 				border-radius: inherit;
-				/* box-shadow: 0px 5px 5px #999999; */
 				max-height: 40em;
 			}
 			
@@ -362,6 +359,7 @@
 				border-bottom-left-radius: 0.25em;
 				border-bottom-right-radius: 0.25em;
 				cursor: pointer;
+				z-index: 1;
 			}
 			
 			.nav_link_btn_div .fa {
@@ -378,13 +376,18 @@
 				background: rgba(0,0,0,0.5);
 				position: fixed;
 				display: none;
-				z-index: 0;
+				z-index: 3;
 			}
 			.reload_div>div{
-				z-index: 3;
 				position: absolute;
 				top: 50%;
 				left: 50%;
+				transform: translate(-50%,-50%);
+				width:8em;
+				height:6em;
+				background: #fff;
+				border-radius:0.25em;
+				line-height:6em;
 			}
 			body.loading{
 				overflow: hidden;
@@ -406,7 +409,9 @@
 
 	<body>
 		<div class="reload_div">
-			
+			<div class="text-center">
+				<span><i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>加载中...</span>
+			</div>
 		</div>
 		<!-- <div class="tip_msg_div">
 			已经到底了~
@@ -458,7 +463,7 @@
 			.page_area_div {
 				position: fixed;
 				right: 0;
-				bottom: 0;
+				bottom: 0.5em;
 				padding-bottom: 0.5em;
 				height: 300px;
 				width: 10%;
@@ -473,7 +478,7 @@
 			}
 			
 			.page_btn_div {
-				background: #479AC7;
+				background: #7d96a3;
 				width: 2em;
 				height: 2em;
 				/* padding: 0.5em; */
@@ -483,6 +488,15 @@
 				line-height: 2em;
 				position: relative;
 				margin: 1em 0em 1em -1em;
+				cursor: pointer;
+			}
+			.page_btn_div.active{
+				width: 3em;
+   				height: 3em;
+    			line-height: 3em;
+    			margin-left: -1.5em;
+    			border-radius: 1.5em;
+    			background: #479AC7;
 			}
 			
 			.page_btn_span {}
@@ -511,12 +525,12 @@
 			<div class="order_menu_div">
 				<div class="order_col_div active">
 					<div class="order_btn_div">
-						<div class="order_btn_part_div desc_div active">
+						<div class="order_btn_part_div desc_div active" data-value="desc">
 							<span class="order_btn_span"> <i
 							class="fa fa-sort-amount-desc"></i>
 						</span>
 						</div>
-						<div class="order_btn_part_div asc_div ">
+						<div class="order_btn_part_div asc_div " data-value="asc">
 							<span class="order_btn_span"> <i
 							class="fa fa-sort-amount-asc" aria-hidden="true"></i>
 						</span>
@@ -528,12 +542,12 @@
 				</div>
 				<div class="order_col_div">
 					<div class="order_btn_div">
-						<div class="order_btn_part_div desc_div ">
+						<div class="order_btn_part_div desc_div "  data-value="desc">
 							<span class="order_btn_span"> <i
 							class="fa fa-sort-amount-desc"></i>
 						</span>
 						</div>
-						<div class="order_btn_part_div asc_div ">
+						<div class="order_btn_part_div asc_div "  data-value="asc">
 							<span class="order_btn_span"> <i
 							class="fa fa-sort-amount-asc" aria-hidden="true"></i>
 						</span>
@@ -545,12 +559,12 @@
 				</div>
 				<div class="order_col_div">
 					<div class="order_btn_div">
-						<div class="order_btn_part_div desc_div ">
+						<div class="order_btn_part_div desc_div "  data-value="desc">
 							<span class="order_btn_span"> <i
 							class="fa fa-sort-amount-desc"></i>
 						</span>
 						</div>
-						<div class="order_btn_part_div asc_div ">
+						<div class="order_btn_part_div asc_div "  data-value="asc">
 							<span class="order_btn_span"> <i
 							class="fa fa-sort-amount-asc" aria-hidden="true"></i>
 						</span>
@@ -562,12 +576,12 @@
 				</div>
 				<div class="order_col_div">
 					<div class="order_btn_div">
-						<div class="order_btn_part_div desc_div ">
+						<div class="order_btn_part_div desc_div "  data-value="desc">
 							<span class="order_btn_span"> <i
 							class="fa fa-sort-amount-desc"></i>
 						</span>
 						</div>
-						<div class="order_btn_part_div asc_div ">
+						<div class="order_btn_part_div asc_div "  data-value="asc">
 							<span class="order_btn_span"> <i
 							class="fa fa-sort-amount-asc" aria-hidden="true"></i>
 						</span>
@@ -615,7 +629,7 @@
 			</div>
 	</body>
 	<script type="text/javascript">
-		$(function() {
+		$(function() {						
 			ini();
 			/* 点击图片或信息跳转至图片详情页 */
 			$(document).on("click", ".simple_img,.card-title,.card-text", function() {
@@ -627,6 +641,10 @@
 				if(confirm("真的要注销吗？")) {
 					location.href = "exit";
 				}
+			})
+			$(document).on("click",".input_div .fa-search",function(){
+				var key=$(this).prev().val();
+				picListByKey("Y",key,1,"24","","");	
 			})
 
 			$(document).on("click", ".order_col_div:not('.active')", function() {
@@ -643,38 +661,43 @@
 			})
 
 			$(document).on("click", ".page_menu_div .page_up_span:not('.disabled')", function() {
-				var key = $(".search_input").val();
-				picListByKey("N", key, page, 28, orderType, orderValue);
+				
 			})
-			$(document).on("click", ".page_menu_div .page_down_span:not('.disabled')", function() {
-				downPageAnimate($("#waterfall"));
-				/* picListByKey("Y"); */
-			})
-
+			/* 排序按钮点击事件  */
 			$(document).on("click", ".desc_div.active span", function() {
 				orderDonwAnimate($(this));
 			})
 			$(document).on("click", ".asc_div.active span", function() {
 				orderUpAnimate($(this));
 			})
-
+			/*滚轮触发事件  */
 			$(document).scroll(function() {
 				if($("#waterfall").attr("isover") == "N") {
 					var scrollTop = $(this).scrollTop();
 					var height = $(document).height() - $(window).height();
 					if(scrollTop >= height) {
 						$(this).scrollTop(scrollTop - 5);
-						picListByKey("N", "", "2", 0);
-						/* $(".footer_loading_div").css("display","inline");  */
+						/*ajax获取数据  */
 					}
 				}
 			});
-
+			/*导航栏显示  */
 			$(document).on("click", ".navbar_div.show .nav_link_btn_div", function() {
 				closeNavbar("-");
 			})
+			/*导航栏隐藏  */
 			$(document).on("click", ".navbar_div:not('.show') .nav_link_btn_div", function() {
 				closeNavbar("+");
+			})
+			/*进入图片详情  */
+			$(document).on("click",".card_div",function(){
+				var id=$(this).attr("data-id");
+				location.href="picture/"+id;
+			})
+			
+			$(document).on("click",".page_content_div .page_btn_div",function(){
+				var page=$(this).attr("data-page");
+				picListByKey("Y","",page,"24","","");
 			})
 
 		})
@@ -687,62 +710,81 @@
 				$(".nav_menu.user_menu").css("display", "none");
 				$(".nav_menu.login_menu").css("display", "block");
 			}
-		}
-		picListByKey("", "", "1", 28);
-
-		function picListByKey(isIni, key, page, pageSize, orderType, orderValue) {
-			$.ajax({
-				url: "picList_key",
-				data: {
-					"key": key,
-					"page": page,
-					"pageSize": pageSize,
-					"orderType": orderType,
-					"orderValue": orderValue
-				},
-				dataType: "json",
-				beforeSend: function() {
-					if(isIni) {
-						$("#waterfall").addClass("loading");
-					}
-				},
-				success: function(json) {
-					/* $("#waterfall .card_div").remove(); */
-					var data=json.data;
-					for(var i = 0; i < data.length; i++) {
-						var row = data[i];
-						$("#waterfall").append(cardHTML(row, i));
-						/* i=getNextCardIndex(i,json.length);   */
-					}
-					console.log(json.total+","+json.totalPage);
-				},
-				complete: function(XMLHttpRequest, textStatus) {
-					if(isIni) {
-						$("#waterfall").removeClass("loading");
-					}
-					if(textStatus == "success" && XMLHttpRequest.responseJSON.length == 0) {
-						showOver();
-					}
-
-				}
-
+		}	
+		
+		function derfind(){
+			/* var dtd=$.Deferred(); */
+			$.when().done(function( data, textStatus, jqXHR ) {  
+				  alert( data.data ); 
 			})
-
+		}
+		
+		picListByKey("Y","","5","24","","");
+		function picListByKey(isReload, key, page, pageSize, orderType, orderValue) {
+			var $el;
+			var flag=isReload=="Y";
+			$.ajax({url:"picList_key",
+				data:{"key":key,
+					"page":page,
+					"pageSize":pageSize,
+					"orderType":orderType,
+					"orderValue":orderValue
+					},
+				dataType:"json",
+				beforeSend:function(){
+					if(flag)
+					{
+						$el=$(".reload_div");
+					}else{
+						$el=$(".footer_loading_div");
+					}
+					$el.css("display","block");
+				}
+			}).done(function(json){
+				if(flag)
+				{
+					$("#waterfall .card_div").remove();
+				}
+				cardHTML(json);
+				getPageArea(page,json.totalPage)
+			}).always(function(){
+				$el.css("display","none");
+			});
 		}
 
-		function cardHTML(row, i) {
-			var html = '<div class="card_div">' +
-				'<img src="picture/' + row.pictures[0].pictureId + '/false">' +
-				'<div class="card_title_div text-left">' +
-				'<span class="card_title">' + row.pictures[0].pictureTitle + "_" + i + '</span>' +
-				'</div>' +
-				'<div class="card_info_div">' +
-				'<span class="pull-left img_author">' + row.userName + '</span>' +
-				'<span class="pull-right img_createdate">2018-04-15</span>' +
-				'<div class="clearfix"></div>' +
-				'</div></div>';
-			return html;
-
+		function cardHTML(json) {
+			var data=json.data;
+			for(var i = 0; i < data.length; i++) {
+				var row = data[i];
+				var html = '<div class="card_div" data-id="'+row.pictures[0].pictureId+'">' +
+					'<img src="picture/' + row.pictures[0].pictureId + '/false">' +
+					'<div class="card_title_div text-left">' +
+					'<span class="card_title">' + row.pictures[0].pictureTitle + "_" + i + '</span>' +
+					'</div>' +
+					'<div class="card_info_div">' +
+					'<span class="pull-left img_author">' + row.userName + '</span>' +
+					'<span class="pull-right img_createdate">2018-04-15</span>' +
+					'<div class="clearfix"></div>' +
+					'</div></div>';
+				$("#waterfall").append(html);
+			}
+		}
+		
+		function getPageArea(page,totalPage){
+			var $content=$(".page_area_div .page_content_div");
+			 $content.children(".page_btn_div").remove();
+			page=Number(page);
+			var startPage=page-3>0?page-3:1;
+			var endPage=page+3>totalPage?totalPage:page+3;
+			var html="";
+			for(var i=startPage;i<=endPage;i++)
+			{
+				html+='<div class="page_btn_div" data-page="'+i+'">'
+				+'<span class="page_btn_span">'
+				+i+'</span></div>';
+			}
+			$content.append(html);
+			$content.children(".page_btn_div[data-page='"+page+"']").addClass("active");
 		}
 
 		function upPageAnimate($el) {

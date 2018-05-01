@@ -53,11 +53,13 @@ public class PictureController {
 		return "forward:main.jsp";
 	}
 
-	@RequestMapping(value = "pictureInfo/{pId}")
+	@RequestMapping(value = "picture/{pId}")
 	public ModelAndView getPictureInfo(@PathVariable(value = "pId") String pictureId, ModelAndView modelAndView) {
-		modelAndView.setViewName("pictureInfo");
+		modelAndView.setViewName("picture");
 		User u = ps.getPictureById(pictureId);
-		modelAndView.addObject("picture", u);
+		modelAndView.addObject("picture", u.getPictures().get(0));
+		modelAndView.addObject("userId", u.getUserId());
+		modelAndView.addObject("userName", u.getUserName());
 		return modelAndView;
 	}
 
