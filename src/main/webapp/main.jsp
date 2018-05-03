@@ -155,7 +155,6 @@
 				position: relative;
 				left: 0px;
 				top: 0px;
-				min-height: 100vh;
 			}
 			/*一个内容层*/
 			
@@ -317,7 +316,7 @@
 				visibility: hidden;
 			}
 			
-			.loading~.footer_loading_div {
+			.footer_loading_div.active {
 				visibility: visible;
 			}
 			
@@ -357,6 +356,9 @@
 				display: none;
 				z-index: 3;
 			}
+			.reload_div.active{
+				display:block;
+			}
 			.reload_div>div{
 				position: absolute;
 				top: 50%;
@@ -376,29 +378,37 @@
 			}
 			.tip_msg_div{
 				position: fixed;
-				top: 40%;
-				left: 40%;
 				z-index: 3;
-				padding: 1em 4em;
-				background: #fff;
-				border:1px solid #333;
+				background:#fff;
+				padding: 2em 4em;
+				display: none;
+				box-shadow: 0px 3px 10px #999999;
+				border-radius: 0.25em;
+				left:50%;
+				transform: translateX(-50%);
+				border:1px solid #fff;
+			}
+			.tip_msg_div.active{
+				display:block;
 			}
 			.key_font{
 				color: #f9fbf5;
     			background: #acacf1;
+    			padding: 0.2em;
+   				margin: 0em 0.1em;
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class="reload_div">
+		<div class="process_div reload_div">
 			<div class="text-center">
-				<span><i class="fa fa-spinner fa-pulse" aria-hidden="true"></i>加载中...</span>
+				<span><i class="fa fa-spinner fa-pulse" aria-hidden="true"></i> 加载中...</span>
 			</div>
 		</div>
-		<!-- <div class="tip_msg_div">
-			已经到底了~
-		</div> -->
+		<div class="process_div tip_msg_div">
+			<span class="tip_msg_value"></span>
+		</div> 
 		<div class="row navbar_div show">
 			<div class="nav_link_btn_div">
 				<span class="fa fa-angle-double-up fa-2x"></span>
@@ -465,7 +475,6 @@
     			border-radius: 1.5em;
     			background: #479AC7;
 			}
-			
 			.page_btn_span {}
 		</style>
 		<div class="page_area_div">
@@ -576,7 +585,7 @@
 				</div>
 				<!-- <div class="clearfix"></div> -->
 				<!--图片显示区域-->
-				<div class="footer_loading_div">
+				<div class="process_div footer_loading_div">
 					<div class="footer_loading_content_div">
 						<span><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></span>
 						<span>加载中...</span>
@@ -588,11 +597,6 @@
 	<script type="text/javascript">
 		$(function() {						
 			ini();
-			/* 点击图片或信息跳转至图片详情页 */
-			$(document).on("click", ".simple_img,.card-title,.card-text", function() {
-				console.log($(this).parents(".card_div").children(".img_div").children("img").attr("data-imgid"));
-
-			})
 			/* 注销按钮 */
 			$(".exit_a").click(function() {
 				if(confirm("真的要注销吗？")) {
@@ -600,8 +604,8 @@
 				}
 			})
 			$(document).on("click",".input_div .fa-search",function(){
-				var key=$(this).prev().val();
-				picListByKey("Y",key,1,"24","","");	
+				var config=getConfig("picList_key",1,"json");
+				getData($(".reload_div"),config,"Y")
 				
 			})
 
@@ -615,28 +619,32 @@
 				//将按钮块初始化为底部
 				$order_btn.css("top", "2em");
 				//执行按钮块的上升动画
-				orderUpAnimate($order_btn.find(".asc_div span"));
+				orderAnimate($order_btn.find(".asc_div span"),0);
 			})
 
-			$(document).on("click", ".page_menu_div .page_up_span:not('.disabled')", function() {
-				
-			})
 			/* 排序按钮点击事件  */
 			$(document).on("click", ".desc_div.active span", function() {
-				orderDonwAnimate($(this));
+				orderAnimate($(this),2);
 			})
 			$(document).on("click", ".asc_div.active span", function() {
-				orderUpAnimate($(this));
+				orderAnimate($(this),0);
 			})
 			/*滚轮触发事件  */
 			$(document).scroll(function() {
-				if($("#waterfall").attr("isover") == "N") {
-					var scrollTop = $(this).scrollTop();
-					var height = $(document).height() - $(window).height();
-					if(scrollTop >= height) {
-						$(this).scrollTop(scrollTop - 5);
-						/*ajax获取数据  */
+				$foot=$(".footer_loading_div");	
+				var scrollTop = $(this).scrollTop();
+				var height = $(document).height() - $(window).height();
+				if(scrollTop >= height&&!$(".process_div").hasClass("active")) {
+					$(this).scrollTop(scrollTop - 10);
+					var page=$(".page_btn_div.active").next().attr("data-page");
+					if(page)
+					{
+						var config=getConfig("picList_key",page,"json");
+						getData($foot,config);
+					}else{
+						/* showTipMsg("到底啦~");  */
 					}
+					
 				}
 			});
 			/*导航栏显示  */
@@ -655,14 +663,12 @@
 			
 			$(document).on("click",".page_content_div .page_btn_div",function(){
 				var page=$(this).attr("data-page");
-				var key=$(".input_div .search_input").val();
-				var $order=$(".order_col_div.active");
-				var orderValue=$order.find(".order_btn_part_div:not('.active')").attr("data-value");
-				var orderType=$order.children(".order_type_div").attr("data-type");
-				picListByKey("Y",key,page,"24",orderType,orderValue);
+				var config=getConfig("picList_key",page,"json");
+				getData($(".reload_div"),config,"Y")
 			})
 
 		})
+		
 		/*初始化 */
 		function ini() {
 			if(${userId != null}) {
@@ -672,58 +678,52 @@
 				$(".nav_menu.user_menu").css("display", "none");
 				$(".nav_menu.login_menu").css("display", "block");
 			}
+			getData($(".reload_div"),getConfig("picList_key",1,"json"),"Y")
 		}	
 		
-		function derfind(){
-			/* var dtd=$.Deferred(); */
-			$.when().done(function( data, textStatus, jqXHR ) {  
-				  alert( data.data ); 
-			})
+		function getConfig(url,page,dataType){
+			var config={url:"",data:{},dataType:"",beforeSend:""};
+			var key=$(".input_div .search_input").val();
+			var $order=$(".order_col_div.active");
+			var orderValue=$order.find(".order_btn_part_div.active").attr("data-value");
+			var orderType=$order.children(".order_type_div").attr("data-type");
+			var data={"key":key,"page":page,"pageSize":24,"orderType":orderType,"orderValue":orderValue};
+			config.url=url;
+			config.dataType=dataType;
+			config.data=data;
+			return config;
 		}
 		
-		picListByKey("Y","","5","24","","");
-		function picListByKey(isReload, key, page, pageSize, orderType, orderValue) {
-			var $el;
-			var flag=isReload=="Y";
-			$.ajax({url:"picList_key",
-				data:{"key":key,
-					"page":page,
-					"pageSize":pageSize,
-					"orderType":orderType,
-					"orderValue":orderValue
-					},
-				dataType:"json",
-				beforeSend:function(){
-					if(flag)
-					{
-						$el=$(".reload_div");
-					}else{
-						$el=$(".footer_loading_div");
-					}
-					$el.css("display","block");
+		function getData($load,config,isReload){
+			config.beforeSend=function(){
+				$load.addClass("active");
+			}
+			$.ajax(config)
+			.done(function(json){
+				if(isReload){
+				 $(".card_div").remove();
+				 $(document).scrollTop(0); 
 				}
-			}).done(function(json){
-				if(flag)
-				{
-					$("#waterfall .card_div").remove();
-					$("html,body").animate({scrollTop:0}, 1000);
+				if(json.data&&json.data.length>0){
+					cardHTML(json);
+					getPageArea(json.page,json.totalPage)
+					showKey(config.data.key);
 				}
-				cardHTML(json);
-				getPageArea(page,json.totalPage);
-				showKey(key)
-			}).always(function(){
-				$el.css("display","none");
-			});
+			})
+			.always(function(json){
+				$load.removeClass("active");
+			})
 		}
 
 		function cardHTML(json) {
 			var data=json.data;
+			var html ="";
 			for(var i = 0; i < data.length; i++) {
 				var row = data[i];
 				var title = row.pictures[0].pictureTitle;
 				var userName = row.userName;
 				var createTime = splitDate(row.pictures[0].createTime);
-				var html = '<div class="card_div" data-id="'+row.pictures[0].pictureId+'">' +
+				html+= '<div class="card_div" data-id="'+row.pictures[0].pictureId+'">' +
 					'<img src="picture/' + row.pictures[0].pictureId + '/false">' +
 					'<div class="card_title_div text-left">' +
 					'<span class="card_title">' + title + "_" + i + '</span>' +
@@ -733,13 +733,13 @@
 					'<span class="pull-right img_createdate">'+createTime+'</span>' +
 					'<div class="clearfix"></div>' +
 					'</div></div>';
-				$("#waterfall").append(html);
 			}
+			$("#waterfall").append(html);
 		}
 		
 		function getPageArea(page,totalPage){
 			var $content=$(".page_area_div .page_content_div");
-			 $content.children(".page_btn_div").remove();
+			$content.children(".page_btn_div").remove();
 			page=Number(page);
 			var startPage=1;
 			var endPage=totalPage;
@@ -796,29 +796,32 @@
 			return date;
 		}
 
-		function disabledPageMenu(name) {
-			$(name).addClass("disabled");
+		function showTipMsg(text){
+			var $el=$(".tip_msg_div");
+			$el.children(".tip_msg_value").text(text);
+			$el.addClass("active");
+			var h=$el.get(0).offsetHeight;
+			$el.css("bottom","-"+h+"px");
+			$el.animate({
+				bottom:"1em"
+			},1000)
 		}
 
-		function abledPageMenu(name) {
-			$(name).removeClass("disabled");
-		}
-
-		function orderUpAnimate($el) {
+		function orderAnimate($el,value) {
 			//获取到点击按钮的父类按钮块
 			var $parent = $el.parent();
 			//激活降序按钮
 			$parent.siblings().eq(0).addClass("active");
 			//执行上升动画
 			$parent.parent().animate({
-				top: "0em"
+				top: value+"em"
 			}, 1000, function() {
 				//完成后移除降序按钮的激活
 				$parent.removeClass("active");
 			});
 		}
 
-		function orderDonwAnimate($el) {
+		/* function orderDonwAnimate($el) {
 			var $parent = $el.parent();
 			$parent.siblings().eq(0).addClass("active");
 			$parent.parent().animate({
@@ -826,7 +829,7 @@
 			}, 1000, function() {
 				$parent.removeClass("active");
 			});
-		}
+		} */
 
 		function showOver() {
 			/* $().animate({}) */
