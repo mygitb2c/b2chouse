@@ -219,6 +219,19 @@
 			.login_btn.disabled {
 				background: #ced4da;
 			}
+			
+			.login_tip_msg{
+				/* -webkit-animation: login_msg 1.5s 2;
+				-webkit-animation-direction: alternate; */
+				animation: login_msg 1.5s 2;
+				animation-direction: alternate;
+			}
+			@keyframes login_msg{
+				from {top:-2em; }
+				33%{top:-5em;}
+				to{top:-5em;}
+			}
+			
 		</style>
 	</head>
 
@@ -347,8 +360,12 @@
 			})
 
 			$(".login_btn").click(function() {
-				$(this).addClass("disabled");
-				$.when(showAlertMsg()).then($(this).removeClass("disabled"))
+				/* $(this).addClass("disabled"); */
+				$(".login_area .alert-danger").addClass("login_tip_msg");
+				/* $.when(showAlertMsg()).then($(this).removeClass("disabled")) */
+			})
+			$(".login_area .alert-danger").on("webkitAnimationEnd mozAnimationEnd animationEnd",function(){
+				$(this).removeClass("login_tip_msg");
 			})
 		})
 		getCenterPosition($(".register_area"));
