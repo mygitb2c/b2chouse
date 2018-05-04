@@ -143,34 +143,41 @@
 			}
 			
 			/*瀑布流  */
-			#waterfall {
+			.waterfall_div {
 				/*瀑布内列数*/
-				-moz-column-count: 4;
+				/* -moz-column-count: 4;
 				-webkit-column-count: 4;
-				column-count: 4;
+				column-count: 4; */
 				/*瀑布内子元素左右margin*/
-				-moz-column-gap: 1em;
+				/* -moz-column-gap: 1em;
 				-webkit-column-gap: 1em;
-				column-gap: 1em;
+				column-gap: 1em; */
 				position: relative;
 				left: 0px;
 				top: 0px;
 			}
 			/*一个内容层*/
 			
+			.waterfall_col_div{
+				width: 25%;
+				float: left;
+				
+			}
 			.card_div {
 				/* border-radius: 0.5em; */
 				padding: 1em;
-				margin: 0 0 1em 0;
+				margin: 0 0.25em 0.5em 0;
 				/*防止子元素被切割*/
-				-moz-page-break-inside: avoid;
+				/* -moz-page-break-inside: avoid;
 				-webkit-column-break-inside: avoid;
-				page-break-inside: avoid;
+				page-break-inside: avoid; */
 				border: 1px solid rgb(230, 230, 230);
 				background: #fff;
 				text-align: center;
 				font-size: 12px;
 				cursor: pointer;
+				width: calc(100% - 0.5em);
+				box-sizing: border-box;
 			}
 			
 			.card_div:hover {
@@ -395,18 +402,17 @@
 				color: #f9fbf5;
     			background: #acacf1;
     			padding: 0.2em;
-   				margin: 0em 0.1em;
 			}
 		</style>
 	</head>
 
 	<body>
-		<div class="process_div reload_div">
+		<div class="progress_div reload_div">
 			<div class="text-center">
 				<span><i class="fa fa-spinner fa-pulse" aria-hidden="true"></i> 加载中...</span>
 			</div>
 		</div>
-		<div class="process_div tip_msg_div">
+		<div class="progress_div tip_msg_div">
 			<span class="tip_msg_value"></span>
 		</div> 
 		<div class="row navbar_div show">
@@ -566,8 +572,12 @@
 
 			<!--图片显示区域-->
 			<div id="content">
-				<div id="waterfall" isover="N">
-
+				<div class="waterfall_div" isover="N">
+				<div class="waterfall_col_div" ></div>
+				<div class="waterfall_col_div" ></div>
+				<div class="waterfall_col_div" ></div>
+				<div class="waterfall_col_div" ></div>
+				<div class="clearfix"></div>
 					<!-- 
 				<div class="card_div">
 					<img src="static/img/无标题5.png">
@@ -585,7 +595,7 @@
 				</div>
 				<!-- <div class="clearfix"></div> -->
 				<!--图片显示区域-->
-				<div class="process_div footer_loading_div">
+				<div class="progress_div footer_loading_div">
 					<div class="footer_loading_content_div">
 						<span><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></span>
 						<span>加载中...</span>
@@ -604,7 +614,7 @@
 				}
 			})
 			$(document).on("click",".input_div .fa-search",function(){
-				var config=getConfig("picList_key",1,"json");
+				var config=getConfig(listUrl,1,"json");
 				getData($(".reload_div"),config,"Y")
 				
 			})
@@ -624,7 +634,7 @@
 
 			/* 排序按钮点击事件  */
 			$(document).on("click", ".desc_div.active span", function() {
-				orderAnimate($(this),2);
+				orderAnimate($(this),2);	
 			})
 			$(document).on("click", ".asc_div.active span", function() {
 				orderAnimate($(this),0);
@@ -634,26 +644,25 @@
 				$foot=$(".footer_loading_div");	
 				var scrollTop = $(this).scrollTop();
 				var height = $(document).height() - $(window).height();
-				if(scrollTop >= height&&!$(".process_div").hasClass("active")) {
+				if(scrollTop >= height&&!$(".progress_div").hasClass("active")) {
 					$(this).scrollTop(scrollTop - 10);
 					var page=$(".page_btn_div.active").next().attr("data-page");
 					if(page)
 					{
-						var config=getConfig("picList_key",page,"json");
+						var config=getConfig(listUrl,page,"json");
 						getData($foot,config);
-					}else{
-						/* showTipMsg("到底啦~");  */
 					}
+				}else{
 					
 				}
 			});
 			/*导航栏显示  */
 			$(document).on("click", ".navbar_div.show .nav_link_btn_div", function() {
-				closeNavbar("-");
+				toggleNavbar("-");
 			})
 			/*导航栏隐藏  */
 			$(document).on("click", ".navbar_div:not('.show') .nav_link_btn_div", function() {
-				closeNavbar("+");
+				toggleNavbar("+");
 			})
 			/*进入图片详情  */
 			$(document).on("click",".card_div",function(){
@@ -663,12 +672,13 @@
 			
 			$(document).on("click",".page_content_div .page_btn_div",function(){
 				var page=$(this).attr("data-page");
-				var config=getConfig("picList_key",page,"json");
+				var config=getConfig(listUrl,page,"json");
 				getData($(".reload_div"),config,"Y")
 			})
 
 		})
-		
+		/*ajax获取图像list路径  */
+		var listUrl="picList_key";
 		/*初始化 */
 		function ini() {
 			if(${userId != null}) {
@@ -678,9 +688,9 @@
 				$(".nav_menu.user_menu").css("display", "none");
 				$(".nav_menu.login_menu").css("display", "block");
 			}
-			getData($(".reload_div"),getConfig("picList_key",1,"json"),"Y")
+			getData($(".reload_div"),getConfig(listUrl,1,"json"),"Y")
 		}	
-		
+		/*获取ajax配置用json  */
 		function getConfig(url,page,dataType){
 			var config={url:"",data:{},dataType:"",beforeSend:""};
 			var key=$(".input_div .search_input").val();
@@ -694,6 +704,10 @@
 			return config;
 		}
 		
+		function orderBtnGetCf($el){
+			var config=getConfig(listUrl,1,"json");
+		}
+		/*获取并显示数据  */
 		function getData($load,config,isReload){
 			config.beforeSend=function(){
 				$load.addClass("active");
@@ -714,29 +728,38 @@
 				$load.removeClass("active");
 			})
 		}
-
+		/*生成图像卡片HTML  */
 		function cardHTML(json) {
 			var data=json.data;
-			var html ="";
+			/* var html =""; */
+			var wf_head='<div class="waterfall_div" data-page="'+json.page+'">';
+			var wf_footer="</div>";
 			for(var i = 0; i < data.length; i++) {
 				var row = data[i];
 				var title = row.pictures[0].pictureTitle;
 				var userName = row.userName;
 				var createTime = splitDate(row.pictures[0].createTime);
-				html+= '<div class="card_div" data-id="'+row.pictures[0].pictureId+'">' +
+				var html= '<div class="card_div" data-id="'+row.pictures[0].pictureId+'">' +
 					'<img src="picture/' + row.pictures[0].pictureId + '/false">' +
 					'<div class="card_title_div text-left">' +
-					'<span class="card_title">' + title + "_" + i + '</span>' +
+					'<span class="card_title">' + title + row.pictures[0].clickCount +'</span>' +
 					'</div>' +
 					'<div class="card_info_div">' +
 					'<span class="pull-left img_author">' + userName + '</span>' +
 					'<span class="pull-right img_createdate">'+createTime+'</span>' +
 					'<div class="clearfix"></div>' +
 					'</div></div>';
+				$(".waterfall_div .waterfall_col_div").eq(getColNum(i)).append(html);
 			}
-			$("#waterfall").append(html);
+			
 		}
-		
+		/*获取所在列数  */
+		function getColNum(i) {
+			var m = $(".card_div").length;
+			var colNum = m % 4;
+			return colNum;
+		}
+		/*生成页码区域  */
 		function getPageArea(page,totalPage){
 			var $content=$(".page_area_div .page_content_div");
 			$content.children(".page_btn_div").remove();
@@ -768,12 +791,12 @@
 			$content.append(html);
 			$content.children(".page_btn_div[data-page='"+page+"']").addClass("active");
 		}
-		
+		/*对搜索成果显示关键字  */
 		function showKey(key){
 			if(key && key.trim().length>0){
 				var key_reg=new RegExp(key,"gm");
-				var $titles = $(".card_title");
-				var $userNames = $(".card_info_div .img_author");
+				var $titles = $(".card_title:not('.revise')");
+				var $userNames = $(".card_info_div .img_author:not('.revise')");
 				for(var i = 0;i<$titles.length;i++)
 				{
 					var title=$titles.eq(i).text();
@@ -783,8 +806,38 @@
 					$titles.eq(i).html(title);
 					$userNames.eq(i).html(userName);
 				}
+				$titles.addClass("revise");
+				$userNames.addClass("revise");
 			}
 		}
+		
+		function setPosition(col) {
+			var i = 0;
+			var j = 0;
+			var n = 0;
+			var w = 100 / col
+			var $els = $(".card_div")
+			for(; n < $els.length; n++) {
+				var left = i * w + "%";
+				var top = 0;
+				if(j >= 1) {
+					var pre = parseInt((j - 1) * col + i);
+					var preEl = $els.eq(pre).get(0);
+					top = preEl.offsetTop + preEl.offsetHeight;
+				}
+				$els.eq(n).css({
+					"left": left,
+					"top": top
+				})
+				i++;
+				if(i >= col) {
+					i = 0;
+					j++;
+				}
+			}
+
+		}
+		
 		
 		function splitDate(date){
 			if(date && date.length==19)
@@ -806,36 +859,23 @@
 				bottom:"1em"
 			},1000)
 		}
-
+		
 		function orderAnimate($el,value) {
 			//获取到点击按钮的父类按钮块
 			var $parent = $el.parent();
-			//激活降序按钮
+			//激活另一个按钮
 			$parent.siblings().eq(0).addClass("active");
-			//执行上升动画
+			//执行动画
 			$parent.parent().animate({
 				top: value+"em"
 			}, 1000, function() {
-				//完成后移除降序按钮的激活
 				$parent.removeClass("active");
+				var config=getConfig(listUrl,1,"json");
+				getData($(".reload_div"),config,"Y");
 			});
 		}
-
-		/* function orderDonwAnimate($el) {
-			var $parent = $el.parent();
-			$parent.siblings().eq(0).addClass("active");
-			$parent.parent().animate({
-				top: "2em"
-			}, 1000, function() {
-				$parent.removeClass("active");
-			});
-		} */
-
-		function showOver() {
-			/* $().animate({}) */
-		}
-
-		function closeNavbar(direction) {
+		/*显示与隐藏导航栏*/
+		function toggleNavbar(direction) {
 			$(".navbar_div").animate({
 				top: direction + "=5em"
 			}, 500, function() {

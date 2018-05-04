@@ -7,16 +7,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 
-	private String userId;//编号
-	private String userName;//用户名
-	private String account;
-	private String password;//密码
-	private String sex;//性别
-	private String email;//邮箱
-	private String createTime;//注册时间
-	private String userImage;//用户头像
-	private String isLock;//是否被锁定
-	private List<Picture> pictures;//图片集合
+	private String userId;// 编号
+	private String userName;// 用户名
+	private String password;// 密码
+	private String sex;// 性别
+	private String email;// 邮箱
+	private String createTime;// 注册时间
+	private String userImage;// 用户头像
+	private String isLock;// 是否被锁定
+	private List<Picture> pictures;// 图片集合
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -36,14 +35,6 @@ public class User {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
 	}
 
 	public String getPassword() {
@@ -102,19 +93,18 @@ public class User {
 		this.pictures = pictures;
 	}
 
-	public User(String userName, String account, String password, String email) {
+	public User(String userName, String password, String email) {
 		super();
 		this.userName = userName;
-		this.account = account;
 		this.password = password;
 		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", account=" + account + ", password=" + password
-				+ ", sex=" + sex + ", email=" + email + ", createTime=" + createTime + ", userImage=" + userImage
-				+ ", isLock=" + isLock + ", pictures=" + pictures + "]";
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", sex=" + sex
+				+ ", email=" + email + ", createTime=" + createTime + ", userImage=" + userImage + ", isLock=" + isLock
+				+ ", pictures=" + pictures + "]";
 	}
 
 }

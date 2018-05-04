@@ -26,7 +26,7 @@ public class UserService {
 	 *            (userName,account,password,email)
 	 * @return
 	 */
-	public boolean insertUser(User user) {
+	public String insertUser(User user) {
 		String userId = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		String createTime = dateFormat.format(new Date());
@@ -34,7 +34,11 @@ public class UserService {
 		user.setUserId(userId);
 		user.setCreateTime(createTime);
 		user.setPassword(MD5Util.getMD5Str(password));
-		return userMapper.insertUser(user);
+		if(userMapper.insertUser(user))
+		{
+			return userId;
+		}
+		return null;
 	}
 
 	/**

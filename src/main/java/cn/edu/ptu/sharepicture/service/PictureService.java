@@ -30,6 +30,7 @@ public class PictureService {
 		rf.setPageSize(sf.getPageSize());
 		rf.setData(pm.getPicturesByKey(sf));
 		rf.setTotal(pm.getTotal(sf));
+		rf.setPage(sf.getPage());
 		return rf;
 	}
 

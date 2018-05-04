@@ -60,11 +60,16 @@ public class UserController {
 		return flag;
 	}
 
-	@ResponseBody
 	@RequestMapping(value = "userRegister", method = RequestMethod.POST)
-	public boolean registered(User user, HttpSession session) {
-		boolean flag = userService.insertUser(user);
-		return flag;
+	public String registered(User user, HttpSession session) {
+		String path = "forward:/";
+		String userId = userService.insertUser(user);
+		if (userId != null) {
+			session.setAttribute("userId", userId);
+		} else {
+			path += "register";
+		}
+		return path;
 	}
 
 	@RequestMapping(value = "userLogin", method = RequestMethod.POST)

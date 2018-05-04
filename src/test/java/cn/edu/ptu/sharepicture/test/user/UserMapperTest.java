@@ -48,13 +48,9 @@ public class UserMapperTest {
 		User user = new User();
 		user.setUserId(UUID.randomUUID().toString().replaceAll("-", ""));
 		user.setUserName("java小王子");
-		user.setAccount("lhb");
 		user.setPassword("123");
-		user.setSex("男");
 		user.setEmail("891671286@qq.com");
-		user.setUserImage("");
 		user.setCreateTime("20180124145122");
-		user.setIsLock("N");
 		boolean flag = userMapper.insertUser(user);
 		System.out.println(flag);
 

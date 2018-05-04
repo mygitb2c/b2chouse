@@ -6,8 +6,8 @@
 	<!--通过关键字多图查询 -->
 	<select id="getPicturesByKey" resultMap="pictures_User">
 		<bind name="key" value="'%'+key+'%'" />
-		SELECT pictureId,pictureTitle,pictureName,userName,pictures.createTime
-		createTime FROM pictures LEFT JOIN user ON
+		SELECT pictureId,pictureTitle,pictureName,userName,pictures.createTime createTime,clickCount
+		FROM pictures LEFT JOIN user ON
 		(pictures.userId=user.userId)
 		RIGHT JOIN pictureType ON
 		pictures.pictureType=pictureType.typeId

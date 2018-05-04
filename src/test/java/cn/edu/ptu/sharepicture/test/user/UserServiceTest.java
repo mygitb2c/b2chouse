@@ -25,9 +25,9 @@ public class UserServiceTest {
 
 	@Test
 	public void insertTest() {
-		User user = new User("王王王", "WWW", "123", "512370345@qq.com");
-		boolean flag = userService.insertUser(user);
-		System.out.println(flag);
+		User user = new User("王王王","123", "512370345@qq.com");
+		String userId = userService.insertUser(user);
+		System.out.println(userId);
 	}
 
 	@Test

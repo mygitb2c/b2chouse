@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.edu.ptu.sharepicture.entity.Page;
 import cn.edu.ptu.sharepicture.entity.Picture;
 import cn.edu.ptu.sharepicture.entity.ReturnForm;
 import cn.edu.ptu.sharepicture.entity.SearchForm;
@@ -90,7 +92,6 @@ public class PictureController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(fileName);
 		picture.setPictureName(path);
 		picture.setPictureName(fileName);
 		/* ps.insertPicture(picture); */
@@ -138,5 +139,21 @@ public class PictureController {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@RequestMapping(value = "when")
+	public String when() {
+		return "forward:when.jsp";
+	}
+
+	@RequestMapping(value = "when_ajax")
+	@ResponseBody
+	public String when(@RequestParam(value = "value") int value) {
+		System.out.println(value);
+		List<Page> list = new ArrayList<Page>();
+		Page page = new Page();
+		page.setPage(value);
+		list.add(page);
+		return value*2+"";
 	}
 }

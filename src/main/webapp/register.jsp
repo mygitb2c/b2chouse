@@ -392,7 +392,7 @@
 			}, 1000)
 		}
 
-		function showAlertMsg() {
+		/* function showAlertMsg() {
 			$el = $(".login_area .alert");
 			$el.css("display", "inline");
 			$el.animate({
@@ -406,7 +406,7 @@
 			}, 500, function() {
 				$el.css("display", "none");
 			})
-		}
+		} */
 	</script>
 
 </html>
