@@ -13,6 +13,11 @@
 		<script src="../static/js/popper.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../static/js/jquery.colorPicker.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		function picLloadComplete(picture) {
+			console.log("加载完成:"+picture.offsetHeight);
+		}
+		</script>
 		<style type="text/css">
 			body {
 				background: rgb(240, 240, 240) url(../static/img/bg.png);
@@ -437,6 +442,7 @@
 				width: 70%;
 				display: inline-block;
 				position: relative;
+				min-height: 18em;
 			}
 			
 			.tool_tag_div {
@@ -606,7 +612,7 @@
 			</div>
 			<div class="picture_container">
 				<div class="picture_div text-center">
-					<img src="${pageContext.request.contextPath}/picture/${picture.pictureId}/false" />
+					<img src="${pageContext.request.contextPath}/picture/${picture.pictureId}/false"  onload="picLloadComplete(this)"/>
 					<div class="tool_tag_div fa-lg">
 						<span class="fa fa-search-plus active" data-evalstr="maxPictureModel()"></span>
 						<span class="fa fa-search-minus" data-evalstr="minPictureModel()"></span>
@@ -739,6 +745,7 @@
 				<div class="msg_row_div">
 					<div class="sender_img_div">
 						<img src="../static/img/萨尔茨卡默古特地区_13.jpg" />
+						<div>王王王</div>
 					</div>
 					<div class="alert four_msg">
 						<div class="msg_caret"></div>
@@ -971,7 +978,7 @@
 						<div class="table_tr">
 							<div class="td_name width_20">
 								<div class="cell_value">
-									<img src="img/demo1.png" style="max-width: 100%;" />
+									<img src="" style="max-width: 100%;" />
 									<div class="send_name_value">
 										王王王
 									</div>
@@ -1083,6 +1090,11 @@
 			$(".source_picture_div").click(function() {
 				$(this).css("display", "none");
 			})
+			
+			$(".picture_div img").on("load",function(){
+				var $parent=$(this).parent();
+				console.log("pw:"+$parent.get(0).offsetWidth+",thisw"+$(this).get(0).offsetWidth);
+			})
 
 			/*$(document).on("click",".page_btn_div.down_page_div:not('.disabled')",function() {
 				$(".page_btn_div").addClass("disabled");
@@ -1137,17 +1149,19 @@
 		}*/
 
 		function maxPictureModel() {
-			$(".tool_tag_div").addClass("loading");
+			var $remark = $(".picture_remark_area_div");
+			var $tool = $(".tool_tag_div");
+			$tool.addClass("loading");
 			$(".picture_div").animate({
 				width: "100%"
 			}, 2000, function() {
-				$(".tool_tag_div").removeClass("loading");
+				$tool.removeClass("loading");
 			})
-			$(".picture_remark_area_div").animate({
+			$remark.animate({
 				opacity: 0
 			}, 1000, function() {
-				$(".picture_remark_area_div").removeClass("right_area");
-				$(".picture_remark_area_div").animate({
+				$remark.removeClass("right_area");
+				$remark.animate({
 					opacity: 1
 				}, 1000)
 			})
@@ -1173,6 +1187,8 @@
 				}, 1000)
 			})
 		}
+		
+
 	</script>
 
 </html>
