@@ -2,18 +2,18 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${picture.pictureTitle}</title>
-<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="../static/css/buttons.css" />
-<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.css" />
-<link rel="stylesheet" type="text/css" href="../static/css/colorPicker.css" />
-<script src="../static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
-<script src="../static/js/popper.js" type="text/javascript" charset="utf-8"></script>
-<script src="../static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-<script src="../static/js/jquery.colorPicker.min.js" type="text/javascript" charset="utf-8"></script>
-<style type="text/css">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>${picture.pictureTitle}</title>
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/colorPicker.css" />
+		<script src="../static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/js/popper.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../static/js/jquery.colorPicker.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
 			body {
 				background: rgb(240, 240, 240) url(../static/img/bg.png);
 				overflow-x: hidden;
@@ -43,7 +43,7 @@
 			
 			.picture_area_div {
 				position: relative;
-				padding: 2em 0em;
+				padding: 0em;
 			}
 			
 			.up_page_area_div,
@@ -108,13 +108,12 @@
 			}
 			
 			.edit_power_off_div {
-				
-				padding:0.5em;
+				padding: 0.5em;
 			}
 			
 			.edit_power_off_span {
 				cursor: pointer;
-				padding:0.2em;
+				padding: 0.2em;
 			}
 			
 			#msg_edit_content_div {
@@ -249,13 +248,13 @@
 			
 			.comment_value {
 				position: absolute;
-				bottom: 0em;
+				bottom: 0.3em;
 				/*left: 0.5em;*/
 			}
 			
 			.date_value {
 				position: absolute;
-				bottom: 0em;
+				bottom: 0.3em;
 				right: 0.5em;
 				font-size: 80%;
 				color: rgb(200, 200, 200);
@@ -415,7 +414,7 @@
 			
 			.source_picture_div {
 				width: 100%;
-				height:100%;
+				height: 100%;
 				position: fixed;
 				display: flex;
 				align-content: center;
@@ -429,7 +428,7 @@
 				max-width: calc(100% - 10px);
 				max-height: calc(100% - 10px);
 				padding: 5px;
-				border:1px solid #ccc;
+				border: 1px solid #ccc;
 				background: #fff;
 				border-radius: 2px;
 			}
@@ -449,14 +448,17 @@
 				display: none;
 				cursor: pointer;
 			}
-			.tool_tag_div.loading span{
+			
+			.tool_tag_div.loading span {
 				display: none !important;
 			}
-			.tool_tag_div span{
+			
+			.tool_tag_div span {
 				display: none;
 			}
-			.tool_tag_div span.active{
-				display:inline;
+			
+			.tool_tag_div span.active {
+				display: inline;
 			}
 			
 			.picture_div:hover .tool_tag_div {
@@ -467,25 +469,62 @@
 				color: #fff;
 			}
 			
-			.picture_remark_div.right_area {
+			.picture_remark_area_div.right_area {
 				position: absolute;
 				right: 0%;
 				top: 0%;
-				width: 26%;
-				padding: 0em;
+				width: 30%;
+				padding: 1em;
+				height: 100%;
 			}
 			
-			.picture_remark_div {
-				padding: 1.5em 0.5em 0em 0.5em;
+			.picture_remark_area_div {
+				/* padding: 1.5em 0.5em 0em 0.5em; */
 				white-space: normal;
+				background: rgba(95, 125, 162, 0.5);
+				padding-bottom: 2em;
+				
 			}
 			
-			.picture_remark_div .fa-border {
+			.remark_area_head_div{
+				text-align: center;
+				padding: 2em 0;
+			}
+			.authorImg{
+				width: 6em;
+				height: 6em;
+				border-radius: 6em;
+			}
+			.remark_content_div{
+				color: #fff;
+			}
+			.remark_value_div{
+				padding:0 10%;
+			}
+			.remark_author_div{
+				color: #fff;
+				padding: 1em 5%;
+			}
+			
+			/* .picture_remark_area_div .fa-border {
 				border-color: #fff;
 			}
 			
 			.remark_value {
 				width: 100%;
+			} */
+			
+			.picture_title_div {
+				padding: 1em 0em;
+				background: rgba(0, 0, 0, 0.73);
+				color: #fff;
+				font-size: 1.2em;
+				margin-bottom: 1.5em;
+				text-align: center;
+			}
+			
+			.picture_title_div>.fa {
+				padding: 0em 0.3em;
 			}
 		</style>
 	</head>
@@ -494,34 +533,9 @@
 		<div class="source_picture_div">
 			<img class="source_picture" />
 		</div>
-		<!--<div class="row navbar_div nofix">
-			<div class="col-md-4 search_div">
-				<div class="input_div form-inline">
-					<input type="text" placeholder="搜索" class="form-control col-md-11 search_input" /> <i class="fa fa-search fa-lg col-md-1"></i>
-				</div>
-			</div>
-			<div class="col-md-4 logo_div">
-				<span class="logo_value">Share Picture</span>
-			</div>
-			<div class="col-md-4 nav_menu login_menu  ">
-				<a class="register_a " href="register"> <i class="fa fa-registered fa-lg"></i> 注册
-				</a>
-				<a class="login_a " href="login"> <i class="fa fa-map-marker fa-lg"></i> 登录
-				</a>
-			</div>
-			<div class="col-md-4 nav_menu user_menu ">
-				<a class="userinfo_a " href="my"> <i class="fa fa-user-o fa-fw fa-lg"></i> 我的
-				</a>
-				<a class="exit_a "> <i class="fa fa-sign-out fa-fw fa-lg"></i> 注销
-				</a>
-				<a class="sharepic_a " href="userinfo.html"> <i class="fa fa-share-alt fa-fw fa-lg"></i> 发图
-				</a>
-			</div>
-		</div>-->
 		<div class="msg_edit_area_div">
 			<div class="edit_area_power_div">
 				<span class="fa fa-pencil-square-o fa-2x edit_area_power_span"></span>
-				<!--<span class="fa fa-times edit_area_power_span"></span>-->
 			</div>
 			<div class="msg_edit_div">
 				<div class="edit_menu_div fa-lg">
@@ -579,41 +593,39 @@
 						<span class="btn_text">发送</span>
 					<span class="fa fa-spinner fa-spin  btn_loading_text"></span>
 					</span>
-					<div class="clearfix">
-
-					</div>
+					<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
 
 		<div class="picture_area_div">
-			<!--<div class="up_page_area_div">
-				<div class="page_btn_div up_page_div">
-					<i class="fa fa-angle-left fa-5x" aria-hidden="true"></i>
-				</div>
+			<div class="picture_title_div">
+				<span class="fa fa-quote-left"></span>
+				<span class="picture_title_span">${picture.pictureTitle}</span>
+				<span class="fa fa-quote-right"></span>
 			</div>
-			<div class="down_page_area_div">
-				<div class="page_btn_div down_page_div">
-					<i class="fa fa-angle-right fa-5x" aria-hidden="true"></i>
-				</div>
-			</div>-->
 			<div class="picture_container">
 				<div class="picture_div text-center">
 					<img src="${pageContext.request.contextPath}/picture/${picture.pictureId}/false" />
-					<div class="tool_tag_div fa-lg" >
+					<div class="tool_tag_div fa-lg">
 						<span class="fa fa-search-plus active" data-evalstr="maxPictureModel()"></span>
 						<span class="fa fa-search-minus" data-evalstr="minPictureModel()"></span>
 					</div>
 				</div>
-				<div class="picture_remark_div right_area">
-					<span class="fa fa-quote-left fa-pull-left fa-3x fa-border" aria-hidden="true"></span>
-					<div class="remark_value">
+				<div class="picture_remark_area_div right_area">
+					<!-- <div class="remark_value">
 						asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd asdas电风扇电风扇的vsdvsdvfd
+						 <footer class="blockquote-footer text-right">From WWF's website</footer>
+					</div> -->
+					<div class="remark_area_head_div">
+						<img src="../static/img/萨尔茨卡默古特地区_10.jpg" class="authorImg"/>
 					</div>
-					<!--<span class="fa fa-quote-right fa-pull-right fa-3x fa-border" aria-hidden="true"></span>
-					<div class="clearfix">
-						
-					</div>-->
+					<div class="remark_content_div">
+						<div class="remark_value_div">
+							爱是打算粉红色花费时间的话,打扫房间啊第三方哈斯东方航,空电视机法的速度回复UIEHSDJA
+						</div>
+						<div class="blockquote-footer text-right remark_author_div">王王王</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -626,22 +638,22 @@
 			}
 			
 			.left_msg_area_div {
-				width: 55%;
+				width: 65%;
 				margin-right: 5%;
 				display: inline-block;
 			}
-			
-			.right_picture_info_area_div {
-				width: 40%;
-				float: right;
-			}
+
 			
 			.msg_row_div .alert {
-				width: calc(100% - 6em);
+				width: calc(70% - 6em);
 				display: inline-block;
 				padding-bottom: 2em;
 				margin: 1em 0em 1em 6em;
 				word-break: break-all;
+			}
+			
+			.msg_row_div.right .alert {
+				margin: 1em 6em 1em 30%;
 			}
 			
 			.sender_img_div {
@@ -663,6 +675,10 @@
 				position: absolute;
 				top: 50%;
 				transform: translateY(-50%);
+			}
+			
+			.right .sender_img_div {
+				right: 0em;
 			}
 			
 			.five_msg {
@@ -695,7 +711,7 @@
 				border-color: #d6d8d9;
 			}
 			
-			.left_caret {
+			.msg_caret {
 				position: absolute;
 				right: 100%;
 				top: 50%;
@@ -707,6 +723,12 @@
 				border-right-color: inherit;
 			}
 			
+			.right .msg_caret {
+				border-left-color: inherit;
+				border-right-color: transparent;
+				left: 100%;
+			}
+			
 			.msg_value_span {
 				font-size: 90%;
 			}
@@ -716,43 +738,40 @@
 			<div class="left_msg_area_div">
 				<div class="msg_row_div">
 					<div class="sender_img_div">
-						<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						<img src="../static/img/萨尔茨卡默古特地区_13.jpg" />
 					</div>
 					<div class="alert four_msg">
-						<div class="left_caret">
-
-						</div>
-						<div class="sender_name"><strong>王王王：</strong></div>
+						<div class="msg_caret"></div>
 						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
 						<div class="date_value">
-							发表于 2018-04-23 09:07:49
+							 2018-04-23 09:07:49
 						</div>
 						<div class="comment_value">
 							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
+							</i><i class="fa fa-star-o fa_isselect" aria-hidden="true" data-point="4">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
 						</div>
 					</div>
 				</div>
-				<div class="msg_row_div">
+				<div class="msg_row_div right">
 					<div class="sender_img_div">
-						<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						<img src="../static/img/萨尔茨卡默古特地区_12.jpg" />
 					</div>
 					<div class="alert three_msg">
-						<div class="left_caret">
+						<div class="msg_caret">
 
 						</div>
-						<div class="sender_name"><strong>王王王：</strong></div>
+
 						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
 						<div class="date_value">
-							发表于 2018-04-23 09:07:49
+							 2018-04-23 09:07:49
 						</div>
 						<div class="comment_value">
 							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
+							</i><i class="fa fa-star-o fa_isselect" aria-hidden="true" data-point="3">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
 						</div>
@@ -760,85 +779,58 @@
 				</div>
 				<div class="msg_row_div">
 					<div class="sender_img_div">
-						<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						<img src="../static/img/萨尔茨卡默古特地区_11.jpg" />
 					</div>
 					<div class="alert two_msg">
-						<div class="left_caret">
+						<div class="msg_caret">
 
 						</div>
-						<div class="sender_name"><strong>王王王：</strong></div>
 						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
 						<div class="date_value">
-							发表于 2018-04-23 09:07:49
+							 2018-04-23 09:07:49
 						</div>
 						<div class="comment_value">
 							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
+							</i><i class="fa fa-star-o fa_isselect" aria-hidden="true" data-point="2">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
 						</div>
 					</div>
 				</div>
-				<div class="msg_row_div">
+				<div class="msg_row_div right">
 					<div class="sender_img_div">
-						<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						<img src="../static/img/萨尔茨卡默古特地区_10.jpg" />
 					</div>
 
 					<div class="alert one_msg">
-						<div class="left_caret">
+						<div class="msg_caret">
 
 						</div>
-						<div class="sender_name"><strong>王王王：</strong></div>
+
 						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
 						<div class="date_value">
-							发表于 2018-04-23 09:07:49
+							 2018-04-23 09:07:49
 						</div>
 						<div class="comment_value">
 							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
+							</i><i class="fa fa-star-o fa_isselect" aria-hidden="true" data-point="1"></i>
 						</div>
 					</div>
 				</div>
-				<!--<div class="alert alert-info">
-					<strong>信息!</strong> 你应该认真阅读
-					<a href="#" class="alert-link">这条信息</a>。
-				</div>
-				<div class="alert alert-warning">
-					<strong>警告!</strong> 你应该认真阅读
-					<a href="#" class="alert-link">这条信息</a>。
-				</div>
-				<div class="alert alert-danger">
-					<strong>错误!</strong> 你应该认真阅读
-					<a href="#" class="alert-link">这条信息</a>。
-				</div>
-				<div class="alert alert-primary">
-					<strong>首选!</strong> 你应该认真阅读
-					<a href="#" class="alert-link">这条信息</a>。
-				</div>
-				<div class="alert alert-secondary">
-					<strong>次要的!</strong> 你应该认真阅读
-					<a href="#" class="alert-link">这条信息</a>。
-				</div>
-				<div class="alert alert-dark">
-					<strong>深灰色!</strong>你应该认真阅读
-					<a href="#" class="alert-link">这条信息</a>。
-				</div>
-				<div class="alert alert-light">
-					<strong>灰色!</strong> 你应该认真阅读
-					<a href="#" class="alert-link">这条信息</a>。
-				</div>-->
 			</div>
 
 			<style type="text/css">
 				.right_picture_info_area_div {
-					padding: 1em;
+					padding: 1em;			
+					width: 30%;
+					float: right;
 				}
 				
-				.right_picture_info_area_div .info_head_div {
+				/* .right_picture_info_area_div .info_head_div {
 					width: calc(100% - 4em);
 					border-top: 1px solid;
 					float: right;
@@ -854,12 +846,118 @@
 				
 				.info_title_span {
 					word-break: break-word;
-				}
+				} */
+				.picture_info_area_div {
+				/* width: 100%; */
+				margin:1em 0;
+				border: 1px solid #333333;
+				padding: 0em 1em 4em 1em;
+				position: relative;
+				background: #fff;
+			}
+			
+			.info_head_div {
+				position: relative;
+				height: 4.5em;
+				padding-top: 0.5em;
+				padding-bottom: 3em;
+				border-bottom: 2px dashed black;
+			}
+			
+			.head_caret_div {
+				position: absolute;
+				width: 1em;
+				height: 1em;
+				border-radius: 1em;
+				background: url(../static/img/bg.png);
+				border: 1px solid #333;
+				display: inline-block;
+				top: 0.5em;
+			}
+			
+			.head_caret_div.left {
+				left: 30%;
+			}
+			
+			.head_caret_div.right {
+				right: 30%;
+			}
+			
+			.info_row_div {
+				padding-bottom: 0.2em;
+				border-bottom: 2px dashed black;
+				padding-top: 1em;
+			}
+			
+			.info_row_value {
+				padding: 0em 1em;
+			}
+			
+			.info_footer_div {
+				position: absolute;
+				bottom: 0em;
+				width: 100%;
+				left: 0em;
+			}
+			
+			.footer_caret_div {
+				width: 1.5em;
+				height: 1.5em;
+				position: absolute;
+				right: -1px;
+				bottom: -1px;
+			}
+			
+			.footer_caret_div:after {
+				content: "";
+				position: absolute;
+				border: 1.5em solid transparent;
+				border-left-color: #333;
+				border-top-color: #333;
+				position: absolute;
+				margin-top: -1.5em;
+				margin-left: -1.5em;
+			}
+			
+			.footer_caret_div:before {
+				content: "";
+				position: absolute;
+				background: url(../static/img/bg.png);
+				width: 3em;
+				height: 3em;
+				margin-top: -1.5em;
+				margin-left: -1.5em;
+			}
+				
+				
+				
 			</style>
 			<div class="right_picture_info_area_div">
-				<div class="info_head_div">
+				<!-- <div class="info_head_div">
 					<span class="fa fa-info fa-3x"></span>
-				</div>
+				</div> -->
+				
+				<div class="picture_info_area_div">
+			<div class="info_head_div">
+				<div class="head_caret_div left"></div>
+				<div class="head_caret_div right"></div>
+			</div>
+			<div class="info_row_div">
+				<span class="info_row_value">作者： 阿萨德</span>
+			</div>
+			<div class="info_row_div">
+				<span class="info_row_value">上传时间：2018-05-04 11:25:32</span>
+			</div>
+			<div class="info_row_div">
+				<span class="info_row_value">点击量：231</span>
+			</div>
+			<div class="info_row_div">
+				<span class="info_row_value">收藏量：23</span>
+			</div>
+			<div class="info_footer_div">
+				<div class="footer_caret_div"></div>
+			</div>
+		</div>
 			</div>
 		</div>
 
@@ -883,7 +981,7 @@
 								<div class="cell_value">
 									阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧
 									<div class="date_value">
-										发表于 2018-04-23 09:07:49
+										2018年5月4日 10:17:29
 									</div>
 									<div class="comment_value">
 										<i class="fa fa-star-o " aria-hidden="true" data-point="5">
@@ -1000,6 +1098,12 @@
 			/*	$(".picture_container div").first().find("img").animate({"opacity":"0"},1000);*/
 
 		})
+		/*geiHeight();
+		 function geiHeight(){
+			console.log($(".picture_remark_area_div").get(0).offsetHeight);
+			console.log($(".remark_value").get(0).offsetHeight);
+			console.log($(".picture_info_area_div").get(0).offsetHeight)
+		} */
 
 		function areaShow($this, areaname, direction) {
 			var data = {};
@@ -1031,41 +1135,41 @@
 			editor.document.contentEditable = true;
 			return ele;
 		}*/
-		
+
 		function maxPictureModel() {
 			$(".tool_tag_div").addClass("loading");
 			$(".picture_div").animate({
 				width: "100%"
-			}, 2000,function(){
+			}, 2000, function() {
 				$(".tool_tag_div").removeClass("loading");
 			})
-			$(".picture_remark_div").animate({
+			$(".picture_remark_area_div").animate({
 				opacity: 0
 			}, 1000, function() {
-				$(".picture_remark_div").removeClass("right_area");
-				$(".picture_remark_div").animate({
+				$(".picture_remark_area_div").removeClass("right_area");
+				$(".picture_remark_area_div").animate({
 					opacity: 1
 				}, 1000)
 			})
 		}
 
 		function minPictureModel() {
-			var $tool=$(".tool_tag_div");
-			var $remark=$(".picture_remark_div");
+			var $tool = $(".tool_tag_div");
+			var $remark = $(".picture_remark_area_div");
 			$tool.addClass("loading");
 			$(".picture_div").animate({
 				width: "70%"
-			}, 2000,function(){
+			}, 2000, function() {
 				$tool.removeClass("loading");
 			})
 			$remark.animate({
 				opacity: 0
-			}, 1000,function(){
+			}, 1000, function() {
 				$remark.addClass("right_area");
-				$remark.css("right","-26%");
+				$remark.css("right", "-30%");
 				$remark.animate({
 					opacity: 1,
-					right:"0%"
+					right: "0%"
 				}, 1000)
 			})
 		}
