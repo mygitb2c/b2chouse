@@ -105,5 +105,12 @@ public class PictureDaoTest {
 		String name=pm.getPictureName("246D9F870CD24994ABE88E6C9B2C91B9");
 		System.out.println(name);
 	}
+	@Test
+	public void getTotal() {
+		SearchForm sf=new SearchForm();
+		sf.setKey("王");
+		int n=pm.getTotal(sf);
+		System.out.println(n);
+	}
 
 }

@@ -156,21 +156,18 @@
 				left: 0px;
 				top: 0px;
 			}
-			/*一个内容层*/
-			
 			.waterfall_col_div{
 				width: 25%;
 				float: left;
-				
 			}
 			.card_div {
 				/* border-radius: 0.5em; */
-				padding: 1em;
-				margin: 0 0.25em 0.5em 0;
 				/*防止子元素被切割*/
 				/* -moz-page-break-inside: avoid;
 				-webkit-column-break-inside: avoid;
 				page-break-inside: avoid; */
+				padding: 1em;
+				margin: 0 0.25em 0.5em 0;
 				border: 1px solid rgb(230, 230, 230);
 				background: #fff;
 				text-align: center;
@@ -182,7 +179,7 @@
 			
 			.card_div:hover {
 				border-color: rgb(213, 233, 161);
-				opacity: 0.8;
+				opacity: 0.9;
 				/* 	-webkit-filter: brightness(120%); 
    				filter: brightness(120%); */
 			}
@@ -859,7 +856,7 @@
 				bottom:"1em"
 			},1000)
 		}
-		
+		/*排序按钮动画，同时进行数据获取  */
 		function orderAnimate($el,value) {
 			//获取到点击按钮的父类按钮块
 			var $parent = $el.parent();

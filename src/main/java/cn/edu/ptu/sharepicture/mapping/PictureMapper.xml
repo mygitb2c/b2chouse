@@ -41,8 +41,8 @@
 	</select>
 	<select id="getTotal" resultType="Integer">
 		<bind name="key" value="'%'+key+'%'" />
-		SELECT COUNT(1) FROM pictures
-		WHERE pictureTitle LIKE #{key} AND pictures.isLock ="N"
+		SELECT COUNT(1) FROM pictures RIGHT JOIN user ON pictures.userId=user.userId
+		WHERE pictureTitle LIKE #{key} OR userName LIKE #{key}  AND pictures.isLock ="N"
 	</select>
 
 	<insert id="insertPicture">

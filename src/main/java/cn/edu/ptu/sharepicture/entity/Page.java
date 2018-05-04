@@ -25,7 +25,7 @@ public class Page {
 
 	public void setTotal(int total) {
 		this.total = total;
-		getTotalPage();
+		/*getTotalPage();*/
 	}
 
 	public int getTotalPage() {
