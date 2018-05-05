@@ -22,6 +22,7 @@
 			body {
 				background: rgb(240, 240, 240) url(../static/img/bg.png);
 				overflow-x: hidden;
+				padding-bottom: 5em;
 			}
 			
 			.drak {
@@ -113,22 +114,27 @@
 			}
 			
 			.edit_power_off_div {
-				padding: 0.5em;
+				padding: 0.2em;
 			}
 			
 			.edit_power_off_span {
 				cursor: pointer;
 				padding: 0.2em;
 			}
-			
-			#msg_edit_content_div {
-				height: 12em;
+			#msg_edit_content_area_div{
 				border-top: 1px solid rgb(230, 230, 230);
-				border-bottom: 1px solid rgb(230, 230, 230);
-				/* border-radius: 0.25em 0.25em 0.25em 0.25em; */
-				outline: none;
-				padding: 0.6em 0.5em;
-				color: #32383E;
+    			border-bottom: 1px solid rgb(230, 230, 230);
+    			height: 8em;
+    			padding: 0.1em 0.5em;
+			}
+			#msg_edit_content_div {
+				height: 100%;
+   		 		width: 100%;
+    			border: none;
+    			outline: none;
+    			padding: 0.75rem 1.25rem 2rem 0.75rem;
+    			color: #32383E;
+    			border-radius: 0.25em;
 			}
 			
 			.edit_btn_list_div .edit_btn_span button {
@@ -143,9 +149,12 @@
 				display: inline-block;
 				width: 1em;
 				height: 1em;
-				border-radius: 0.25em;
+				border-radius: 1em;
 				border: 1px solid #CCC;
 				margin: 0em 0.5em;
+			}
+			#backgroundboard+.colorPicker-picker{
+				width: 2em;
 			}
 			
 			.star_btn_div,
@@ -338,15 +347,15 @@
 			.msg_edit_area_div {
 				position: fixed;
 				bottom: 1em;
-				right: -45%;
-				width: 45%;
+				right: -40%;
+				width: 40%;
 				padding: 0em 0.5em;
 				z-index: 1;
 			}
 			
-			.msg_edit_div:hover {
+			/* .msg_edit_div:hover {
 				opacity: 1;
-			}
+			} */
 			
 			.msg_edit_div {
 				width: 100%;
@@ -354,7 +363,7 @@
 				border: 1px solid #333333;
 				background: rgb(255, 255, 255);
 				border-radius: 0.25em 0.25em 0.25em 0.25em;
-				opacity: 0.1;
+				opacity: 1;
 			}
 			
 			.edit_menu_div {
@@ -437,6 +446,31 @@
 				background: #fff;
 				border-radius: 2px;
 			}
+			.reload_div {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				position: fixed;
+				display: none;
+				z-index: 3;
+				cursor: wait;
+			}
+			.reload_div.active {
+	display: block;
+}
+
+.reload_content_div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 8em;
+	height: 6em;
+	background: #fff;
+	border-radius: 0.25em;
+	line-height: 6em;
+	text-align: center;
+}
 			
 			.picture_container .picture_div {
 				width: 70%;
@@ -532,12 +566,19 @@
 			.picture_title_div>.fa {
 				padding: 0em 0.3em;
 			}
+			
 		</style>
 	</head>
 
 	<body class="">
 		<div class="source_picture_div">
 			<img class="source_picture" />
+		</div>
+		<div class="reload_div">
+			<div class="reload_content_div">
+				<span class="fa fa-spinner fa-pulse"></span>
+				<span class="reload_msg_span">加载中...</span>
+			</div>
 		</div>
 		<div class="msg_edit_area_div">
 			<div class="edit_area_power_div">
@@ -546,32 +587,33 @@
 			<div class="msg_edit_div">
 				<div class="edit_menu_div fa-lg">
 					<div class="edit_btn_list_div">
-						<div class="edit_btn_div">
+						<!-- <div class="edit_btn_div">
 							<span class="edit_btn_span ">
-						<button class="fa fa-font" aria-hidden="true" data-exetype=""></button>
-					</span>
+								<button class="fa fa-font" aria-hidden="true" data-exetype=""></button>
+							</span>
+						</div> -->
+						<div class="edit_btn_div">
+							<span class="edit_btn_span">
+								<button class="fa fa-bold" aria-hidden="true" data-exetype="bold"></button>
+							</span>
 						</div>
 						<div class="edit_btn_div">
 							<span class="edit_btn_span">
-						<button class="fa fa-bold" aria-hidden="true" data-exetype="bold"></button>
-					</span>
+								<button class="fa fa-underline" aria-hidden="true" data-exetype="underline"></button>
+							</span>
 						</div>
 						<div class="edit_btn_div">
 							<span class="edit_btn_span">
-						<button class="fa fa-underline" aria-hidden="true" data-exetype="underline"></button>
-					</span>
+								<button class="fa fa-italic" aria-hidden="true" data-exetype="italic"></button>
+							</span>
 						</div>
 						<div class="edit_btn_div">
 							<span class="edit_btn_span">
-						<button class="fa fa-italic" aria-hidden="true" data-exetype="italic"></button>
-					</span>
-						</div>
-						<div class="edit_btn_div">
-							<span class="edit_btn_span">
-						<button class="fa fa-pencil-square" aria-hidden="true"></button>
+						<button class="fa fa-smile-o" aria-hidden="true"></button>
 						</span>
 						</div>
 						<input id="colorboard" value="#212529" />
+						<input id="backgroundboard" value="#FFFFFF" />
 					</div>
 					<div class="comment_list_div">
 						<div class="star_btn_div">
@@ -591,8 +633,10 @@
 					</div>
 					<div class="clearfix"></div>
 				</div>
-				<div id="msg_edit_content_div" contenteditable="true">
-
+				<div id="msg_edit_content_area_div">
+					<iframe id="msg_edit_content_div" contenteditable="true" data-bgc="">
+				
+					</iframe>
 				</div>
 				<div class="send_btn_div">
 					<span class="send_btn_span">
@@ -630,7 +674,7 @@
 						<div class="remark_value_div">
 							爱是打算粉红色花费时间的话,打扫房间啊第三方哈斯东方航,空电视机法的速度回复UIEHSDJA
 						</div>
-						<div class="blockquote-footer text-right remark_author_div">王王王</div>
+						<div class="blockquote-footer text-right remark_author_div">${authorName}</div>
 					</div>
 				</div>
 			</div>
@@ -738,14 +782,51 @@
 			.msg_value_span {
 				font-size: 90%;
 			}
+			.msg_footer_div {
+				text-align: center;
+				height: 3em;
+				line-height: 3em;
+				margin-top: 4em;
+			}
+			
+			.page_span {
+				padding: 0.5em 1em;
+				border: 1px solid #ddd;
+				color: #007bff;
+				background: #fff;
+				cursor: default;
+			}
+			
+			.page_btn_span {
+				cursor: pointer;
+			}
+			
+			.page_btn_span:hover {
+				background: rgb(245, 245, 245);
+			}
+			
+			.page_btn_span.active {
+				background: #6699CC;
+				color: #FFFFFF;
+			}
+			
+			.page_up_span {
+				margin-right: -1px;
+				border-radius: 0.25em 0em 0em 0.25em;
+			}
+			
+			.page_down_span {
+				margin-left: -1px;
+				border-radius: 0em 0.25em 0.25em 0em;
+			}
 		</style>
 
 		<div class="info_area_div">
 			<div class="left_msg_area_div">
+				<div class="msg_show_panel">
 				<div class="msg_row_div">
 					<div class="sender_img_div">
 						<img src="../static/img/萨尔茨卡默古特地区_13.jpg" />
-						<div>王王王</div>
 					</div>
 					<div class="alert four_msg">
 						<div class="msg_caret"></div>
@@ -827,6 +908,18 @@
 							</i><i class="fa fa-star-o fa_isselect" aria-hidden="true" data-point="1"></i>
 						</div>
 					</div>
+				</div>
+				</div>
+				<div class="msg_footer_div">
+					<span class="page_span page_btn_span page_up_span">
+					上一页
+					</span>
+					<span class="page_span  page_info_span">
+						3/5
+					</span>
+					<span class="page_span page_btn_span page_down_span">
+						下一页
+					</span>
 				</div>
 			</div>
 
@@ -936,8 +1029,6 @@
 				margin-left: -1.5em;
 			}
 				
-				
-				
 			</style>
 			<div class="right_picture_info_area_div">
 				<!-- <div class="info_head_div">
@@ -947,16 +1038,17 @@
 				<div class="picture_info_area_div">
 			<div class="info_head_div">
 				<div class="head_caret_div left"></div>
+			
 				<div class="head_caret_div right"></div>
 			</div>
 			<div class="info_row_div">
-				<span class="info_row_value">作者： 阿萨德</span>
+				<span class="info_row_value">作者： ${authorName}</span>
 			</div>
 			<div class="info_row_div">
-				<span class="info_row_value">上传时间：2018-05-04 11:25:32</span>
+				<span class="info_row_value">上传时间：${picture.createTime}</span>
 			</div>
 			<div class="info_row_div">
-				<span class="info_row_value">点击量：231</span>
+				<span class="info_row_value">点击量：${picture.clickCount}</span>
 			</div>
 			<div class="info_row_div">
 				<span class="info_row_value">收藏量：23</span>
@@ -1029,6 +1121,7 @@
 
 	<script type="text/javascript">
 		$(function() {
+			
 			/*var  editor=iniEdit();*/
 			$(".edit_btn_span i.fa").click(function() {
 				if($(this).hasClass("fa_isselect")) {
@@ -1038,21 +1131,29 @@
 					$(this).addClass("fa_isselect");
 				}
 			})
-			$(".edit_btn_span button:not('.fa-pencil-square')").click(function() {
+			$(".edit_btn_span button:not('.fa-smile-o')").click(function() {
 				$(this).parent().parent().toggleClass("active");
 				fontStyle($(this).attr("data-exetype"));
 			})
 
-			$(".edit_btn_span button.fa-pencil-square").click(function() {
+			/* $(".edit_btn_span button.fa-pencil-square").click(function() {
 				var val = $(this).attr("data-exevalue");
 				$(this).css("color", val);
 				color(val);
-			})
-			$("#colorboard").colorPicker({
+			}) */
+			 $("#colorboard").colorPicker({
 				onColorChange: function(id, newValue) {
 					$(".edit_btn_span .fa-pencil-square").attr("data-exevalue", newValue);
+					color(newValue);
 				}
 			});
+			$("#backgroundboard").colorPicker({
+				onColorChange: function(id, newValue) {
+					$el=$("#msg_edit_content_div");
+					$el.css("background",newValue);
+					$el.attr("data-bgc",newValue);
+				}
+			}); 
 
 			$(".fa-angle-down").click(function() {
 				var num = Math.random() * 5 + 1;
@@ -1066,20 +1167,24 @@
 			})
 
 			$(document).on("click", ".edit_area_power_div", (function() {
-				areaShow($(this), ".msg_edit_area_div", "right");
-				$("#msg_edit_content_div").focus();
+				if("${userId}"){
+				areaShow(".msg_edit_area_div", "right");
+				}else{
+					alert("请先登录")
+				}
+				/* $("#msg_edit_content_div").focus(); */
 			}))
 
 			$(document).on("click", ".edit_power_off_span", (function() {
-				areaClose($(this), ".msg_edit_area_div", "right", "45%")
+				areaClose(".msg_edit_area_div", "right", "40%")
 			}))
 
 			$(document).on("click", ".msg_panel_area_div:not('.active') .msg_area_power_div", (function() {
-				areaShow($(this), ".msg_panel_area_div", "left");
+				areaShow(".msg_panel_area_div", "left");
 			}))
 
 			$(document).on("click", ".msg_panel_area_div.active .msg_area_power_off_div", (function() {
-				areaClose($(this), ".msg_panel_area_div", "left", "50%")
+				areaClose(".msg_panel_area_div", "left", "50%")
 			}))
 
 			$(document).on("click", ".tool_tag_div:not('.loading') span", function() {
@@ -1094,6 +1199,10 @@
 			$(".picture_div img").on("load",function(){
 				var $parent=$(this).parent();
 				console.log("pw:"+$parent.get(0).offsetWidth+",thisw"+$(this).get(0).offsetWidth);
+			})
+			$(document).on("click",".send_btn_span:not('.loading')",function(){
+				$(this).addClass("loading");
+				
 			})
 
 			/*$(document).on("click",".page_btn_div.down_page_div:not('.disabled')",function() {
@@ -1110,6 +1219,18 @@
 			/*	$(".picture_container div").first().find("img").animate({"opacity":"0"},1000);*/
 
 		})
+		var editor,doc;
+		ini();
+		function ini(){
+			 /*travelpostcontent*/
+			editor = document.getElementById("msg_edit_content_div").contentWindow; //获取iframe Window 对象
+			doc = document.getElementById("msg_edit_content_div").contentDocument; //获取iframe documen 对象
+			/*butGroup = document.getElementById('butGroup');*/
+			editor.document.designMode = 'On';
+			editor.document.contentEditable = true;
+			
+		}
+		
 		/*geiHeight();
 		 function geiHeight(){
 			console.log($(".picture_remark_area_div").get(0).offsetHeight);
@@ -1117,7 +1238,7 @@
 			console.log($(".picture_info_area_div").get(0).offsetHeight)
 		} */
 
-		function areaShow($this, areaname, direction) {
+		function areaShow( areaname, direction) {
 			var data = {};
 			data[direction] = "0em";
 			$(areaname).animate(data, 1000, function() {
@@ -1125,7 +1246,7 @@
 			})
 		}
 
-		function areaClose($this, areaname, direction, width) {
+		function areaClose(areaname, direction, width) {
 			var data = {};
 			data[direction] = "-" + width;
 			$(areaname).animate(data, 1000, function() {
@@ -1134,11 +1255,11 @@
 		}
 
 		function fontStyle(style, val) {
-			document.execCommand(style, false, null);
+			editor.document.execCommand(style, false, null);
 		}
 
 		function color(val) {
-			document.execCommand("foreColor", false, val);
+			editor.document.execCommand("foreColor", false, val);
 		}
 		/*function iniEdit(){
 			var ele=document.getElementById("msg_edit_content_div");
