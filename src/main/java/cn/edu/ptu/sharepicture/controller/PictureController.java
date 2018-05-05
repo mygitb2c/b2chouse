@@ -60,8 +60,8 @@ public class PictureController {
 		modelAndView.setViewName("picture");
 		User u = ps.getPictureById(pictureId);
 		modelAndView.addObject("picture", u.getPictures().get(0));
-		modelAndView.addObject("userId", u.getUserId());
-		modelAndView.addObject("userName", u.getUserName());
+		modelAndView.addObject("authorId", u.getUserId());
+		modelAndView.addObject("authorName", u.getUserName());
 		return modelAndView;
 	}
 

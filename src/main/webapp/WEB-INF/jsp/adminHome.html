@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>管理中心</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+		<script src="js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/popper.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body {
+				background: #F5F5F5;
+			}
+			
+			.mycontainer {
+				width: calc(100% - 11em);
+				position: relative;
+				margin-right: 11em;
+			}
+			
+			#max_win_div {
+				width: calc(100% - 9em);
+				/*margin-left: 9em;*/
+				display: inline-block;
+				position: static;
+				padding: 0.2em;
+				background: #33414e;
+				border-radius: 0.3em;
+				border: 1px solid #CCCCCC;
+				margin-top: 1em;
+				display: none;
+			}
+			
+			#max_win_div.show {
+				display: inline-block;
+			}
+			/*图标样式*/
+			
+			.icons_area_div {
+				width: 7em;
+				padding-top: 3em;
+				display: inline-block;
+			}
+			
+			.area_col_div {
+				display: inline-block;
+			}
+			
+			.icon_div {
+				text-align: center;
+				padding: 0.3em;
+				border: 1px solid transparent;
+				cursor: pointer;
+				border-radius: 0.25em;
+				margin: 0.5em 0em;
+			}
+			
+			.icon_div:hover {
+				border: 1px solid rgb(177, 206, 241);
+				opacity: 0.95;
+			}
+			
+			.icon_div:active {
+				background: rgba(212, 227, 244, 0.9);
+			}
+			
+			.icon_footer_div {
+				margin: 0.2em 0em;
+				font-size: 0.95rem;
+			}
+			/*图标样式*/
+			/*窗口样式*/
+			
+			.win_div {
+				width: 45%;
+				padding: 0.2em;
+				background: #76828e;
+				border-radius: 0.3em;
+				border: 1px solid #CCCCCC;
+				position: absolute;
+				left: calc(27.5% + 5.5em);
+				top: 3em;
+				overflow: hidden;
+				display: none;
+			}
+			
+			.win_div.show {
+				display: block;
+			}
+			
+			.win_div.max_model {
+				display: none !important;
+			}
+			
+			.win_div.min {
+				position: fixed !important;
+				left: calc(100% - 11em) !important;
+			}
+			
+			.win_div.mining {
+				height: 3em !important;
+			}
+			
+			.win_div.active {
+				background: #33414e;
+				z-index: 1;
+			}
+			
+			.win_head_div {
+				background: inherit;
+				padding: 0.3em 0.3em 1.5em 0.3em;
+				color: #fff;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+			}
+			
+			.win_name_div {
+				float: left;
+				-webkit-line-clamp: 1;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				width: 80%;
+			}
+			
+			.mining .win_tool_menu_div,
+			.mining .win_body_div,
+			.min .win_tool_menu_div,
+			.maxing .win_tool_menu_div {
+				display: none;
+			}
+			
+			.win_tool_menu_div {
+				float: right;
+				font-size: 1rem;
+			}
+			
+			.win_tool_menu_div>span.fa {
+				margin: 0em 0.3em;
+				padding: 0.2em;
+				cursor: pointer;
+			}
+			
+			.win_tool_menu_div>span.fa:active {
+				background: #fff;
+				color: #32383E;
+				border-radius: 0.25em;
+			}
+			
+			.win_body_div {
+				height: 500px;
+				background: #fff;
+				overflow-y: auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mycontainer">
+			<div class="icons_area_div" align="center">
+				<div class="area_col_div">
+					<div class="icon_div" title="用户中心" data-key="#usercenter">
+						<div class="icon_body_div">
+							<span class="fa fa-address-book-o fa-3x"></span>
+						</div>
+						<div class="icon_footer_div">
+							用户中心
+						</div>
+					</div>
+					<div class="icon_div" title="图片中心" data-key="#picturecenter">
+						<div class="icon_body_div">
+							<span class="fa fa fa-picture-o fa-3x"></span>
+						</div>
+						<div class="icon_footer_div">
+							图片中心
+						</div>
+					</div>
+					<div class="icon_div" title="留言中心" data-key="#messagecenter">
+						<div class="icon_body_div">
+							<span class="fa fa fa-comments fa-3x"></span>
+						</div>
+						<div class="icon_footer_div">
+							留言中心
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="max_win_div" class="pull-right">
+				<div class="win_head_div">
+					<div class="win_name_div">
+						超级窗口
+					</div>
+					<div class="win_tool_menu_div">
+						<span class="fa fa-window-close" aria-hidden="true"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="win_body_div">
+
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="win_div show" id="usercenter_win">
+				<div class="win_head_div">
+					<div class="win_name_div">
+						用户管理中心
+					</div>
+					<div class="win_tool_menu_div">
+						<span class="fa fa-window-minimize" aria-hidden="true"></span>
+						<span class="fa fa-window-maximize" aria-hidden="true"></span>
+						<span class="fa fa-window-close" aria-hidden="true"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="win_body_div">
+					
+				</div>
+			</div>
+
+			<div class="win_div" id="picturecenter_win">
+				<div class="win_head_div">
+					<div class="win_name_div">
+						图片管理中心
+					</div>
+					<div class="win_tool_menu_div">
+						<span class="fa fa-window-minimize" aria-hidden="true"></span>
+						<span class="fa fa-window-maximize" aria-hidden="true"></span>
+						<span class="fa fa-window-close" aria-hidden="true"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="win_body_div">
+
+				</div>
+			</div>
+			<div class="win_div" id="messagecenter_win">
+				<div class="win_head_div">
+					<div class="win_name_div">
+						留言管理中心
+					</div>
+					<div class="win_tool_menu_div">
+						<span class="fa fa-window-minimize" aria-hidden="true"></span>
+						<span class="fa fa-window-maximize" aria-hidden="true"></span>
+						<span class="fa fa-window-close" aria-hidden="true"></span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="win_body_div">
+
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+
+			var left, top;
+			$(document).on("mousedown", ".win_div:not('.mining,.min') .win_head_div", function(e) {
+				$(".win_div").removeClass("active");
+				$(this).parents(".win_div").addClass("moving active");
+				$("body").addClass("movemodel");
+				left = e.pageX - $(this).offset().left;
+				top = e.pageY - $(this).offset().top;
+			})
+			$(document).on("mousemove", "body.movemodel", function(e) {
+				var x = e.pageX - left;
+				var y = e.pageY - top;
+				$(".moving").css({
+					"left": x,
+					"top": y
+				});
+			})
+			$(document).on("mouseup", ".moving,.movemodel", function() {
+				$(this).removeClass("moving movemodel");
+			})
+			$(document).on("click", ".win_div:not('.min')", function() {
+				$(".win_div").removeClass("active");
+				$(this).addClass("active");
+			})
+			/*还原窗口*/
+			$(document).on("click", ".win_div.min", function() {
+				$(".win_div").removeClass("active");
+				$(this).addClass("active maxing");
+				$(this).removeClass("min");
+				var min_top = $(this).position().top;
+				var point = eval("(" + $(this).attr("data-point") + ")");
+				$(this).animate(point, 500, function() {
+					$(this).removeClass("maxing");
+				})
+				var $minel = $(".win_div.min");
+				for(var i = 0; i < $minel.length; i++) {
+					var $el = $minel.eq(i);
+					if($el.position().top > min_top) {
+						$el.animate({
+							"top": "-=3.5em"
+						}, 200)
+					}
+				}
+
+			})
+			/*窗口缩小*/
+			$(".win_div .win_tool_menu_div .fa-window-minimize").click(function() {
+				var $win = $(this).parents(".win_div");
+				var point = "{'left':'" + $win.css("left") + "','top':'" + $win.css("top") + "','width':'" + $win.css("width") + "','height':'" + $win.css("height") + "'}";
+				var y = ($(".win_div.min,.win_div.mining").length * 3.5 + 5) + "em";
+				$win.attr({
+					"data-point": point
+				});
+				$win.addClass("mining");
+				$win.animate({
+					"width": "10em",
+					"left": "100%",
+					"height": "3em",
+					"top": y
+				}, 500, function() {
+					$win.addClass("min");
+					$win.removeClass("active mining");
+				})
+			})
+			/*点击应用图标*/
+			$(".icon_div").click(function() {
+				var name = $(this).attr("data-key") + "_win";
+				$(name).addClass("show");
+				$(name).click();
+			})
+			/*关闭窗口*/
+			$(".win_div .fa-window-close").click(function() {
+				$win = $(this).parents(".win_div");
+				$win.removeClass("show");
+				/*$win.removeAttr("style");*/
+			})
+			/*关闭超级窗口*/
+			$("#max_win_div .fa-window-close").click(function() {
+				$max_win = $("#max_win_div");
+				$max_win.removeClass("show");
+				$(".win_div.max_model").removeClass("max_model");
+			})
+			$(".win_div .fa-window-maximize").click(function() {
+				$win = $(this).parents(".win_div")
+				$(".win_div.max_model").removeClass("max_model");
+				$win.addClass("max_model");
+				var html = $win.children(".win_body").html();
+				var name = $win.find(".win_name_div").text();
+				$max_win = $("#max_win_div");
+				$max_win.html(html);
+				$max_win.find(".win_name_div").text(name);
+				$max_win.addClass("show");
+
+			})
+		})
+	</script>
+
+</html>

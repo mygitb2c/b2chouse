@@ -231,12 +231,14 @@
 				33%{top:-5em;}
 				to{top:-5em;}
 			}
-			
+			.register_area{
+				display: none;
+			}
 		</style>
 	</head>
 
 	<body>
-		<div class="area_div register_area ">
+		<div id="register_area" class="area_div register_area ">
 			<div class="win_div">
 				<div class="win_head_div register_win">
 					<span class="area_title_span">
