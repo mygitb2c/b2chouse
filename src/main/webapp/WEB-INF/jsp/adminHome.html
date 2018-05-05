@@ -14,6 +14,19 @@
 				background: #F5F5F5;
 			}
 			
+			::-webkit-scrollbar {
+				width: 8px;
+			}
+			
+			::-webkit-scrollbar-thumb {
+				background-color: #c1c1c1;
+				border-radius: 4px;
+			}
+			
+			span.fa {
+				padding: 0em 0.3em;
+			}
+			
 			.mycontainer {
 				width: calc(100% - 11em);
 				position: relative;
@@ -74,16 +87,20 @@
 			/*窗口样式*/
 			
 			.win_div {
-				width: 45%;
+				width: 60%;
 				padding: 0.2em;
 				background: #76828e;
 				border-radius: 0.3em;
 				border: 1px solid #CCCCCC;
 				position: absolute;
-				left: calc(27.5% + 5.5em);
+				left: calc(2% + 5.5em);
 				top: 3em;
 				overflow: hidden;
 				display: none;
+			}
+			
+			.win_div.max {
+				width: 96%;
 			}
 			
 			.win_div.show {
@@ -97,6 +114,11 @@
 			.win_div.min {
 				position: fixed !important;
 				left: calc(100% - 11em) !important;
+				cursor: pointer;
+			}
+			
+			.win_div.min:hover {
+				background: #33414e;
 			}
 			
 			.win_div.mining {
@@ -122,7 +144,21 @@
 				text-overflow: ellipsis;
 				overflow: hidden;
 				white-space: nowrap;
-				width: 80%;
+				width: calc(100% - 7em);
+			}
+			
+			.min .win_name_div {
+				width: 100%;
+			}
+			
+			.win_div:not(.max) .fa-window-restore,
+			.win_div.max .fa-window-maximize {
+				display: none;
+			}
+			
+			.win_div:not(.max) .fa-window-maximize,
+			.win_div.max .fa-window-restore {
+				display: inline-block;
 			}
 			
 			.mining .win_tool_menu_div,
@@ -154,10 +190,172 @@
 				background: #fff;
 				overflow-y: auto;
 			}
+			
+			input[type='text'] {
+				outline: none;
+			}
+			
+			.condition_input {
+				padding: 0;
+				border: none;
+			}
+			
+			.condition_div {
+				display: inline-block;
+				padding: 0.3em 0.5em;
+				border: 1px solid #333;
+			}
+			
+			.info_condition_menu_div {
+				padding: 0.5em;
+			}
+			
+			.data_card_div {
+				position: relative;
+				display: inline-block;
+				margin: 0.5em 0em 0.5em 2em;
+				background: #E8E8FF;
+				border-radius: 0.25em;
+				padding: 1.5em 2.5em 0.5em 0em;
+				width: calc(33% - 2em);
+			}
+			
+			.user_info_div {
+				padding-left: 2.5em;
+			}
+			
+			.user_img_div {
+				position: absolute;
+				left: -2em;
+				top: calc(50% - 2em);
+			}
+			
+			.user_img_div img {
+				width: 4em;
+				height: 4em;
+				border-radius: 4em;
+				padding: 0.5em;
+				background: #fff;
+			}
+			
+			.half_circle {
+				width: 2.5em;
+				border: 2.5em solid #f5f5f5;
+				border-left: none;
+				border-radius: 0em 2.5em 2.5em 0em;
+				position: absolute;
+				top: calc(50% - 2.5em);
+				left: -1px;
+			}
+			
+			.info_row {
+				margin: 0.3em 0.2em;
+				padding-bottom: 0.3;
+			}
+			
+			.info_value_span {
+				font-size: 80%;
+			}
+			
+			.create_time_div {
+				font-size: 0.95em;
+			}
+			
+			.user_is_lock_div {
+				width: 1em;
+				height: 1em;
+				border-radius: 1em;
+				position: absolute;
+				background: rgb(73, 183, 0);
+				border: 1px solid rgb(85, 213, 0);
+				top: 0.25em;
+				left: 0.5em;
+			}
+			
+			.data_card_menu_div {
+				position: absolute;
+				height: 100%;
+				width: 2em;
+				right: 0em;
+				text-align: center;
+				top: 0;
+			}
+			
+			.show_info_btn_div {
+				position: absolute;
+				width: 100%;
+				padding: 0.3em;
+				background: #6699CC;
+				color: #fff;
+				border-radius: 0em 0.25em;
+			}
+			
+			.edit_info_btn_div {
+				position: absolute;
+				width: 100%;
+				bottom: 0em;
+				padding: 0.3em;
+				background: #6699CC;
+				color: #fff;
+				border-radius: 0.25em 0em;
+			}
+			
+			.picture_div {
+				width: 100%;
+			}
+			
+			.picture_div img {
+				max-width: 100%;
+				max-height: 15em;
+				padding-left: 2.5em;
+			}
+			
+			.model_win_area_div {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				z-index: 1;
+				background: rgba(0, 0, 0, .5);
+			}
+			
+			.model_win_div {
+				background: #fff;
+				width: 400px;
+				height: 400px;
+				border: none;
+				background: #F1FAFA;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 0.25em;
+			}
+			.model_win_head_div{
+				text-align: center;
+				padding: 0.5em 0em;
+				font-size: 1.3rem;
+				background: #defcfc;
+			}
+			.model_win_name_span{
+				
+			}
 		</style>
 	</head>
 
 	<body>
+		<div class="model_win_area_div">
+			<div class="model_win_div">
+				<div class="model_win_head_div">
+					<span class="model_win_name_span">详情页</span>
+				</div>
+				<div class="model_win_body_div">
+
+				</div>
+				<div class="model_win_footer_div">
+
+				</div>
+			</div>
+		</div>
 		<div class="mycontainer">
 			<div class="icons_area_div" align="center">
 				<div class="area_col_div">
@@ -202,47 +400,344 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div class="win_div show" id="usercenter_win">
+			<div class="win_div show max" id="usercenter_win">
 				<div class="win_head_div">
 					<div class="win_name_div">
-						用户管理中心
+						<span class="fa fa-address-book-o"></span><span class="win_name_span">用户管理中心</span>
 					</div>
 					<div class="win_tool_menu_div">
 						<span class="fa fa-window-minimize" aria-hidden="true"></span>
 						<span class="fa fa-window-maximize" aria-hidden="true"></span>
+						<span class="fa fa-window-restore" aria-hidden="true"></span>
 						<span class="fa fa-window-close" aria-hidden="true"></span>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="win_body_div">
-					
+					<div class="info_condition_menu_div">
+						<div class="condition_div">
+							<input type="text" id="user_userid_input" class="condition_input" placeholder="用户编号" />
+
+						</div>
+						<div class="condition_div">
+							<input type="text" id="user_username_input" class="condition_input" placeholder="用户名" />
+						</div>
+						<!--<div class="condition_div">
+							<input type="text" id="user_email_input" class="condition_input" placeholder="邮箱" />
+						</div>
+						<div class="condition_div">
+							<input type="text" id="user_islock_input" class="condition_input" placeholder="状态" />
+						</div>-->
+					</div>
+					<div class="data_content_div">
+						<div class="data_card_div">
+							<div class="user_img_div">
+								<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+							</div>
+							<div class="user_info_area_div">
+								<!--<div class="half_circle"></div>-->
+								<div class="user_info_div">
+									<div class="info_row user_name_div">
+										<span class="info_name_span">用户名：</span>
+										<span class="info_value_span">往往往往</span>
+									</div>
+									<div class="info_row  email_div">
+										<span class="info_name_span">邮箱：</span>
+										<span class="info_value_span">512370345@qq.com</span>
+									</div>
+									<div class="info_row create_time_div">
+										<span class="info_name_span">注册时间：</span>
+										<span class="info_value_span">2018-05-05 22:01:56</span>
+									</div>
+									<div class="user_is_lock_div">
+
+									</div>
+								</div>
+							</div>
+							<div class="data_card_menu_div">
+								<div class="show_info_btn_div">
+									<span class="fa fa-info"></span>
+								</div>
+								<div class="edit_info_btn_div">
+									<span class="fa fa-pencil"></span>
+								</div>
+							</div>
+						</div>
+						<div class="data_card_div">
+							<div class="user_img_div">
+								<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+							</div>
+							<div class="user_info_area_div">
+								<!--<div class="half_circle"></div>-->
+								<div class="user_info_div">
+									<div class="info_row user_name_div">
+										<span class="info_name_span">用户名：</span>
+										<span class="info_value_span">往往往往</span>
+									</div>
+									<div class="info_row  email_div">
+										<span class="info_name_span">邮箱：</span>
+										<span class="info_value_span">512370345@qq.com</span>
+									</div>
+									<div class="info_row create_time_div">
+										<span class="info_name_span">注册时间：</span>
+										<span class="info_value_span">2018-05-05 22:01:56</span>
+									</div>
+									<div class="user_is_lock_div">
+
+									</div>
+								</div>
+							</div>
+							<div class="data_card_menu_div">
+								<div class="show_info_btn_div">
+									<span class="fa fa-info"></span>
+								</div>
+								<div class="edit_info_btn_div">
+									<span class="fa fa-pencil"></span>
+								</div>
+							</div>
+						</div>
+						<div class="data_card_div">
+							<div class="user_img_div">
+								<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+							</div>
+							<div class="user_info_area_div">
+								<!--<div class="half_circle"></div>-->
+								<div class="user_info_div">
+									<div class="info_row user_name_div">
+										<span class="info_name_span">用户名：</span>
+										<span class="info_value_span">往往往往</span>
+									</div>
+									<div class="info_row  email_div">
+										<span class="info_name_span">邮箱：</span>
+										<span class="info_value_span">512370345@qq.com</span>
+									</div>
+									<div class="info_row create_time_div">
+										<span class="info_name_span">注册时间：</span>
+										<span class="info_value_span">2018-05-05 22:01:56</span>
+									</div>
+									<div class="user_is_lock_div" title="未锁定">
+
+									</div>
+								</div>
+							</div>
+							<div class="data_card_menu_div">
+								<div class="show_info_btn_div">
+									<span class="fa fa-info"></span>
+								</div>
+								<div class="edit_info_btn_div">
+									<span class="fa fa-pencil"></span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<div class="win_div" id="picturecenter_win">
+			<div class="win_div max" id="picturecenter_win">
 				<div class="win_head_div">
 					<div class="win_name_div">
-						图片管理中心
+						<span class="fa fa-picture-o "></span><span class="win_name_span">图片管理中心</span>
 					</div>
 					<div class="win_tool_menu_div">
 						<span class="fa fa-window-minimize" aria-hidden="true"></span>
 						<span class="fa fa-window-maximize" aria-hidden="true"></span>
+						<span class="fa fa-window-restore" aria-hidden="true"></span>
 						<span class="fa fa-window-close" aria-hidden="true"></span>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="win_body_div">
+					<div class="data_card_div">
+						<div class="user_img_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="user_info_area_div">
+							<!--<div class="half_circle"></div>-->
+							<div class="user_info_div">
+								<div class="info_row user_name_div">
+									<span class="info_name_span">标题：</span>
+									<span class="info_value_span small">as打三分大赛复赛</span>
+								</div>
+								<div class="info_row  email_div">
+									<span class="info_name_span">作者：</span>
+									<span class="info_value_span small">阿斯达</span>
+								</div>
+								<div class="info_row create_time_div">
+									<span class="info_name_span">上传时间：</span>
+									<span class="info_value_span small">2018-05-05 22:01:56</span>
+								</div>
+								<div class="user_is_lock_div" title="未锁定">
 
+								</div>
+							</div>
+						</div>
+						<div class="picture_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="data_card_menu_div">
+							<div class="show_info_btn_div">
+								<span class="fa fa-info"></span>
+							</div>
+							<div class="edit_info_btn_div">
+								<span class="fa fa-pencil"></span>
+							</div>
+						</div>
+					</div>
+					<div class="data_card_div">
+						<div class="user_img_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="user_info_area_div">
+							<!--<div class="half_circle"></div>-->
+							<div class="user_info_div">
+								<div class="info_row user_name_div">
+									<span class="info_name_span">用户名：</span>
+									<span class="info_value_span">往往往往</span>
+								</div>
+								<div class="info_row  email_div">
+									<span class="info_name_span">邮箱：</span>
+									<span class="info_value_span">512370345@qq.com</span>
+								</div>
+								<div class="info_row create_time_div">
+									<span class="info_name_span">注册时间：</span>
+									<span class="info_value_span">2018-05-05 22:01:56</span>
+								</div>
+								<div class="user_is_lock_div" title="未锁定">
+
+								</div>
+							</div>
+						</div>
+						<div class="picture_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="data_card_menu_div">
+							<div class="show_info_btn_div">
+								<span class="fa fa-info"></span>
+							</div>
+							<div class="edit_info_btn_div">
+								<span class="fa fa-pencil"></span>
+							</div>
+						</div>
+					</div>
+					<div class="data_card_div">
+						<div class="user_img_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="user_info_area_div">
+							<!--<div class="half_circle"></div>-->
+							<div class="user_info_div">
+								<div class="info_row user_name_div">
+									<span class="info_name_span">用户名：</span>
+									<span class="info_value_span">往往往往</span>
+								</div>
+								<div class="info_row  email_div">
+									<span class="info_name_span">邮箱：</span>
+									<span class="info_value_span">512370345@qq.com</span>
+								</div>
+								<div class="info_row create_time_div">
+									<span class="info_name_span">注册时间：</span>
+									<span class="info_value_span">2018-05-05 22:01:56</span>
+								</div>
+								<div class="user_is_lock_div" title="未锁定">
+
+								</div>
+							</div>
+						</div>
+						<div class="picture_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="data_card_menu_div">
+							<div class="show_info_btn_div">
+								<span class="fa fa-info"></span>
+							</div>
+							<div class="edit_info_btn_div">
+								<span class="fa fa-pencil"></span>
+							</div>
+						</div>
+					</div>
+					<div class="data_card_div">
+						<div class="user_img_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="user_info_area_div">
+							<!--<div class="half_circle"></div>-->
+							<div class="user_info_div">
+								<div class="info_row user_name_div">
+									<span class="info_name_span">用户名：</span>
+									<span class="info_value_span">往往往往</span>
+								</div>
+								<div class="info_row  email_div">
+									<span class="info_name_span">邮箱：</span>
+									<span class="info_value_span">512370345@qq.com</span>
+								</div>
+								<div class="info_row create_time_div">
+									<span class="info_name_span">注册时间：</span>
+									<span class="info_value_span">2018-05-05 22:01:56</span>
+								</div>
+								<div class="user_is_lock_div" title="未锁定">
+
+								</div>
+							</div>
+						</div>
+						<div class="picture_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="data_card_menu_div">
+							<div class="show_info_btn_div">
+								<span class="fa fa-info"></span>
+							</div>
+							<div class="edit_info_btn_div">
+								<span class="fa fa-pencil"></span>
+							</div>
+						</div>
+					</div>
+					<div class="data_card_div">
+						<div class="user_img_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="user_info_area_div">
+							<!--<div class="half_circle"></div>-->
+							<div class="user_info_div">
+								<div class="info_row user_name_div">
+									<span class="info_name_span">用户名：</span>
+									<span class="info_value_span">往往往往</span>
+								</div>
+								<div class="info_row  email_div">
+									<span class="info_name_span">邮箱：</span>
+									<span class="info_value_span">512370345@qq.com</span>
+								</div>
+								<div class="info_row create_time_div">
+									<span class="info_name_span">注册时间：</span>
+									<span class="info_value_span">2018-05-05 22:01:56</span>
+								</div>
+								<div class="user_is_lock_div" title="未锁定">
+
+								</div>
+							</div>
+						</div>
+						<div class="picture_div">
+							<img src="static/img/萨尔茨卡默古特地区_1.jpg" />
+						</div>
+						<div class="data_card_menu_div">
+							<div class="show_info_btn_div">
+								<span class="fa fa-info"></span>
+							</div>
+							<div class="edit_info_btn_div">
+								<span class="fa fa-pencil"></span>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="win_div" id="messagecenter_win">
+			<div class="win_div max" id="messagecenter_win">
 				<div class="win_head_div">
 					<div class="win_name_div">
-						留言管理中心
+						<span class="fa fa-comments"></span><span class="win_name_span">留言管理中心</span>
 					</div>
 					<div class="win_tool_menu_div">
 						<span class="fa fa-window-minimize" aria-hidden="true"></span>
 						<span class="fa fa-window-maximize" aria-hidden="true"></span>
+						<span class="fa fa-window-restore" aria-hidden="true"></span>
 						<span class="fa fa-window-close" aria-hidden="true"></span>
 					</div>
 					<div class="clearfix"></div>
@@ -314,7 +809,7 @@
 					"left": "100%",
 					"height": "3em",
 					"top": y
-				}, 500, function() {
+				}, 300, function() {
 					$win.addClass("min");
 					$win.removeClass("active mining");
 				})
@@ -338,7 +833,7 @@
 				$(".win_div.max_model").removeClass("max_model");
 			})
 			$(".win_div .fa-window-maximize").click(function() {
-				$win = $(this).parents(".win_div")
+				/*$win = $(this).parents(".win_div")
 				$(".win_div.max_model").removeClass("max_model");
 				$win.addClass("max_model");
 				var html = $win.children(".win_body").html();
@@ -346,9 +841,28 @@
 				$max_win = $("#max_win_div");
 				$max_win.html(html);
 				$max_win.find(".win_name_div").text(name);
-				$max_win.addClass("show");
-
+				$max_win.addClass("show");*/
+				$win = $(this).parents(".win_div");
+				/*var width = $win.css("width");
+				$win.attr("data-norw", width);*/
+				$win.animate({
+					"width": "96%",
+					"left": "-=18%"
+				}, 400, function() {
+					$win.addClass("max");
+				})
 			})
+			$(".win_div .fa-window-restore").click(function() {
+				$win = $(this).parents(".win_div");
+				/*var width=$win.attr("data-norw");*/
+				$win.animate({
+					"width": "60%",
+					"left": "+=18%"
+				}, 400, function() {
+					$win.removeClass("max");
+				})
+			})
+
 		})
 	</script>
 
