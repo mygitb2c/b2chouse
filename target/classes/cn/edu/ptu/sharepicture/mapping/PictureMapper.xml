@@ -3,36 +3,48 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.ptu.sharepicture.dao.PictureMapper">
+	<sql id="orderBy">
+		ORDER BY ${orderType} ${orderValue} LIMIT
+		#{start},#{pageSize}
+	</sql>
 	<!--通过关键字多图查询 -->
 	<select id="getPicturesByKey" resultMap="pictures_User">
 		<bind name="key" value="'%'+key+'%'" />
-		SELECT pictureId,pictureTitle,pictureName,userName,pictures.createTime
-		createTime FROM pictures LEFT JOIN user ON
-		(pictures.userId=user.userId)
+		SELECT
+		pictureId,pictureTitle,pictureName,userName,pictures.createTime
+		createTime,clickCount,download
+		FROM pictures LEFT JOIN user ON
+		(authorId=userId)
 		RIGHT JOIN pictureType ON
 		pictures.pictureType=pictureType.typeId
 		WHERE userName LIKE #{key} OR
-		pictureTitle LIKE #{key} AND pictures.isLock ="N" ORDER BY
-		${orderType}
-		${orderValue} LIMIT #{start},#{pageSize}
+		pictureTitle LIKE #{key} AND pictures.isLock ="N"
+		<include refid="orderBy"></include>
 	</select>
 	<!--通过图片编号查询图片详细信息 -->
 	<select id="getPictureById" resultMap="pictures_User">
 		SELECT
 		pictureId,pictureTitle,pictureName,remark,pictures.createTime
-		createTime,clickCount,user.userId userId,userName FROM pictures
-		RIGHT
-		JOIN user ON pictures.userId=user.userId WHERE pictureId=#{pictureId}
+		createTime,clickCount,download,userId,userName FROM
+		pictures
+		RIGHT JOIN
+		user ON authorId=userId WHERE
+		pictureId=#{pictureId} AND
+		pictures.isLock='N'
 	</select>
 	<!--通过用户编号多图查询 -->
-	<select id="getPicturesByUserId" resultMap="pictures_User">
+	<select id="getPicturesByAuthorId" resultMap="pictures_User">
 		SELECT
 		pictureId,pictureTitle,pictureName,remark,pictures.createTime
-		createTime,clickCount,user.userId userId,userName FROM pictures
+		createTime,clickCount,download,userId,userName FROM
+		pictures
 		RIGHT
-		JOIN user ON pictures.userId=user.userId WHERE
-		pictures.userId=#{key}
-		${orderType} ${orderValue} LIMIT #{start},#{pageSize}
+		JOIN
+		user ON authorId=userId WHERE
+		authorId=#{key} AND pictures.isLock='N'
+		ORDER BY
+		${orderType}
+		${orderValue} LIMIT #{start},#{pageSize}
 	</select>
 	<!--通过图片编号查询图片名 -->
 	<select id="getPictureName" resultType="String">
@@ -41,32 +53,55 @@
 	</select>
 	<select id="getTotal" resultType="Integer">
 		<bind name="key" value="'%'+key+'%'" />
-		SELECT COUNT(1) FROM pictures
-		WHERE pictureTitle LIKE #{key} AND pictures.isLock ="N"
+		SELECT COUNT(1) FROM pictures RIGHT JOIN user ON
+		authorId=userId
+		WHERE
+		pictureTitle LIKE #{key} OR userName
+		LIKE #{key} AND pictures.isLock
+		="N"
 	</select>
 
 	<insert id="insertPicture">
 		INSERT INTO pictures
-		VALUES(#{pictureId},#{userId},#{pictureTitle},#{pictureType},#{pictureName},#{remark},#{createTime},#{clickCount},#{download},"N")
+		VALUES(#{pictureId},#{authorId},#{pictureTitle},#{pictureType},#{pictureName},#{remark},#{createTime},#{clickCount},#{download},"N")
 	</insert>
 
 
-	<resultMap type="cn.edu.ptu.sharepicture.entity.User"
-		id="pictures_User">
+	<select id="getPicturesByKey_admin" resultMap="pictures_User">
+		<bind name="pictureTitle" value="'%'+Picture.pictureTitle+'%'" />
+		<bind name="userName" value="'%'+User.userName+'%'" />
+		SELECT pictures.*,user.* From pictures RIGHT JOIN user ON
+		authorId=userId
+		<where>
+			<if test="Picture.pictureId!=null">
+				pictureId=#{Picture.pictureId}
+			</if>
+			<if test="Picture.pictureId==null">
+				pictureTitle LIKE #{pictureTitle} OR userName LIKE
+				#{userName}
+				<if test="User.userId!=null">
+					AND userId=#{User.userId}
+				</if>
+				ORDER BY ${SearchFrom.orderType} ${SearchFrom.orderValue} LIMIT
+				#{SearchFrom.start},#{SearchFrom.pageSize}
+			</if>
+		</where>
+	</select>
+
+
+	<resultMap type="cn.edu.ptu.sharepicture.entity.User" id="pictures_User">
 		<id property="userId" javaType="String" column="userId" />
 		<result property="userName" javaType="String" column="userName" />
 		<collection property="pictures"
 			ofType="cn.edu.ptu.sharepicture.entity.Picture">
 			<id property="pictureId" javaType="String" column="pictureId" />
-			<result property="pictureTitle" javaType="String"
-				column="pictureTitle" />
-			<result property="pictureName" javaType="String"
-				column="pictureName" />
-			<result property="createTime" javaType="String"
-				column="createTime" />
+			<result property="pictureTitle" javaType="String" column="pictureTitle" />
+			<result property="pictureName" javaType="String" column="pictureName" />
+			<result property="createTime" javaType="String" column="createTime" />
 			<result property="remark" javaType="String" column="remark" />
-			<result property="clickCount" javaType="String"
-				column="clickCount" />
+			<result property="clickCount" javaType="String" column="clickCount" />
+			<result property="download" javaType="String" column="download" />
+			<result property="isLock" javaType="String" column="isLock" />
 		</collection>
 	</resultMap>
 </mapper>

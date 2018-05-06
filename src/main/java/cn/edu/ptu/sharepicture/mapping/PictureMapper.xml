@@ -10,7 +10,8 @@
 	<!--通过关键字多图查询 -->
 	<select id="getPicturesByKey" resultMap="pictures_User">
 		<bind name="key" value="'%'+key+'%'" />
-		SELECT pictureId,pictureTitle,pictureName,userName,pictures.createTime
+		SELECT
+		pictureId,pictureTitle,pictureName,userName,pictures.createTime
 		createTime,clickCount,download
 		FROM pictures LEFT JOIN user ON
 		(authorId=userId)
@@ -67,6 +68,8 @@
 
 
 	<select id="getPicturesByKey_admin" resultMap="pictures_User">
+		<bind name="pictureTitle" value="'%'+Picture.pictureTitle+'%'" />
+		<bind name="userName" value="'%'+User.userName+'%'" />
 		SELECT pictures.*,user.* From pictures RIGHT JOIN user ON
 		authorId=userId
 		<where>
@@ -74,8 +77,8 @@
 				pictureId=#{Picture.pictureId}
 			</if>
 			<if test="Picture.pictureId==null">
-				pictureTitle LIKE #{Picture.pictureTitle} OR userName LIKE
-				#{User.userName}
+				pictureTitle LIKE #{pictureTitle} OR userName LIKE
+				#{userName}
 				<if test="User.userId!=null">
 					AND userId=#{User.userId}
 				</if>

@@ -13,7 +13,7 @@ import cn.edu.ptu.sharepicture.entity.User;
 import cn.edu.ptu.sharepicture.service.PictureService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml", "classpath:mybatis-config.xml" })
+@ContextConfiguration(locations = { "classpath:applicationContext.xml", "classpath:spring-mybatis.xml" })
 public class PictureServiceTest {
 
 	@Resource
