@@ -68,6 +68,7 @@ public class PictureController {
 	@RequestMapping(value = "picList_key")
 	@ResponseBody
 	public ReturnForm<User> getPictureByKey(SearchForm sf) {
+		System.out.println(sf);
 		return ps.getPicturesByKey(sf);
 	}
 

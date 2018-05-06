@@ -6,7 +6,8 @@
 	<!--通过关键字多图查询 -->
 	<select id="getPicturesByKey" resultMap="pictures_User">
 		<bind name="key" value="'%'+key+'%'" />
-		SELECT pictureId,pictureTitle,pictureName,userName,pictures.createTime createTime,clickCount
+		SELECT pictureId,pictureTitle,pictureName,userName,pictures.createTime
+		createTime,clickCount
 		FROM pictures LEFT JOIN user ON
 		(pictures.userId=user.userId)
 		RIGHT JOIN pictureType ON
@@ -20,18 +21,20 @@
 	<select id="getPictureById" resultMap="pictures_User">
 		SELECT
 		pictureId,pictureTitle,pictureName,remark,pictures.createTime
-		createTime,clickCount,user.userId userId,userName FROM pictures
-		RIGHT
-		JOIN user ON pictures.userId=user.userId WHERE pictureId=#{pictureId}
+		createTime,clickCount,download,user.userId userId,userName FROM
+		pictures
+		RIGHT JOIN user ON pictures.userId=user.userId WHERE
+		pictureId=#{pictureId} AND pictures.isLock='N'
 	</select>
 	<!--通过用户编号多图查询 -->
 	<select id="getPicturesByUserId" resultMap="pictures_User">
 		SELECT
 		pictureId,pictureTitle,pictureName,remark,pictures.createTime
-		createTime,clickCount,user.userId userId,userName FROM pictures
+		createTime,clickCount,download,user.userId userId,userName FROM
+		pictures
 		RIGHT
 		JOIN user ON pictures.userId=user.userId WHERE
-		pictures.userId=#{key}
+		pictures.userId=#{key} AND pictures.isLock='N'
 		${orderType} ${orderValue} LIMIT #{start},#{pageSize}
 	</select>
 	<!--通过图片编号查询图片名 -->
@@ -41,8 +44,10 @@
 	</select>
 	<select id="getTotal" resultType="Integer">
 		<bind name="key" value="'%'+key+'%'" />
-		SELECT COUNT(1) FROM pictures RIGHT JOIN user ON pictures.userId=user.userId
-		WHERE pictureTitle LIKE #{key} OR userName LIKE #{key}  AND pictures.isLock ="N"
+		SELECT COUNT(1) FROM pictures RIGHT JOIN user ON
+		pictures.userId=user.userId
+		WHERE pictureTitle LIKE #{key} OR userName
+		LIKE #{key} AND pictures.isLock ="N"
 	</select>
 
 	<insert id="insertPicture">
@@ -51,22 +56,17 @@
 	</insert>
 
 
-	<resultMap type="cn.edu.ptu.sharepicture.entity.User"
-		id="pictures_User">
+	<resultMap type="cn.edu.ptu.sharepicture.entity.User" id="pictures_User">
 		<id property="userId" javaType="String" column="userId" />
 		<result property="userName" javaType="String" column="userName" />
 		<collection property="pictures"
 			ofType="cn.edu.ptu.sharepicture.entity.Picture">
 			<id property="pictureId" javaType="String" column="pictureId" />
-			<result property="pictureTitle" javaType="String"
-				column="pictureTitle" />
-			<result property="pictureName" javaType="String"
-				column="pictureName" />
-			<result property="createTime" javaType="String"
-				column="createTime" />
+			<result property="pictureTitle" javaType="String" column="pictureTitle" />
+			<result property="pictureName" javaType="String" column="pictureName" />
+			<result property="createTime" javaType="String" column="createTime" />
 			<result property="remark" javaType="String" column="remark" />
-			<result property="clickCount" javaType="String"
-				column="clickCount" />
+			<result property="clickCount" javaType="String" column="clickCount" />
 		</collection>
 	</resultMap>
 </mapper>
