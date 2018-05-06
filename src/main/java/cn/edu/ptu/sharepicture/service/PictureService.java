@@ -26,7 +26,7 @@ public class PictureService {
 
 	// 模糊搜索分页得到图片信息
 	public ReturnForm<User> getPicturesByKey(SearchForm sf) {
-		ReturnForm<User> rf=new ReturnForm<User>();
+		ReturnForm<User> rf = new ReturnForm<User>();
 		rf.setPageSize(sf.getPageSize());
 		rf.setData(pm.getPicturesByKey(sf));
 		rf.setTotal(pm.getTotal(sf));
@@ -35,8 +35,8 @@ public class PictureService {
 		return rf;
 	}
 
-	public List<User> getPicturesByUserId(SearchForm sf) {
-		return pm.getPicturesByUserId(sf);
+	public List<User> getPicturesByAuthorId(SearchForm sf) {
+		return pm.getPicturesByAuthorId(sf);
 	}
 
 	public boolean insertPicture(Picture picture) {
@@ -44,9 +44,13 @@ public class PictureService {
 		picture.setPictureId(pictureId);
 		return pm.insertPicture(picture);
 	}
-	
+
 	public String getPictureName(String pictureId) {
 		return pm.getPictureName(pictureId);
+	}
+
+	public List<User> getPicturesByKey_admin(User user, Picture picture, SearchForm sf) {
+		return pm.getPicturesByKey_admin(user, picture, sf);
 	}
 
 }

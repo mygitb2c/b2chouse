@@ -13,7 +13,7 @@ public interface PictureMapper {
 
 	List<User> getPicturesByKey(SearchForm sf);
 
-	List<User> getPicturesByUserId(SearchForm sf);
+	List<User> getPicturesByAuthorId(SearchForm sf);
 
 	User getPictureById(@Param(value = "pictureId") String pictureId);
 
@@ -26,4 +26,7 @@ public interface PictureMapper {
 	String getPictureName(@Param(value = "pictureId") String pictureId);
 
 	int getTotal(SearchForm sf);
+
+	public List<User> getPicturesByKey_admin(@Param(value = "User") User user,
+			@Param(value = "Picture") Picture picture, @Param(value = "SearchFrom") SearchForm sf);
 }

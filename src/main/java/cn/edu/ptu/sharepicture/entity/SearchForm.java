@@ -8,6 +8,15 @@ public class SearchForm extends Page {
 	private String key;// 搜索关键字
 	private String orderType;// 排序字段名称
 	private String orderValue;// 排序值
+	private boolean isAdmin;
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 
 	public String getKey() {
 		if (key == null) {
@@ -48,8 +57,8 @@ public class SearchForm extends Page {
 
 	@Override
 	public String toString() {
-		return "SearchForm [key=" + key + ", orderType=" + orderType + ", orderValue=" + orderValue + super.toString()
-				+ "]";
+		return "SearchForm [key=" + key + ", orderType=" + orderType + ", orderValue=" + orderValue + ", isAdmin="
+				+ isAdmin + "," + super.toString() + "]";
 	}
 
 }

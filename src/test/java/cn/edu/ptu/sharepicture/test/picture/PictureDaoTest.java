@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -42,9 +43,11 @@ public class PictureDaoTest {
 
 	@Test
 	public void select() {
-		List<User> list = pm.getPicturesByKey(new SearchForm());
+		SearchForm sf = new SearchForm();
+
+		List<User> list = pm.getPicturesByKey(sf);
 		for (User user : list) {
-			System.out.println(user);
+			System.out.println(user.getPictures().get(0));
 		}
 	}
 
@@ -62,7 +65,7 @@ public class PictureDaoTest {
 				int download = (int) (Math.random() * 99) + 1;
 				picture.setDownload(download + "");
 				picture.setPictureId(id);
-				picture.setUserId("8EA7EDE3A8AB4CBFB9819C5ED28460FB");
+				picture.setAuthorId("8EA7EDE3A8AB4CBFB9819C5ED28460FB");
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String createTime = dateFormat.format(new Date()).substring(0, 17);
 				int ss = (int) (Math.random() * 51) + 10;
@@ -79,8 +82,8 @@ public class PictureDaoTest {
 				pm.insertPicture(picture);
 				try {
 					FileInputStream fis = new FileInputStream(f);
-					int i=fis.available();
-					byte[] data=new byte[i];
+					int i = fis.available();
+					byte[] data = new byte[i];
 					fis.read(data);
 					fis.close();
 					FileOutputStream fos = new FileOutputStream(new File(picPath + id + type));
@@ -99,18 +102,32 @@ public class PictureDaoTest {
 			}
 		}
 	}
-	
+
 	@Test
 	public void getPictureName() {
-		String name=pm.getPictureName("246D9F870CD24994ABE88E6C9B2C91B9");
+		String name = pm.getPictureName("246D9F870CD24994ABE88E6C9B2C91B9");
 		System.out.println(name);
 	}
+
 	@Test
 	public void getTotal() {
-		SearchForm sf=new SearchForm();
+		SearchForm sf = new SearchForm();
 		sf.setKey("王");
-		int n=pm.getTotal(sf);
+		int n = pm.getTotal(sf);
 		System.out.println(n);
+	}
+
+	@Test
+	public void getPicturesByKey_admin() {
+		Picture picture = new Picture();
+		picture.setPictureTitle("加利福");
+		picture.setPictureId("ABBCFC08928D445DACC69729F5F2174E");
+		User user = new User();
+		List<User> lu = pm.getPicturesByKey_admin(user, picture, new SearchForm());
+		for (User user2 : lu) {
+			System.out.println(user2);
+		}
+
 	}
 
 }

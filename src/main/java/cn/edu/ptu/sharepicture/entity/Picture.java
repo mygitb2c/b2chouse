@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class Picture {
 
 	private String pictureId;// 编号
-	private String userId;// 用户编号
+	private String authorId;// 作者编号
 	private String pictureTitle;// 图片标题
 	private String pictureType;// 图片类型
 	private String pictureName;// 完整图片名
@@ -25,14 +25,6 @@ public class Picture {
 
 	public void setPictureId(String pictureId) {
 		this.pictureId = pictureId;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public String getPictureTitle() {
@@ -107,9 +99,17 @@ public class Picture {
 		this.msgs = msgs;
 	}
 
+	public String getAuthorId() {
+		return authorId;
+	}
+
+	public void setAuthorId(String authorId) {
+		this.authorId = authorId;
+	}
+
 	@Override
 	public String toString() {
-		return "Picture [pictureId=" + pictureId + ", userId=" + userId + ", pictureTitle=" + pictureTitle
+		return "Picture [pictureId=" + pictureId + ", authorId=" + authorId + ", pictureTitle=" + pictureTitle
 				+ ", pictureType=" + pictureType + ", pictureName=" + pictureName + ", remark=" + remark
 				+ ", createTime=" + createTime + ", clickCount=" + clickCount + ", download=" + download + ", isLock="
 				+ isLock + ", msgs=" + msgs + "]";

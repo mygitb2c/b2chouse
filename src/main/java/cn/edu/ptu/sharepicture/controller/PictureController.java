@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -68,14 +69,13 @@ public class PictureController {
 	@RequestMapping(value = "picList_key")
 	@ResponseBody
 	public ReturnForm<User> getPictureByKey(SearchForm sf) {
-		System.out.println(sf);
 		return ps.getPicturesByKey(sf);
 	}
 
 	@RequestMapping(value = "picList_uId")
 	@ResponseBody
 	public List<User> getPictureByUserId(SearchForm sf) {
-		return ps.getPicturesByUserId(sf);
+		return ps.getPicturesByAuthorId(sf);
 	}
 
 	@RequestMapping(value = "insert")
@@ -142,6 +142,12 @@ public class PictureController {
 		}
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "admin/pictures")
+	public List<User> getPicturesByKey_admin(User user, Picture picture, SearchForm sf) {
+		return ps.getPicturesByKey_admin(user, picture, sf);
+	}
+
 	@RequestMapping(value = "when")
 	public String when() {
 		return "forward:when.jsp";
@@ -150,11 +156,10 @@ public class PictureController {
 	@RequestMapping(value = "when_ajax")
 	@ResponseBody
 	public String when(@RequestParam(value = "value") int value) {
-		System.out.println(value);
 		List<Page> list = new ArrayList<Page>();
 		Page page = new Page();
 		page.setPage(value);
 		list.add(page);
-		return value*2+"";
+		return value * 2 + "";
 	}
 }
