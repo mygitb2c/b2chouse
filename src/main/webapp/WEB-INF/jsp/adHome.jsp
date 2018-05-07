@@ -106,7 +106,7 @@
 			}
 			
 			.win_div.max {
-				width: 96%;
+				width: 100%;
 			}
 			
 			.win_div.show {
@@ -193,10 +193,11 @@
 			}
 			
 			.win_body_div {
-				min-height: 500px;
 				background: #fff;
 				overflow-y: auto;
 				height: calc(100% - 3em);
+				position:relative;
+				white-space: nowrap;
 			}
 			
 			input[type='text'] {
@@ -244,10 +245,12 @@
 			}
 			
 			.data_content_div {
-				width: calc(100% - 17em);
+				width: calc(100% - 15em);
 				min-width: 80%;
 				display: inline-block;
 				overflow-y: auto;
+				height: 100%;
+				white-space: normal;
 			}
 			
 			.data_card_div {
@@ -256,7 +259,7 @@
 				margin: 0.5em 0em 0.5em 2em;
 				background: #E8E8FF;
 				border-radius: 0.25em;
-				padding: 1.5em 2.5em 0.5em 0em;
+				padding: 0.5em 2.5em;
 			}
 			/*.max .data_card_div {
 				width: calc(33% - 2em);
@@ -272,7 +275,7 @@
 			}
 			
 			.user_info_div {
-				padding-left: 2.5em;
+				
 			}
 			
 			.user_img_div {
@@ -302,6 +305,10 @@
 			.info_row {
 				margin: 0.3em 0.2em;
 				padding-bottom: 0.3;
+			}
+			.info_name_span{
+				font-size:90%;
+				font-weight: bold;
 			}
 			
 			.info_value_span {
@@ -352,12 +359,12 @@
 			
 			.picture_div {
 				width: 100%;
+				text-align: center;
 			}
 			
 			.picture_div img {
 				max-width: 15em;
 				max-height: 15em;
-				padding-left: 2.5em;
 			}
 			
 			.model_win_area_div {
@@ -445,9 +452,31 @@
 				width: 1em;
 				height: 1em;
 				position: absolute;
-				bottom: 0.2em;
-				right: 0.2em;
+				bottom: 0em;
+				right: 0em;
 				cursor: nw-resize;
+			}
+			.loading_area_div{
+			    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    text-align: center;
+    background: rgba(0,0,0,0.5);
+    bottom: 0em;
+    display: none;
+			}
+			.loading_content_div{
+			width: 10em;
+    height: 5em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #fff;
+    line-height: 5em;
+    border-radius: 0.25em;
+    box-shadow: 0px 0px 10px #333;
 			}
 			
 			button:focus {
@@ -516,6 +545,43 @@
 			.btn_row_div .right_btn {
 				border-radius: 0em 3em 3em 0em;
 				border-left: none;
+			}
+			.win_page_area_div {
+				text-align: center;
+				height: 3em;
+				line-height: 3em;
+				margin-top: 4em;
+			}
+			
+			.page_span {
+				padding: 0.5em 1em;
+				border: 1px solid #ddd;
+				color: #007bff;
+				background: #fff;
+				cursor: default;
+			}
+			
+			.page_btn_span {
+				cursor: pointer;
+			}
+			
+			.page_btn_span:hover {
+				background: rgb(245, 245, 245);
+			}
+			
+			.page_btn_span.active {
+				background: #6699CC;
+				color: #FFFFFF;
+			}
+			
+			.page_up_span {
+				margin-right: -1px;
+				border-radius: 0.25em 0em 0em 0.25em;
+			}
+			
+			.page_down_span {
+				margin-left: -1px;
+				border-radius: 0em 0.25em 0.25em 0em;
 			}
 		</style>
 	</head>
@@ -599,7 +665,7 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div class="win_div show max" id="usercenter_win">
+			<div class="win_div max" id="usercenter_win">
 				<span class="win_size_span"></span>
 				<div class="win_head_div">
 					<div class="win_name_div">
@@ -614,6 +680,12 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="win_body_div">
+				<div class="loading_area_div">
+					<div class="loading_content_div">
+						<span class="fa fa-cog fa-spin"></span>
+						<span class="">加载中...</span>
+					</div>
+				</div>
 					<div class="info_condition_menu_div">
 						<div class="condition_group_div">
 							<div class="menu_title">
@@ -623,7 +695,7 @@
 								<input type="text" name="cd_user_userId" class="condition_input" placeholder="用户编号" />
 							</div>
 							<div class="group_btn_div">
-								<button>精确查找</button>
+								<button class="win_search_btn run_eval run_eval" data-eval="">精确查找</button>
 							</div>
 							<div class="condition_div">
 								<input type="text" name="cd_user_userName" class="condition_input" placeholder="用户名" />
@@ -638,7 +710,7 @@
 
 							</div>
 							<div class="group_btn_div">
-								<button>过 滤</button>
+								<button class="win_search_btn run_eval" data-eval="">过 滤</button>
 							</div>
 						</div>
 					</div>
@@ -761,25 +833,31 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="win_body_div">
+				<div class="loading_area_div">
+					<div class="loading_content_div">
+						<span class="fa fa-cog fa-spin"></span>
+						<span class="">加载中...</span>
+					</div>
+				</div>
 					<div class="info_condition_menu_div">
 						<div class="condition_group_div">
 							<div class="menu_title">
 								数据过滤<span class="fa fa-search fa-lg"></span>
 							</div>
 							<div class="condition_div">
-								<input type="text" name="cd_picture_pictureId" class="condition_input" placeholder="图片编号" />
-							</div>
-							<div class="condition_div">
-								<input type="text" name="cd_picture_userId" class="condition_input" placeholder="作者编号" />
+								<input type="text" name="cd_pictures_pictureId" class="condition_input" placeholder="图片编号" />
 							</div>
 							<div class="group_btn_div">
-								<button>精确查找</button>
+								<button class="win_search_btn run_eval" data-eval="getPicturesByKey(1,'id')">精确查找</button>
 							</div>
 							<div class="condition_div">
-								<input type="text" name="cd_picture_pictureTitle" class="condition_input" placeholder="标题" />
+								<input type="text" name="cd_pictures_authorId" class="condition_input" placeholder="作者编号" />
 							</div>
 							<div class="condition_div">
-								<input type="text" name="cd_picture_userName" class="condition_input" placeholder="作者" />
+								<input type="text" name="cd_pictures_pictureTitle" class="condition_input" placeholder="标题" />
+							</div>
+							<div class="condition_div">
+								<input type="text" name="cd_pictures_userName" class="condition_input" placeholder="作者" />
 							</div>
 							<div class="condition_btn_list_div">
 								<div class="btn_row_div">
@@ -789,189 +867,24 @@
 
 							</div>
 							<div class="group_btn_div">
-								<button>过 滤</button>
+								<button class="win_search_btn run_eval" data-eval="getPicturesByKey(1)">过 滤</button>
 							</div>
 						</div>
+						<div class="win_page_area_div">
+					<span class="page_span page_btn_span page_up_span">
+					上一页
+					</span>
+					<span class="page_span  page_info_span">
+						3/5
+					</span>
+					<span class="page_span page_btn_span page_down_span">
+						下一页
+					</span>
+				</div>
 					</div>
-					<div class="data_card_div">
-						<div class="user_img_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="user_info_area_div">
-							<!--<div class="half_circle"></div>-->
-							<div class="user_info_div">
-								<div class="info_row user_name_div">
-									<span class="info_name_span">标题：</span>
-									<span class="info_value_span small">as打三分大赛复赛</span>
-								</div>
-								<div class="info_row  email_div">
-									<span class="info_name_span">作者：</span>
-									<span class="info_value_span small">阿斯达</span>
-								</div>
-								<div class="info_row create_time_div">
-									<span class="info_name_span">上传时间：</span>
-									<span class="info_value_span small">2018-05-05 22:01:56</span>
-								</div>
-								<div class="user_is_lock_div" title="未锁定">
-
-								</div>
-							</div>
-						</div>
-						<div class="picture_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="data_card_menu_div">
-							<div class="show_info_btn_div">
-								<span class="fa fa-info"></span>
-							</div>
-							<div class="edit_info_btn_div">
-								<span class="fa fa-pencil"></span>
-							</div>
-						</div>
-					</div>
-					<div class="data_card_div">
-						<div class="user_img_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="user_info_area_div">
-							<!--<div class="half_circle"></div>-->
-							<div class="user_info_div">
-								<div class="info_row user_name_div">
-									<span class="info_name_span">用户名：</span>
-									<span class="info_value_span">往往往往</span>
-								</div>
-								<div class="info_row  email_div">
-									<span class="info_name_span">邮箱：</span>
-									<span class="info_value_span">512370345@qq.com</span>
-								</div>
-								<div class="info_row create_time_div">
-									<span class="info_name_span">注册时间：</span>
-									<span class="info_value_span">2018-05-05 22:01:56</span>
-								</div>
-								<div class="user_is_lock_div" title="未锁定">
-
-								</div>
-							</div>
-						</div>
-						<div class="picture_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="data_card_menu_div">
-							<div class="show_info_btn_div">
-								<span class="fa fa-info"></span>
-							</div>
-							<div class="edit_info_btn_div">
-								<span class="fa fa-pencil"></span>
-							</div>
-						</div>
-					</div>
-					<div class="data_card_div">
-						<div class="user_img_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="user_info_area_div">
-							<!--<div class="half_circle"></div>-->
-							<div class="user_info_div">
-								<div class="info_row user_name_div">
-									<span class="info_name_span">用户名：</span>
-									<span class="info_value_span">往往往往</span>
-								</div>
-								<div class="info_row  email_div">
-									<span class="info_name_span">邮箱：</span>
-									<span class="info_value_span">512370345@qq.com</span>
-								</div>
-								<div class="info_row create_time_div">
-									<span class="info_name_span">注册时间：</span>
-									<span class="info_value_span">2018-05-05 22:01:56</span>
-								</div>
-								<div class="user_is_lock_div" title="未锁定">
-
-								</div>
-							</div>
-						</div>
-						<div class="picture_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="data_card_menu_div">
-							<div class="show_info_btn_div">
-								<span class="fa fa-info"></span>
-							</div>
-							<div class="edit_info_btn_div">
-								<span class="fa fa-pencil"></span>
-							</div>
-						</div>
-					</div>
-					<div class="data_card_div">
-						<div class="user_img_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="user_info_area_div">
-							<!--<div class="half_circle"></div>-->
-							<div class="user_info_div">
-								<div class="info_row user_name_div">
-									<span class="info_name_span">用户名：</span>
-									<span class="info_value_span">往往往往</span>
-								</div>
-								<div class="info_row  email_div">
-									<span class="info_name_span">邮箱：</span>
-									<span class="info_value_span">512370345@qq.com</span>
-								</div>
-								<div class="info_row create_time_div">
-									<span class="info_name_span">注册时间：</span>
-									<span class="info_value_span">2018-05-05 22:01:56</span>
-								</div>
-								<div class="user_is_lock_div" title="未锁定">
-
-								</div>
-							</div>
-						</div>
-						<div class="picture_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="data_card_menu_div">
-							<div class="show_info_btn_div">
-								<span class="fa fa-info"></span>
-							</div>
-							<div class="edit_info_btn_div">
-								<span class="fa fa-pencil"></span>
-							</div>
-						</div>
-					</div>
-					<div class="data_card_div">
-						<div class="user_img_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="user_info_area_div">
-							<!--<div class="half_circle"></div>-->
-							<div class="user_info_div">
-								<div class="info_row user_name_div">
-									<span class="info_name_span">用户名：</span>
-									<span class="info_value_span">往往往往</span>
-								</div>
-								<div class="info_row  email_div">
-									<span class="info_name_span">邮箱：</span>
-									<span class="info_value_span">512370345@qq.com</span>
-								</div>
-								<div class="info_row create_time_div">
-									<span class="info_name_span">注册时间：</span>
-									<span class="info_value_span">2018-05-05 22:01:56</span>
-								</div>
-								<div class="user_is_lock_div" title="未锁定">
-
-								</div>
-							</div>
-						</div>
-						<div class="picture_div">
-							<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
-						</div>
-						<div class="data_card_menu_div">
-							<div class="show_info_btn_div">
-								<span class="fa fa-info"></span>
-							</div>
-							<div class="edit_info_btn_div">
-								<span class="fa fa-pencil"></span>
-							</div>
-						</div>
+					<div class="data_content_div pictures_content">
+					
+					
 					</div>
 				</div>
 			</div>
@@ -990,6 +903,12 @@
 					<div class="clearfix"></div>
 				</div>
 				<div class="win_body_div">
+				<div class="loading_area_div">
+					<div class="loading_content_div">
+						<span class="fa fa-cog fa-spin"></span>
+						<span class="">加载中...</span>
+					</div>
+				</div>
 					<div class="info_condition_menu_div">
 						<div class="condition_group_div">
 							<div class="menu_title">
@@ -999,7 +918,7 @@
 								<input type="text" name="cd_user_userId" class="condition_input" placeholder="用户编号" />
 							</div>
 							<div class="group_btn_div">
-								<button>精确查找</button>
+								<button class="win_search_btn run_eval" data-eval="">精确查找</button>
 							</div>
 							<div class="condition_div">
 								<input type="text" name="cd_user_userName" class="condition_input" placeholder="用户名" />
@@ -1014,9 +933,20 @@
 
 							</div>
 							<div class="group_btn_div">
-								<button>过 滤</button>
+								<button class="win_search_btn run_eval" data-eval="">过 滤</button>
 							</div>
 						</div>
+						<div class="msg_footer_div">
+							<span class="page_span page_btn_span page_up_span">
+							上一页
+						</span>
+					<span class="page_span  page_info_span">
+						3/5
+					</span>
+					<span class="page_span page_btn_span page_down_span">
+						下一页
+					</span>
+				</div>
 					</div>
 				</div>
 			</div>
@@ -1147,19 +1077,18 @@
 			$(".model_win_area_div .fa-times").click(function() {
 				$(".model_win_area_div").css("display", "none")
 			})
-			$(".show_info_btn_div").click(function() {
+			$(document).on("click",".show_info_btn_div",function() {
 				$(".model_win_area_div .model_win_div").removeClass("edit");
 				$(".model_win_area_div").css("display", "block");
 
 			})
-			$(".edit_info_btn_div").click(function() {
+			$(document).on("click",".edit_info_btn_div",function() {
 				$(".model_win_area_div").css("display", "block");
 				$(".model_win_area_div .model_win_div").addClass("edit");
 			})
 			$(".win_size_span").mousedown(function() {
 				$(this).parent(".win_div").addClass("changeSize");
 				changing = true;
-
 			})
 			$(document).on("mousemove", function(e) {
 				if(!changing) {
@@ -1189,25 +1118,95 @@
 				}
 				$(this).attr("data-value", value);
 			})
+			$(document).on("click",".run_eval:not('.disabled')",function(){
+				eval($(this).attr("data-eval"));
+			})
+			
 		})
-		getPicturesByKey();
-		function getPicturesByKey(){
+		getPicturesByKey(1);
+		function getPicturesByKey(page,model){
+			var data=getPicturesAjaxData(model);
+		 	var $load=$("#picturecenter_win .win_body_div .loading_area_div");
+			data.page=page;
 			$.ajax({
 				"url":"admin/pictures",
-				"data":{"authorId":"authorId",
-					"pictureId":"pictureId",
-					"userName":"userName",
-					"orderType":"orderType",
-					"orderValue":"overValue"
-				},
+				"data":data,
 				"dataType":"json",
-				beforeSend:function(){
-					console.log("这是before")
-				},success:function(json){
-					console.log(json);
-				}
+				 beforeSend:function(){
+					$load.css("display","block");
+				}, success:function(json){
+					createPicturesHTML(json);
+				},complete:function(){
+					$load.css("display","none");
+				} 
 			})
 		}
+		
+		function getPicturesAjaxData(model){
+			var data={"pageSize":"15"};
+			if(model){
+				var pictureId=$(".condition_input[name='cd_pictures_pictureId']").val();
+				return {"pictureId":pictureId};
+			}
+			var authorId=$(".condition_input[name='cd_pictures_authorId']").val();
+			if(authorId)
+			{
+				data["authorId"]=authorId;
+			}
+			var pictureTitle=$(".condition_input[name='cd_pictures_pictureTitle']").val();
+			var userName=$(".condition_input[name='cd_pictures_userName']").val()
+			var $order=$("#picturecenter_win .condition_btn_list_div button.active");
+			var orderType=$order.attr("data-type");
+			var orderValue=$order.attr("data-value");
+			data["pictureTitle"]=pictureTitle;
+			data["userName"]=userName;
+			data["orderType"]=orderType;
+			data["orderValue"]=orderValue;
+			return data;
+		}
+		
+		function createPicturesHTML(json){
+			var html="";
+			var data=json.data;
+			$(".data_content_div.pictures_content .data_card_div").remove()
+			for(var i=0;i<data.length;i++)
+			{
+				var el=data[i].pictures[0];
+				var userName=data[i].userName;
+				var userImage=data[i].userImage;
+				var state="green";
+				if(el.isLock!="N")
+				{
+					state="red";
+				}
+				html+='<div class="data_card_div picture_card_div">'
+					+'<div class="user_img_div">'
+					+'<img src="picture/'+el.pictureId+'/false" /></div>'
+					+'<div class="user_info_area_div">'
+					+'<div class="user_info_div">'
+					+'<div class="info_row user_name_div">'
+					+'<span class="info_name_span">标题：</span>'
+					+'<span class="info_value_span small">'+el.pictureTitle+'</span></div>'
+					+'<div class="info_row  email_div">'
+					+'<span class="info_name_span">作者：</span>'
+					+'<span class="info_value_span small">'+userName+'</span></div>'
+					+'<div class="info_row create_time_div">'
+					+'<span class="info_name_span">上传时间：</span>'
+					+'<span class="info_value_span small">'+el.createTime+'</span></div>'
+					+'<div class="user_is_lock_div '+state+'">'
+					+'</div></div></div>'
+					+'<div class="picture_div">'
+					+'<img src="picture/'+el.pictureId+'/false" /></div>'
+					+'<div class="data_card_menu_div">'
+					+'<div class="show_info_btn_div">'
+					+'<span class="fa fa-info"></span></div>'
+					+'<div class="edit_info_btn_div">'
+					+'<span class="fa fa-pencil"></span></div></div></div>';
+			}
+			$(".data_content_div.pictures_content").append(html);
+		}
+		
+		
 		
 	</script>
 

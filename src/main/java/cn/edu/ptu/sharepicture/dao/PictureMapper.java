@@ -29,4 +29,8 @@ public interface PictureMapper {
 
 	public List<User> getPicturesByKey_admin(@Param(value = "User") User user,
 			@Param(value = "Picture") Picture picture, @Param(value = "SearchFrom") SearchForm sf);
+
+	int getTotal_admin(@Param(value = "User") User user, @Param(value = "Picture") Picture picture);
+
+	public User getPictureByPId_admin(@Param(value = "pictureId") String pictureId);
 }

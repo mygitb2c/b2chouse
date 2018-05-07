@@ -31,7 +31,6 @@ public class PictureService {
 		rf.setData(pm.getPicturesByKey(sf));
 		rf.setTotal(pm.getTotal(sf));
 		rf.setPage(sf.getPage());
-		rf.setPageSize(sf.getPageSize());
 		return rf;
 	}
 
@@ -49,8 +48,17 @@ public class PictureService {
 		return pm.getPictureName(pictureId);
 	}
 
-	public List<User> getPicturesByKey_admin(User user, Picture picture, SearchForm sf) {
-		return pm.getPicturesByKey_admin(user, picture, sf);
+	public ReturnForm<User> getPicturesByKey_admin(User user, Picture picture, SearchForm sf) {
+		ReturnForm<User> rf = new ReturnForm<User>();
+		rf.setPageSize(sf.getPageSize());
+		rf.setData(pm.getPicturesByKey_admin(user, picture, sf));
+		rf.setTotal(pm.getTotal_admin(user, picture));
+		rf.setPage(sf.getPage());
+		return rf;
+	}
+
+	public User getPictureByPId_admin(String pictureId) {
+		return pm.getPictureByPId_admin(pictureId);
 	}
 
 }

@@ -63,6 +63,7 @@ public class PictureController {
 		modelAndView.addObject("picture", u.getPictures().get(0));
 		modelAndView.addObject("authorId", u.getUserId());
 		modelAndView.addObject("authorName", u.getUserName());
+		modelAndView.addObject("authorImage", u.getUserImage());
 		return modelAndView;
 	}
 
@@ -144,8 +145,14 @@ public class PictureController {
 
 	@ResponseBody
 	@RequestMapping(value = "admin/pictures")
-	public List<User> getPicturesByKey_admin(User user, Picture picture, SearchForm sf) {
+	public ReturnForm<User> getPicturesByKey_admin(User user, Picture picture, SearchForm sf) {
 		return ps.getPicturesByKey_admin(user, picture, sf);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "admin/picture/{pId}")
+	public User getPictureByPId_admin(@PathVariable(value = "pId") String pictureId) {
+		return ps.getPictureByPId_admin(pictureId);
 	}
 
 	@RequestMapping(value = "when")
