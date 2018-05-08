@@ -57,6 +57,11 @@ public class PictureController {
 	public String index() {
 		return "forward:main.jsp";
 	}
+	
+	@RequestMapping(value = "/share")
+	public String share() {
+		return "sharepicture";
+	}
 
 	@RequestMapping(value = "picture/{pId}")
 	public ModelAndView getPictureInfo(@PathVariable(value = "pId") String pictureId, ModelAndView modelAndView) {
