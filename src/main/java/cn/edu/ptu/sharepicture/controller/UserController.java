@@ -1,23 +1,37 @@
 package cn.edu.ptu.sharepicture.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import cn.edu.ptu.sharepicture.entity.User;
 import cn.edu.ptu.sharepicture.service.UserService;
+import cn.edu.ptu.sharepicture.util.ImageUtil;
 
 @Controller
 public class UserController {
 
 	@Resource
 	private UserService userService;
+
+	@Value("${image_path}")
+	private String prePath;
 
 	@RequestMapping(value = "login")
 	public String toLoginWeb(HttpServletRequest request) {
@@ -78,6 +92,34 @@ public class UserController {
 			HttpSession session) {
 		User u = userService.login(email, password, session);
 		return u;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "userImage")
+	public boolean changeUserImage(@RequestParam(value = "img") MultipartFile img) {
+		String userId = "79DC6FA4F265451E8C2947E26FFC7713";
+		int i = img.getOriginalFilename().lastIndexOf(".");
+		String type = img.getOriginalFilename().substring(i);
+		String imageId = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+		String fileName = imageId + type;
+		String path = prePath + fileName;
+		File file = new File(path);
+		try {
+			FileUtils.copyInputStreamToFile(img.getInputStream(), file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+		}
+		return userService.changeUserImage(userId, fileName);
+	}
+
+	@RequestMapping(value = "user/{userId}")
+	public void getImageFromHD(@PathVariable(value = "userId") String userId, HttpServletRequest request,
+			HttpServletResponse response) {
+		String userImage = userService.getUserImage(userId);
+		String imagePath = prePath + userImage;
+		ImageUtil.getImage(response, imagePath);
 	}
 
 	@ResponseBody

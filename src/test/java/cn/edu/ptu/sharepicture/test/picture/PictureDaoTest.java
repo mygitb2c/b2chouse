@@ -44,15 +44,15 @@ public class PictureDaoTest {
 	@Test
 	public void select() {
 		SearchForm sf = new SearchForm();
-
 		List<User> list = pm.getPicturesByKey(sf);
 		for (User user : list) {
-			System.out.println(user.getPictures().get(0));
+			System.out.println(user);
 		}
 	}
 
 	public void getPicture(File file) {
-
+		String[] authors = new String[] { "8EA7EDE3A8AB4CBFB9819C5ED28460FB", "8EA7EDE3A8AB4CBFB9819C5ED28460FB",
+				"5ffcdf537ccb479c844459e47df4216e" };
 		Picture picture = null;
 		File[] files = file.listFiles();
 		for (File f : files) {
@@ -60,12 +60,13 @@ public class PictureDaoTest {
 				picture = new Picture();
 				String type = f.getName().substring(f.getName().lastIndexOf("."));
 				String id = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+				int author = (int) (Math.random() * 3);
 				int clickCount = (int) (Math.random() * 99) + 1;
 				picture.setClickCount(clickCount + "");
 				int download = (int) (Math.random() * 99) + 1;
 				picture.setDownload(download + "");
 				picture.setPictureId(id);
-				picture.setAuthorId("8EA7EDE3A8AB4CBFB9819C5ED28460FB");
+				picture.setAuthorId(authors[author]);
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String createTime = dateFormat.format(new Date()).substring(0, 17);
 				int ss = (int) (Math.random() * 51) + 10;
@@ -105,7 +106,7 @@ public class PictureDaoTest {
 
 	@Test
 	public void getPictureName() {
-		String name = pm.getPictureName("246D9F870CD24994ABE88E6C9B2C91B9");
+		String name = pm.getPictureNameById("246D9F870CD24994ABE88E6C9B2C91B9");
 		System.out.println(name);
 	}
 
@@ -120,9 +121,11 @@ public class PictureDaoTest {
 	@Test
 	public void getPicturesByKey_admin() {
 		Picture picture = new Picture();
-		picture.setPictureTitle("加利福");
-		picture.setPictureId("ABBCFC08928D445DACC69729F5F2174E");
+		/* picture.setPictureId("D3914B6518C4489998A1FDCA96417474"); */
+		picture.setPictureTitle("");
 		User user = new User();
+		user.setUserName("");
+		picture.setAuthorId("5ffcdf537ccb479c844459e47df4216e");
 		List<User> lu = pm.getPicturesByKey_admin(user, picture, new SearchForm());
 		for (User user2 : lu) {
 			System.out.println(user2);

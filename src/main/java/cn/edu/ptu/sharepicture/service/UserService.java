@@ -108,5 +108,14 @@ public class UserService {
 		User user = userMapper.getUserInfo(userId);
 		return user;
 	}
+	
+	public String getUserImage(String userId)
+	{
+		return userMapper.getUserImage(userId);
+	}
+	
+	public boolean changeUserImage(String userId,String userImage) {
+		return userMapper.changeUserImage(userId, userImage);
+	}
 
 }

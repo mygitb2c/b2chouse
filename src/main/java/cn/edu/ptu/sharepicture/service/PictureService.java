@@ -39,13 +39,11 @@ public class PictureService {
 	}
 
 	public boolean insertPicture(Picture picture) {
-		String pictureId = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
-		picture.setPictureId(pictureId);
 		return pm.insertPicture(picture);
 	}
 
-	public String getPictureName(String pictureId) {
-		return pm.getPictureName(pictureId);
+	public String getPictureNameById(String pictureId) {
+		return pm.getPictureNameById(pictureId);
 	}
 
 	public ReturnForm<User> getPicturesByKey_admin(User user, Picture picture, SearchForm sf) {
