@@ -23,7 +23,7 @@ public interface PictureMapper {
 
 	boolean updatePicture(Picture picture);
 
-	String getPictureName(@Param(value = "pictureId") String pictureId);
+	String getPictureNameById(@Param(value = "pictureId") String pictureId);
 
 	int getTotal(SearchForm sf);
 

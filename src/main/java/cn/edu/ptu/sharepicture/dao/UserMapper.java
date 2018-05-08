@@ -70,4 +70,8 @@ public interface UserMapper {
 
 	User getUserInfo(String userId);
 
+	String getUserImage(@Param(value="userId")String userId);
+
+	boolean changeUserImage(@Param(value = "userId") String userId, @Param(value = "userImage") String userImage);
+
 }

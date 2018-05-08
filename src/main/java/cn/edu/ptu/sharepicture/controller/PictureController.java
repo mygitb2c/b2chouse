@@ -13,6 +13,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.websocket.server.PathParam;
 
 import org.apache.commons.io.FileUtils;
@@ -36,6 +37,7 @@ import cn.edu.ptu.sharepicture.entity.ReturnForm;
 import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
 import cn.edu.ptu.sharepicture.service.PictureService;
+import cn.edu.ptu.sharepicture.util.ImageUtil;
 
 @Controller
 public class PictureController {
@@ -61,9 +63,7 @@ public class PictureController {
 		modelAndView.setViewName("picture");
 		User u = ps.getPictureById(pictureId);
 		modelAndView.addObject("picture", u.getPictures().get(0));
-		modelAndView.addObject("authorId", u.getUserId());
 		modelAndView.addObject("authorName", u.getUserName());
-		modelAndView.addObject("authorImage", u.getUserImage());
 		return modelAndView;
 	}
 
@@ -83,9 +83,14 @@ public class PictureController {
 	@ResponseBody
 	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
 	public boolean insert(Picture picture, @RequestParam(value = "img") MultipartFile img, HttpServletRequest request) {
+		/*
+		 * HttpSession session=request.getSession(); String
+		 * authorId=session.getAttribute("userId")+"";
+		 */
 		int i = img.getOriginalFilename().lastIndexOf(".");
 		String type = img.getOriginalFilename().substring(i);
-		String fileName = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase() + type;
+		String pictureId = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+		String fileName = pictureId + type;
 		String path = prePath + fileName;
 		File file = new File(path);
 		try {
@@ -94,10 +99,10 @@ public class PictureController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		picture.setPictureName(path);
+		picture.setAuthorId("79DC6FA4F265451E8C2947E26FFC7713");
+		picture.setPictureId(pictureId);
 		picture.setPictureName(fileName);
-		/* ps.insertPicture(picture); */
-		return true;
+		return ps.insertPicture(picture);
 	}
 
 	// 通过图片编号获取图片名，并通过图片名从本地硬盘上获取图片返回给页面
@@ -105,42 +110,13 @@ public class PictureController {
 	public void getPictureFromHD(@PathVariable(value = "pictureId") String pictureId,
 			@PathVariable(value = "download") boolean download, HttpServletRequest request,
 			HttpServletResponse response) {
-		String pictureName = ps.getPictureName(pictureId);
+		String pictureName = ps.getPictureNameById(pictureId);
 		String picturePath = prePath + pictureName;
-		FileInputStream fis = null;
-		BufferedOutputStream bos = null;
 		if (download == true) {
 			response.setContentType("application/file-download");
 			response.addHeader("Content-Disposition", "attachment; filename=" + pictureName);
 		}
-		try {
-			fis = new FileInputStream(new File(picturePath));
-			int i = fis.available();
-			byte[] data = new byte[i];
-			fis.read(data);
-			bos = new BufferedOutputStream(response.getOutputStream());
-			bos.write(data);
-			bos.flush();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.err.println("Mapping{picture/" + pictureId + "/" + download + "}:" + picturePath + " 下未找到文件");
-			/* e.printStackTrace(); */
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fis != null) {
-					fis.close();
-				}
-				if (bos != null) {
-					bos.close();
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		ImageUtil.getImage(response, picturePath);
 	}
 
 	@ResponseBody

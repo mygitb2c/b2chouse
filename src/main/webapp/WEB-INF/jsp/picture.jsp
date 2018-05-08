@@ -668,7 +668,7 @@
 						 <footer class="blockquote-footer text-right">From WWF's website</footer>
 					</div> -->
 					<div class="remark_area_head_div">
-						<img src="${pageContext.request.contextPath}/user/${userId}/false" class="authorImg"/>
+						<img src="${pageContext.request.contextPath}/user/${picture.authorId}" class="authorImg"/>
 					</div>
 					<div class="remark_content_div">
 						<div class="remark_value_div">

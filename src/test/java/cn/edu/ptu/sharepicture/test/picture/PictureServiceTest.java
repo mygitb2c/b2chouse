@@ -1,5 +1,7 @@
 package cn.edu.ptu.sharepicture.test.picture;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -7,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import cn.edu.ptu.sharepicture.entity.Picture;
 import cn.edu.ptu.sharepicture.entity.ReturnForm;
 import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
@@ -27,4 +30,16 @@ public class PictureServiceTest {
 		System.out.println(rf);
 	}
 
+	@Test
+	public void getPicturesByKey_admin() {
+		Picture picture = new Picture();
+		picture.setPictureTitle("");
+		User user=new User();
+		user.setUserName("");
+		picture.setAuthorId("8EA7EDE3A8AB4CBFB9819C5ED28460FB");
+		ReturnForm<User> rf = ps.getPicturesByKey_admin(user, picture, new SearchForm());
+		for (User u : rf.getData()) {
+			System.out.println(u);
+		}
+	}
 }
