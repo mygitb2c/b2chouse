@@ -9,7 +9,8 @@ public class Message {
 	private String pictureId;
 	private String sendId;
 	private String content;
-	private int floor;
+	private int star;
+	private String bgColor;
 	private String createTime;
 	private String isLock;
 
@@ -49,12 +50,20 @@ public class Message {
 		this.content = content;
 	}
 
-	public int getFloor() {
-		return floor;
+	public int getStar() {
+		return star;
 	}
 
-	public void setFloor(int floor) {
-		this.floor = floor;
+	public void setStar(int star) {
+		this.star = star;
+	}
+
+	public String getBgColor() {
+		return bgColor;
+	}
+
+	public void setBgColor(String bgColor) {
+		this.bgColor = bgColor;
 	}
 
 	public String getCreateTime() {
@@ -75,8 +84,9 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Messages [messageId=" + messageId + ", pictureId=" + pictureId + ", sendId=" + sendId + ", content="
-				+ content + ", floor=" + floor + ", createTime=" + createTime + ", isLock=" + isLock + "]";
+		return "Message [messageId=" + messageId + ", pictureId=" + pictureId + ", sendId=" + sendId + ", content="
+				+ content + ", star=" + star + ", bgColor=" + bgColor + ", createTime=" + createTime + ", isLock="
+				+ isLock + "]";
 	}
 
 }

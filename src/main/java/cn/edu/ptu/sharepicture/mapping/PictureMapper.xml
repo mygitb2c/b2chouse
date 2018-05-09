@@ -70,7 +70,7 @@
 
 	<insert id="insertPicture">
 		INSERT INTO pictures
-		VALUES(#{pictureId},#{authorId},#{pictureTitle},'',#{pictureName},#{remark},NOW(),0,0,"N")
+		VALUES(#{pictureId},#{authorId},#{pictureTitle},0,#{pictureName},#{remark},NOW(),0,0,"N")
 	</insert>
 
 
