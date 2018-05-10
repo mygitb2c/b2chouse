@@ -16,6 +16,7 @@ public class User {
 	private String userImage;// 用户头像
 	private String isLock;// 是否被锁定
 	private List<Picture> pictures;// 图片集合
+	private List<Message> messages;
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -99,12 +100,21 @@ public class User {
 		this.password = password;
 		this.email = email;
 	}
+	
+
+	public List<Message> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<Message> messages) {
+		this.messages = messages;
+	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", sex=" + sex
 				+ ", email=" + email + ", createTime=" + createTime + ", userImage=" + userImage + ", isLock=" + isLock
-				+ ", pictures=" + pictures + "]";
+				+ ", pictures=" + pictures + ", messages=" + messages + "]";
 	}
 
 }

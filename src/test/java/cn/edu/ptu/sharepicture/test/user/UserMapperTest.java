@@ -39,8 +39,8 @@ public class UserMapperTest {
 	
 	@Test
 	public void login(){
-		User u=userMapper.login("WWW", "1234");
-		System.out.println(u);
+		String userId=userMapper.login("WWW", "1234");
+		System.out.println(userId);
 	}
 
 	@Test

@@ -42,9 +42,9 @@ public interface UserMapper {
 	 * 
 	 * @param account
 	 * @param password
-	 * @return isLock
+	 * @return
 	 */
-	User login(@Param(value = "email") String email, @Param(value = "password") String password);
+	String login(@Param(value = "email") String email, @Param(value = "password") String password);
 
 	/**
 	 * 更新用户信息
@@ -70,7 +70,7 @@ public interface UserMapper {
 
 	User getUserInfo(String userId);
 
-	String getUserImage(@Param(value="userId")String userId);
+	String getUserImage(@Param(value = "userId") String userId);
 
 	boolean changeUserImage(@Param(value = "userId") String userId, @Param(value = "userImage") String userImage);
 

@@ -48,7 +48,7 @@
 				</a>
 				<a class="exit_a "> <i class="fa fa-sign-out fa-fw fa-lg"></i> 注销
 				</a>
-				<a class="sharepic_a " href="userinfo.html"> <i class="fa fa-share-alt fa-fw fa-lg"></i> 发图
+				<a class="sharepic_a " href="share"> <i class="fa fa-share-alt fa-fw fa-lg"></i> 发图
 				</a>
 			</div>
 		</div>

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import cn.edu.ptu.sharepicture.entity.Message;
 import cn.edu.ptu.sharepicture.entity.SearchForm;
+import cn.edu.ptu.sharepicture.entity.User;
 
 public interface MessageMapper {
 
@@ -15,7 +16,7 @@ public interface MessageMapper {
 
 	boolean updateMessage(Message message);
 
-	List<Message> getMsgsByPId(SearchForm sf);
+	List<User> getMsgsByPId(SearchForm sf);
 
 	int getTotal(@Param(value = "key") String key);
 

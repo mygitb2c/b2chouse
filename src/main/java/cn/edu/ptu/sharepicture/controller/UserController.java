@@ -35,15 +35,12 @@ public class UserController {
 
 	@RequestMapping(value = "login")
 	public String toLoginWeb(HttpServletRequest request) {
-		String addr = request.getRemoteAddr() + ":" + request.getRemotePort() + request.getContextPath();
-		System.out.println("addr:" + addr);
-		System.out.println("referer:" + request.getHeader("referer"));
-		return "forward:login.jsp";
+		return "forward:uSign.jsp";
 	}
 
 	@RequestMapping(value = "register")
-	public String toRegisterWeb() {
-		return "forward:register.jsp";
+	public String toSign() {
+		return "forward:uSign.jsp";
 	}
 
 	@RequestMapping(value = "exit")
@@ -74,24 +71,26 @@ public class UserController {
 		return flag;
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "userRegister", method = RequestMethod.POST)
-	public String registered(User user, HttpSession session) {
-		String path = "forward:/";
+	public boolean registered(User user, HttpSession session) {
+		boolean result = false;
 		String userId = userService.insertUser(user);
 		if (userId != null) {
 			session.setAttribute("userId", userId);
-		} else {
-			path += "register";
-		}
-		return path;
+			result = true;
+		} /*
+			 * else { path += "register"; }
+			 */
+		return result;
 	}
 
-	@RequestMapping(value = "userLogin", method = RequestMethod.POST)
+	@RequestMapping(value = "userLogin", method = RequestMethod.GET)
 	@ResponseBody
-	public User login(@Param(value = "email") String email, @Param(value = "password") String password,
+	public boolean login(@Param(value = "email") String email, @Param(value = "password") String password,
 			HttpSession session) {
-		User u = userService.login(email, password, session);
-		return u;
+		boolean result = userService.login(email, password, session);
+		return result;
 	}
 
 	@ResponseBody

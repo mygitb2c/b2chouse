@@ -14,7 +14,7 @@
 				margin: 0em;
 				padding: 0em;
 				background: #f5f5f5;
-				padding: 1em;
+				
 			}
 			
 			.share_picture_area_div {
@@ -94,7 +94,7 @@
 				width: 40%;
 				height: 3em;
 				line-height: 3em;
-				position: absolute;
+				position: fixed;
 				top: -3em;
 				left: 30%;
 				font-size: 1.2rem;
@@ -182,7 +182,7 @@
 			
 			.submit_btn_div {
 				/*width: 15%;*/
-				position: absolute;
+				position: fixed;
 				right: 3%;
 				top: calc(50% - 10rem);
 				text-align: center;
@@ -194,7 +194,7 @@
 				cursor: pointer;
 			}
 			
-			.submit_btn_div:active>div {
+			.submit_btn_div:not(.active):active>div {
 				background: transparent;
 				color: rgb(75, 107, 206);
 			}
@@ -263,15 +263,46 @@
 					font-size: 1em;
 				}
 			}
+			.loading_div{
+			position:fixed;
+			z-index: 3;
+			width: 100%;
+			height: 100%;
+			background:rgba(0,0,0,0.5);
+			display: none;
+			}
+			.loading_div.active{
+			display:block; 
+			}
+			.loading_content_div{
+				    width: 7em;
+    height: 5em;
+    line-height: 5em;
+    background: #fff;
+    box-shadow: 0px 0px 10px #333;
+    border-radius: 0.25em;
+    text-align: center;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    position: absolute;
+				
+			}
 		</style>
 	</head>
 
 	<body>
+	<div class="loading_div">
+		<div class="loading_content_div">
+		<span class="fa fa-spinner fa-pulse  fa-fw"></span>
+		<span>加载中...</span>
+		</div>
+	</div>
 		<div class="main_link_div">
 			<div>Share Picture</div>
 		</div>
 		<div class="submit_btn_div">
-			<div class="">
+			<div >
 				<span>分 享</span>
 			</div>
 		</div>
@@ -303,7 +334,7 @@
 				<div class="picture_title_div">
 					<div class="data_name_tip_div title">
 						<div class="name_content_div">
-							标 题 <span class="total"></span>
+							标 题 <span class="total">0/30</span>
 						</div>
 					</div>
 					<span class="fa fa-quote-left fa-2x fa-pull-left"></span>
@@ -313,7 +344,7 @@
 				<div class="remark_area_div">
 					<div class="data_name_tip_div remark">
 						<div class="name_content_div">
-							简 介 <span class="total"></span>
+							简 介 <span class="total">0/150</span>
 						</div>
 					</div>
 					<textarea name="remark" class="reamrk_textarea pic_data data_error" data-limit="150"></textarea>
@@ -335,10 +366,15 @@
 			})
 
 			$(".main_link_div").click(function() {
-				location.href = "/";
+				location.href = "main";
 			})
-			$(".submit_btn_div").click(function() {
-				$els = $(".pic_data");
+			$(document).on("click",".submit_btn_div:not('.active')",function() {
+				if($("#img_file_input").hasClass("data_error"))
+				{
+					showMsg("至少上传一张图片");
+					return;
+				}
+				$els = $(".pic_data:not('#img_file_input')");
 				for(var i = 0; i < $els.length; i++) {
 					var $el = $els.eq(i);
 					if($el.hasClass("data_error")) {
@@ -353,6 +389,7 @@
 			})
 			$(document).on("animationend", ".alertmsg_area_div.show", function() {
 				$(this).removeClass("show");
+				
 			})
 
 			$(document).on("dragover", ".picture_drop_load_area", function(e) {
@@ -397,21 +434,29 @@
 			$.ajax({
 				"url": "insert",
 				"data": fd,
-				"dataType": "json",
 				"type": "post",
-				cache: false,
-				processData: false,
-				contentType: false,
-				success: function(str) {
-					if(str==true)
+				"cache": false,
+				"processData": false,
+				"contentType": false,
+				"beforeSend":function(){
+					$(".loading_div,.submit_btn_div").addClass("active");
+				}
+			}).done(function(pictureId){
+					if(pictureId)
 					{
 						showMsg("上传成功!");
-						location.href="${pageContext.request.contextPath}/";
+						setTimeout("location.href='picture/"+pictureId+"'",1500);
+						
 					}else{
 						showMsg("我也不知道为什么上传失败了!");
 					}
+			})
+			.always(function(pictureId){
+				if(!pictureId){
+					$(".submit_btn_div").removeClass("active");
 				}
-			});
+				$(".loading_div").removeClass("active");
+			})
 		}
 		
 		function verification($el){
@@ -431,6 +476,10 @@
 				$(".picture").attr("src", this.result);
 				$(".picture_drop_load_area").addClass("active");
 			}
+		}
+		
+		function toPicture(pictureId){
+			
 		}
 	</script>
 

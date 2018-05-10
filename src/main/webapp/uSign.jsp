@@ -20,10 +20,10 @@
 				margin: 0em 5%;
 			}
 			
-			.register_area.disabled {
+			.register_area.disabled,.login_area.disabled {
 				-webkit-filter: grayscale(100%);
 				filter: grayscale(100%);
-				width: 30%;
+				/* width: 30%; */
 				opacity: 0.5;
 			}
 			
@@ -57,9 +57,9 @@
 				
 			}
 			
-			.disabled #form_reg {
+			/* .disabled #form_reg {
 				display: none;
-			}
+			} */
 			
 			.btn_reg {
 				padding: 0.3em 5em;
@@ -142,9 +142,10 @@
 				/*left: 0%;*/
 				width: 35%;
 				right: 5%;
+				padding: 0em 0.5em;
 			}
 			
-			.win_head_div.login_win {
+			.login_win .win_head_div {
 				color: #00B271;
 				border-color: #00B271;
 			}
@@ -203,7 +204,7 @@
 				width: 80%;
 				margin: 0em 10%;
 				height: 3em;
-				top: -2em;
+				top: 0em;
 				z-index: -1;
 			}
 			
@@ -227,12 +228,13 @@
 				animation-direction: alternate;
 			}
 			@keyframes login_msg{
-				from {top:-2em; }
-				33%{top:-5em;}
-				to{top:-5em;}
+				from {top:0em; }
+				33%{top:-3em;}
+				to{top:-3em;}
 			}
-			.register_area{
-				display: none;
+			.login_win{
+				padding-top: 2em; 
+				background: #fff;
 			}
 		</style>
 	</head>
@@ -255,17 +257,17 @@
 					<form action="userRegister" method="post" id="form_reg" class="text-center">
 						<div class="form-inline form-group">
 							<label class="row_name" for="email">邮箱：</label>
-							<input type="text" name="email" id="email" class="form-control " />
+							<input type="text" name="email" id="email" class="form-control reg_data" />
 							<i class="fa fa-check-circle" aria-hidden="true"></i>
 						</div>
 						<div class="form-inline form-group">
 							<label class="row_name" for="userName">用户名：</label>
-							<input type="text" name="userName" id="userName" class="form-control " />
+							<input type="text" name="userName" id="userName" class="form-control reg_data" />
 							<i class="fa fa-check-circle" aria-hidden="true"></i>
 						</div>
 						<div class="form-inline form-group">
 							<label class="row_name" for="password">密码：</label>
-							<input type="password" name="password" id="password" class="form-control " />
+							<input type="password" name="password" id="password" class="form-control reg_data" />
 							<i class="fa fa-check-circle" aria-hidden="true"></i>
 						</div>
 						<div class="form-inline form-group">
@@ -290,9 +292,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="area_div login_area">
-			<div class="win_div">
-				<div class="win_head_div login_win">
+		<div class="area_div login_area" id="login_area">
+			<div class="win_div login_win">
+				<div class="win_head_div">
 					<span class="area_title_span">
 					<i class="fa fa-sign-in"></i> 
 					帐号登录
@@ -358,28 +360,38 @@
 				$(this).prev().val("");
 			})
 			$(".area_trun_span").click(function() {
-				closeArea($(this).parents(".area_div"));
+				$(".area_div").addClass("disabled");
+				$(this).parents(".area_div").siblings().removeClass("disabled");
 			})
 
-			$(".login_btn").click(function() {
-				/* $(this).addClass("disabled"); */
-				$(".login_area .alert-danger").addClass("login_tip_msg");
-				/* $.when(showAlertMsg()).then($(this).removeClass("disabled")) */
+			$(document).on("click",".login_area:not('.disabled') .login_btn",function() {
+				login();
+				
 			})
 			$(".login_area .alert-danger").on("webkitAnimationEnd mozAnimationEnd animationEnd",function(){
 				$(this).removeClass("login_tip_msg");
 			})
+			$(document).on("focus",".area_div input",function(){
+				$(".area_div").addClass("disabled");
+				$(this).parents(".area_div").removeClass("disabled")
+			})
+			
 		})
 		getCenterPosition($(".register_area"));
 		getCenterPosition($(".login_area"));
-
+		getAction();
+		function getAction(){
+			var strs=window.location.pathname.split("/");
+			var action=strs[strs.length-1];
+			$(".area_div").addClass("disabled");
+			$("#"+action+"_area").removeClass("disabled");
+		}
+		
 		function getCenterPosition($el) {
 			var y = $el.height() / 2;
 			var x = $el.width() / 2;
 			$el.css({
 				"top": "calc(50% - " + y + "px)"
-				/*,
-								"left": "calc(50% - " + x + "px)"*/
 			});
 		}
 
@@ -409,6 +421,36 @@
 				$el.css("display", "none");
 			})
 		} */
+		
+		function login(){
+			var email=$(".login_email").val();
+			var password=$(".login_password").val();
+			if(email.length==0||password.length==0)
+			{
+				showLoginMsge("用户信息不能为空");
+			}else{
+				$.ajax({
+					"url":"userLogin",
+					"data":{"email":email,"password":password},
+					"dataType":"json",
+					"success":function(result){
+						if(result)
+						{
+							/* showLoginMsge("登录成功"); */
+							location.href="main";
+						}else{
+							showLoginMsge("用户信息不匹配");
+						}
+					}
+				})
+			}
+		}
+		
+		function showLoginMsge(text){
+			var $el=$(".login_area .alert-danger");
+			$el.find(".alert_msg").text(text);
+			$el.addClass("login_tip_msg");
+		}
 	</script>
 
 </html>

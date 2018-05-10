@@ -21,13 +21,13 @@
 		FROM user
 	</select>
 
-	<select id="login"
-		resultType="cn.edu.ptu.sharepicture.entity.User">
-		SELECT USERID,ISLOCK FROM user
+	<select id="login" resultType="String">
+		SELECT userId FROM user
 		WHERE
 		EMAIL=#{email}
 		AND
 		PASSWORD=#{password}
+		AND ISLOCK="N"
 	</select>
 
 	<select id="getUserInfo"
@@ -50,7 +50,8 @@
 	</select>
 
 	<select id="getUserImage" resultType="String">
-		SELECT userImage FROM user WHERE userId=#{userId}
+		SELECT userImage FROM user
+		WHERE userId=#{userId}
 	</select>
 
 	<insert id="insertUser">

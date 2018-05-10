@@ -6,6 +6,7 @@ import cn.edu.ptu.sharepicture.dao.MessageMapper;
 import cn.edu.ptu.sharepicture.entity.Message;
 import cn.edu.ptu.sharepicture.entity.ReturnForm;
 import cn.edu.ptu.sharepicture.entity.SearchForm;
+import cn.edu.ptu.sharepicture.entity.User;
 
 @Service
 public class MessageService {
@@ -16,8 +17,8 @@ public class MessageService {
 		return mm.insertMessage(msg);
 	}
 
-	public ReturnForm<Message> getMsgsByPId(SearchForm sf) {
-		ReturnForm<Message> rf = new ReturnForm<Message>();
+	public ReturnForm<User> getMsgsByPId(SearchForm sf) {
+		ReturnForm<User> rf = new ReturnForm<User>();
 		rf.setData(mm.getMsgsByPId(sf));
 		rf.setTotal(mm.getTotal(sf.getKey()));
 		rf.setPage(sf.getPage());

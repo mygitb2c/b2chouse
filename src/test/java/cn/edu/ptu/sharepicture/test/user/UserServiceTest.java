@@ -32,8 +32,8 @@ public class UserServiceTest {
 
 	@Test
 	public void loginTest() {
-		User u = userService.login("512370345@qq.com", "123456",null);
-		System.out.println(u);
+		boolean result = userService.login("512370345@qq.com", "123456",null);
+		System.out.println(result);
 	}
 
 	@Test

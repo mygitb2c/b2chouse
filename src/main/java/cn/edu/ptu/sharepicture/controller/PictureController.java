@@ -53,11 +53,11 @@ public class PictureController {
 		return "form";
 	}
 
-	@RequestMapping(value = "/")
+	@RequestMapping(value = { "/", "main" })
 	public String index() {
 		return "forward:main.jsp";
 	}
-	
+
 	@RequestMapping(value = "/share")
 	public String share() {
 		return "sharepicture";
@@ -87,7 +87,7 @@ public class PictureController {
 	@RequestMapping(value = "insert")
 	@ResponseBody
 	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
-	public boolean insert(Picture picture, @RequestParam(value = "img") MultipartFile img, HttpServletRequest request) {
+	public String insert(Picture picture, @RequestParam(value = "img") MultipartFile img, HttpServletRequest request) {
 		/*
 		 * HttpSession session=request.getSession(); String
 		 * authorId=session.getAttribute("userId")+"";
@@ -107,7 +107,12 @@ public class PictureController {
 		picture.setAuthorId("79DC6FA4F265451E8C2947E26FFC7713");
 		picture.setPictureId(pictureId);
 		picture.setPictureName(fileName);
-		return ps.insertPicture(picture);
+		String result = null;
+		if (ps.insertPicture(picture)) {
+			result = pictureId;
+			System.out.println("true");
+		}
+		return result;
 	}
 
 	// 通过图片编号获取图片名，并通过图片名从本地硬盘上获取图片返回给页面

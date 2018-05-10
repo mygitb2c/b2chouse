@@ -48,17 +48,15 @@ public class UserService {
 	 * @param password
 	 * @return
 	 */
-	public User login(String email, String password, HttpSession session) {
+	public boolean login(String email, String password, HttpSession session) {
 		password = MD5Util.getMD5Str(password);
-		User u = userMapper.login(email, password);
-		if (u != null) {
-			if (u.getIsLock() == "Y") {
-				u.setUserId(null);
-			} else {
-				session.setAttribute("userId", u.getUserId());
-			}
+		boolean result=false;
+		String userId = userMapper.login(email, password);
+		if (userId!=null) {
+			session.setAttribute("userId", userId);
+			result=true;
 		}
-		return u;
+		return result;
 	}
 
 	/**
