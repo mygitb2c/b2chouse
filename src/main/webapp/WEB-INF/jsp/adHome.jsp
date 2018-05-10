@@ -102,11 +102,11 @@
 				top: 0.3em;
 				overflow: hidden;
 				display: none;
-				height: calc(100vh - 0.5em);
+				height: 700px;
 			}
 			
 			.win_div.max {
-				width: 100%;
+				width: 105%;
 			}
 			
 			.win_div.show {
@@ -238,6 +238,7 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
+				position: relative;
 			}
 			
 			.condition_group_div {
@@ -548,13 +549,17 @@
 			}
 			.win_page_area_div {
 				text-align: center;
-				height: 3em;
-				line-height: 3em;
-				margin-top: 4em;
+    height: 3em;
+    line-height: 3em;
+    margin-top: 4em;
+    position: absolute;
+    bottom: 0em;
+    width: 90%;
+    left: 5%;
 			}
 			
 			.page_span {
-				padding: 0.5em 1em;
+				padding: 2% 5%;
 				border: 1px solid #ddd;
 				color: #007bff;
 				background: #fff;
@@ -563,13 +568,17 @@
 			
 			.page_btn_span {
 				cursor: pointer;
+				user-select:none;
+			}
+			.page_btn_span.disabled{
+				color: #CCC;
 			}
 			
 			.page_btn_span:hover {
 				background: rgb(245, 245, 245);
 			}
 			
-			.page_btn_span.active {
+			.page_btn_span:not(.disabled).active {
 				background: #6699CC;
 				color: #FFFFFF;
 			}
@@ -871,13 +880,13 @@
 							</div>
 						</div>
 						<div class="win_page_area_div">
-					<span class="page_span page_btn_span page_up_span">
+					<span class="page_span page_btn_span page_up_span" data-value="-1">
 					上一页
-					</span>
-					<span class="page_span  page_info_span">
-						3/5
-					</span>
-					<span class="page_span page_btn_span page_down_span">
+					</span><span class="page_span  page_info_span" >
+						<span class="page_value"></span>
+						<span>/</span>
+						<span class="total_page_value"></span>
+					</span><span class="page_span page_btn_span page_down_span" data-value="1">
 						下一页
 					</span>
 				</div>
@@ -942,8 +951,7 @@
 						</span>
 					<span class="page_span  page_info_span">
 						3/5
-					</span>
-					<span class="page_span page_btn_span page_down_span">
+					</span><span class="page_span page_btn_span page_down_span">
 						下一页
 					</span>
 				</div>
@@ -1121,6 +1129,12 @@
 				eval($(this).attr("data-eval"));
 			})
 			
+			$(document).on("click","#picturecenter_win .page_btn_span:not('.disabled')",function(){
+				var o_page=Number($("#picturecenter_win .page_info_span .page_value").text());
+				var page=o_page+Number($(this).attr("data-value"));
+				getPicturesByKey(page);
+			})
+			
 		})
 		getPicturesByKey(1);
 		function getPicturesByKey(page,model){
@@ -1128,13 +1142,14 @@
 		 	var $load=$("#picturecenter_win .win_body_div .loading_area_div");
 			data.page=page;
 			$.ajax({
-				"url":"pictures",
+				"url":"admin/pictures",
 				"data":data,
 				"dataType":"json",
 				 beforeSend:function(){
 					$load.css("display","block");
 				}, success:function(json){
 					createPicturesHTML(json);
+					setPageFoot($("#picturecenter_win .page_info_span"),page,json.totalPage)
 				},complete:function(){
 					$load.css("display","none");
 				} 
@@ -1172,7 +1187,6 @@
 			{
 				var el=data[i].pictures[0];
 				var userName=data[i].userName;
-				var userImage=data[i].userImage;
 				var state="green";
 				if(el.isLock!="N")
 				{
@@ -1180,7 +1194,7 @@
 				}
 				html+='<div class="data_card_div picture_card_div">'
 					+'<div class="user_img_div">'
-					+'<img src="../picture/'+el.pictureId+'/false" /></div>'
+					+'<img src="user/'+el.authorId+'" /></div>'
 					+'<div class="user_info_area_div">'
 					+'<div class="user_info_div">'
 					+'<div class="info_row user_name_div">'
@@ -1195,7 +1209,7 @@
 					+'<div class="user_is_lock_div '+state+'">'
 					+'</div></div></div>'
 					+'<div class="picture_div">'
-					+'<img src="../picture/'+el.pictureId+'/false" /></div>'
+					+'<img src="picture/'+el.pictureId+'/false" /></div>'
 					+'<div class="data_card_menu_div">'
 					+'<div class="show_info_btn_div">'
 					+'<span class="fa fa-info"></span></div>'
@@ -1205,6 +1219,21 @@
 			$(".data_content_div.pictures_content").append(html);
 		}
 		
+		function setPageFoot($el,page,totalPage){
+			$el.find(".page_value").text(page);
+			$el.find(".total_page_value").text(totalPage);
+			if(page<=1){
+				$el.prev().addClass("disabled");
+			}else{
+				$el.prev().removeClass("disabled");
+			}
+			if(page>=totalPage)
+			{
+				$el.next().addClass("disabled");
+			}else{
+				$el.next().removeClass("disabled");
+			}
+		}
 		
 		
 	</script>

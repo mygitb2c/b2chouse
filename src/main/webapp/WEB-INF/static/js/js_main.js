@@ -143,7 +143,7 @@ function cardHTML(json) {
 		var html = '<div class="card_div" data-id="' + row.pictures[0].pictureId + '">' +
 			'<img src="picture/' + row.pictures[0].pictureId + '/false">' +
 			'<div class="card_title_div text-left">' +
-			'<span class="card_title">' + title + row.pictures[0].clickCount + '</span>' +
+			'<span class="card_title">' + title + '</span>' +
 			'</div>' +
 			'<div class="card_info_div">' +
 			'<span class="pull-left img_author">' + userName + '</span>' +

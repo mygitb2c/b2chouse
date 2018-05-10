@@ -62,7 +62,7 @@
 						<input id="backgroundboard" value="#FFFFFF" />
 					</div>
 					<div class="comment_list_div">
-						<div class="star_btn_div">
+						<div class="star_btn_div error">
 							<span class="edit_btn_span">
 							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
 							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
@@ -84,7 +84,12 @@
 				
 					</iframe>
 				</div>
-				<div class="send_btn_div">
+				<div class="msg_edit_foot_div">
+					<div class="msg_total">
+					<span class="msg_num_value">0</span>
+					<span>/</span>
+					<span class="msg_total_value">80</span>
+					</div>
 					<span class="send_btn_span">
 						<span class="btn_text">发送</span>
 					<span class="fa fa-spinner fa-spin btn_loading_text"></span>
@@ -96,6 +101,7 @@
 
 		<div class="picture_area_div">
 			<div class="picture_title_div">
+			<span class="main_nav_link pull-left">Share Picture</span>
 				<span class="fa fa-quote-left"></span>
 				<span class="picture_title_span">${picture.pictureTitle}</span>
 				<span class="fa fa-quote-right"></span>
@@ -125,7 +131,7 @@
 		<div class="info_area_div">
 			<div class="left_msg_area_div">
 				<div class="msg_show_panel">
-				<div class="msg_row_div">
+				<!-- <div class="msg_row_div">
 					<div class="sender_img_div">
 						<img src="../static/img/萨尔茨卡默古特地区_13.jpg" />
 					</div>
@@ -145,13 +151,13 @@
 						</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				</div>
 				<div class="msg_panel_footer_div">
 					<span class="page_span page_btn_span page_up_span">
 					上一页
 					</span><span class="page_span  page_info_span">
-						3/5
+						0/0
 					</span><span class="page_span page_btn_span page_down_span">
 						下一页
 					</span>
@@ -199,9 +205,11 @@
 			$(".edit_btn_span i.fa").click(function() {
 				if($(this).hasClass("fa_isselect")) {
 					$(".edit_btn_span i.fa").removeClass("fa_isselect");
+					$(this).parents(".star_btn_div").addClass("error");
 				} else {
 					$(".edit_btn_span i.fa").removeClass("fa_isselect");
 					$(this).addClass("fa_isselect");
+					$(this).parents(".star_btn_div").removeClass("error");
 				}
 			})
 			$(".edit_btn_span button:not('.fa-smile-o')").click(function() {
@@ -274,23 +282,24 @@
 				console.log("pw:"+$parent.get(0).offsetWidth+",thisw"+$(this).get(0).offsetWidth);
 			})
 			$(document).on("click",".send_btn_span:not('.loading')",function(){
-				$(this).addClass("loading");
-				
+				/* $(this).addClass("loading"); */
+				if(vailMsg()){ 
+				sendMsg($(this));
+				}
 			})
-
-			/*$(document).on("click",".page_btn_div.down_page_div:not('.disabled')",function() {
-				$(".page_btn_div").addClass("disabled");
-				$.when($(".picture_container div").animate({
-					left: "-100%"
-				}, 1000)).then(function  () {
-					$(".picture_container div").first().remove();
-					$(".picture_container div").first().css("left","0%");
-					$(".page_btn_div").removeClass("disabled");
-				})
-			})*/
-
-			/*	$(".picture_container div").first().find("img").animate({"opacity":"0"},1000);*/
-
+			$("#msg_edit_content_div").contents().find("body").keyup(function(){
+				var length=$("#msg_edit_content_div").contents().find("body").text().length;
+				if(length>$(".msg_total_value").text()||length==0)
+				{
+					$("#msg_edit_content_div,.msg_num_value").addClass("error");
+				}else{
+					$("#msg_edit_content_div,.msg_num_value").removeClass("error");
+				}
+				$(".msg_num_value").text(length);
+			})
+			$(".main_nav_link").click(function(){
+				location.href="../main";
+			})
 		})
 		var editor,doc;
 		ini();
@@ -303,13 +312,6 @@
 			editor.document.contentEditable = true;
 			
 		}
-		
-		/*geiHeight();
-		 function geiHeight(){
-			console.log($(".picture_remark_area_div").get(0).offsetHeight);
-			console.log($(".remark_value").get(0).offsetHeight);
-			console.log($(".picture_info_area_div").get(0).offsetHeight)
-		} */
 
 		function areaShow( areaname, direction) {
 			var data = {};
@@ -417,6 +419,13 @@
 		}
 		
 		function setMsgPanelFooter(page,totalPage){
+			if(totalPage>0)
+			{
+				$(".msg_panel_footer_div").addClass("active");
+			}else{
+				$(".msg_panel_footer_div").remove("active");
+				return;
+			}
 			$(".page_info_span").text(page+"/"+totalPage);
 			if(page<=1)
 			{
@@ -432,6 +441,28 @@
 			}
 		}
 		
+		function vailMsg(){
+			if($(".error").length>0)
+			{
+				return false;
+			}
+			return true;
+		}
+		
+		function sendMsg($el){
+			var data={"pictureId":pId,"content":$("#msg_edit_content_div").contents().find("body").html(),"star":$(".star_btn_div .fa_isselect").attr("data-point"),"bgColor":$("#msg_edit_content_div").attr("data-bgc")};
+			var config={"url":"../msg/insert","data":data,"dataType":"json","type":"Post","beforeSend":""};
+			config.beforeSend=function(){
+				$el.addClass("loading");
+			}
+			$.ajax(config).done(function(){
+				getMsg(1);
+				$("#msg_edit_content_div").contents().find("body").html("");
+			}).always(function(){
+				$el.removeClass("loading");
+			})
+			
+		}
 
 	</script>
 
