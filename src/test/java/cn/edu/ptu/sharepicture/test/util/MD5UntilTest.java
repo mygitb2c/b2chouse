@@ -20,7 +20,7 @@ public class MD5UntilTest {
 	public void getStr() {
 		String result = md5.getMD5Str("123456");
 		System.out.println(result);
-		System.out.println(result.equals("99C5E07B4D5DE9D18C350CDF64C5AA3D"));
+		System.out.println(result.equals("E10ADC3949BA59ABBE56E057F20F883E"));
 	}
 
 }

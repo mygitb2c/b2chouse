@@ -7,7 +7,7 @@ public class Message {
 
 	private String messageId;
 	private String pictureId;
-	private String sendId;
+	private String senderId;
 	private String content;
 	private int star;
 	private String bgColor;
@@ -34,12 +34,12 @@ public class Message {
 		this.pictureId = pictureId;
 	}
 
-	public String getSendId() {
-		return sendId;
+	public String getSenderId() {
+		return senderId;
 	}
 
-	public void setSendId(String sendId) {
-		this.sendId = sendId;
+	public void setSenderId(String senderId) {
+		this.senderId = senderId;
 	}
 
 	public String getContent() {
@@ -84,7 +84,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [messageId=" + messageId + ", pictureId=" + pictureId + ", sendId=" + sendId + ", content="
+		return "Message [messageId=" + messageId + ", pictureId=" + pictureId + ", senderId=" + senderId + ", content="
 				+ content + ", star=" + star + ", bgColor=" + bgColor + ", createTime=" + createTime + ", isLock="
 				+ isLock + "]";
 	}

@@ -1,5 +1,7 @@
 package cn.edu.ptu.sharepicture.controller;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +15,7 @@ import cn.edu.ptu.sharepicture.service.MessageService;
 @Controller
 public class MessageController {
 
+	@Resource
 	private MessageService ms;
 
 	@ResponseBody
@@ -22,8 +25,8 @@ public class MessageController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="msg/pId")
-	public ReturnForm<User> getMsgsByPId(SearchForm sf) {
+	@RequestMapping(value = "msg/pId")
+	public ReturnForm<Message> getMsgsByPId(SearchForm sf) {
 		return ms.getMsgsByPId(sf);
 	}
 

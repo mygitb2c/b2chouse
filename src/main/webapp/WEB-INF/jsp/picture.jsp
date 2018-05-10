@@ -38,11 +38,6 @@
 			<div class="msg_edit_div">
 				<div class="edit_menu_div fa-lg">
 					<div class="edit_btn_list_div">
-						<!-- <div class="edit_btn_div">
-							<span class="edit_btn_span ">
-								<button class="fa fa-font" aria-hidden="true" data-exetype=""></button>
-							</span>
-						</div> -->
 						<div class="edit_btn_div">
 							<span class="edit_btn_span">
 								<button class="fa fa-bold" aria-hidden="true" data-exetype="bold"></button>
@@ -85,14 +80,14 @@
 					<div class="clearfix"></div>
 				</div>
 				<div id="msg_edit_content_area_div">
-					<iframe id="msg_edit_content_div" contenteditable="true" data-bgc="">
+					<iframe id="msg_edit_content_div" contenteditable="true" data-bgc="#fff">
 				
 					</iframe>
 				</div>
 				<div class="send_btn_div">
 					<span class="send_btn_span">
 						<span class="btn_text">发送</span>
-					<span class="fa fa-spinner fa-spin  btn_loading_text"></span>
+					<span class="fa fa-spinner fa-spin btn_loading_text"></span>
 					</span>
 					<div class="clearfix"></div>
 				</div>
@@ -134,96 +129,30 @@
 					<div class="sender_img_div">
 						<img src="../static/img/萨尔茨卡默古特地区_13.jpg" />
 					</div>
-					<div class="alert four_msg">
+					<div class="alert">
 						<div class="msg_caret"></div>
 						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
+						<div class="msg_footer_div">
 						<div class="date_value">
 							 2018-04-23 09:07:49
 						</div>
 						<div class="comment_value">
-							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
-							</i><i class="fa fa-star-o fa_isselect" aria-hidden="true" data-point="4">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
+							<i class="fa fa-star-o "  data-point="5">
+							</i><i class="fa fa-star-o fa_isselect"  data-point="4">
+							</i><i class="fa fa-star-o" data-point="3">
+							</i><i class="fa fa-star-o"  data-point="2">
+							</i><i class="fa fa-star-o"  data-point="1"></i>
 						</div>
-					</div>
-				</div>
-				<div class="msg_row_div right">
-					<div class="sender_img_div">
-						<img src="../static/img/萨尔茨卡默古特地区_12.jpg" />
-					</div>
-					<div class="alert three_msg">
-						<div class="msg_caret">
-
-						</div>
-
-						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
-						<div class="date_value">
-							 2018-04-23 09:07:49
-						</div>
-						<div class="comment_value">
-							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
-							</i><i class="fa fa-star-o fa_isselect" aria-hidden="true" data-point="3">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
-						</div>
-					</div>
-				</div>
-				<div class="msg_row_div">
-					<div class="sender_img_div">
-						<img src="../static/img/萨尔茨卡默古特地区_11.jpg" />
-					</div>
-					<div class="alert two_msg">
-						<div class="msg_caret">
-
-						</div>
-						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
-						<div class="date_value">
-							 2018-04-23 09:07:49
-						</div>
-						<div class="comment_value">
-							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
-							</i><i class="fa fa-star-o fa_isselect" aria-hidden="true" data-point="2">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
-						</div>
-					</div>
-				</div>
-				<div class="msg_row_div right">
-					<div class="sender_img_div">
-						<img src="../static/img/萨尔茨卡默古特地区_10.jpg" />
-					</div>
-
-					<div class="alert one_msg">
-						<div class="msg_caret">
-
-						</div>
-
-						<span class="msg_value_span">阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧</span>
-						<div class="date_value">
-							 2018-04-23 09:07:49
-						</div>
-						<div class="comment_value">
-							<i class="fa fa-star-o " aria-hidden="true" data-point="5">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
-							</i><i class="fa fa-star-o fa_isselect" aria-hidden="true" data-point="1"></i>
 						</div>
 					</div>
 				</div>
 				</div>
-				<div class="msg_footer_div">
+				<div class="msg_panel_footer_div">
 					<span class="page_span page_btn_span page_up_span">
 					上一页
-					</span>
-					<span class="page_span  page_info_span">
+					</span><span class="page_span  page_info_span">
 						3/5
-					</span>
-					<span class="page_span page_btn_span page_down_span">
+					</span><span class="page_span page_btn_span page_down_span">
 						下一页
 					</span>
 				</div>
@@ -259,66 +188,11 @@
 			</div>
 		</div>
 
-		<div class="msg_panel_area_div">
-			<div class="msg_panel_div">
-				<div class="msg_panel_content_div">
-					<div class="table_div">
-
-					</div>
-					<div class="tr_modo" style="display: none;">
-						<div class="table_tr">
-							<div class="td_name width_20">
-								<div class="cell_value">
-									<img src="" style="max-width: 100%;" />
-									<div class="send_name_value">
-										王王王
-									</div>
-								</div>
-							</div>
-							<div class="td_value width_80">
-								<div class="cell_value">
-									阿德萨夫斯达克反对vgkdsfnvjdfnvbjadfnvboadnvbodfjnhdfogafd 赛道姐啊死哦等哈苏打水份雕塑发吧
-									<div class="date_value">
-										2018年5月4日 10:17:29
-									</div>
-									<div class="comment_value">
-										<i class="fa fa-star-o " aria-hidden="true" data-point="5">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="4">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="3">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="2">
-							</i><i class="fa fa-star-o" aria-hidden="true" data-point="1"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="msg_panel_footer_div">
-					<div class="page_menu_div text-center">
-						<span class="page_menu_span page_up_span"> 
-								<i class="fa fa-angle-up" aria-hidden="true"></i>
-							</span>
-					</div>
-					<div class="page_menu_div text-center">
-						<span></span>
-					</div>
-					<div class="page_menu_div text-center">
-						<span class="page_menu_span page_down_span"> 
-								<i class="fa fa-angle-down" aria-hidden="true"></i>
-							</span>
-					</div>
-				</div>
-				<div class="msg_area_power_off_div">
-					<span class="fa fa-power-off fa-lg"></span>
-				</div>
-				<div class="msg_area_power_div">
-					<span class="fa fa-caret-right fa-2x"></span>
-				</div>
-			</div>
-		</div>
+		
 	</body>
 
 	<script type="text/javascript">
+	var pId="${picture.pictureId}";
 		$(function() {
 			
 			/*var  editor=iniEdit();*/
@@ -460,13 +334,6 @@
 		function color(val) {
 			editor.document.execCommand("foreColor", false, val);
 		}
-		/*function iniEdit(){
-			var ele=document.getElementById("msg_edit_content_div");
-			
-			ele.designMode="on";
-			editor.document.contentEditable = true;
-			return ele;
-		}*/
 
 		function maxPictureModel() {
 			var $remark = $(".picture_remark_area_div");
@@ -506,6 +373,63 @@
 					right: "0%"
 				}, 1000)
 			})
+		}
+		
+		getMsg(1);
+		
+		function getMsg(page){
+			var config={"url":"../msg/pId","data":{"key":pId,"page":page,"pageSize":5},"dataType":"json"};
+			$.ajax(config).done(function(json){
+				var datas=json.data;
+				getMsgHTML(datas)
+				setMsgPanelFooter(page,json.totalPage);
+			})
+		}
+		
+		function getMsgHTML(datas){
+			$el=$(".msg_show_panel");
+			$el.children(".msg_row_div").remove();
+			for(var i=0;i<datas.length;i++)
+			{
+				var message=datas[i];
+				var c="";
+				var star="";
+				if(i%2==1)
+				{
+					c="right";
+				}
+				var html='<div class="msg_row_div '+c+'">'
+					+'<div class="sender_img_div">'
+					+'<img src="../user/'+message.senderId+'" /></div>'
+					+'<div class="alert" style="background:'+message.bgColor+';border-color:'+message.bgColor+'">'
+					+'<div class="msg_caret"></div>'
+					+'<span class="msg_value_span">'+message.content+'</span>'
+					+'<div class="msg_footer_div">'
+					+'<div class="date_value">'+message.createTime+'</div>'
+					+'<div class="comment_value">';
+				for(var j=0;j<Number(message.star);j++)
+				{
+					star+='<i class="fa fa-star"></i>';
+				}
+				html+=star+'</div></div></div></div>';
+				$el.append(html);
+			}
+		}
+		
+		function setMsgPanelFooter(page,totalPage){
+			$(".page_info_span").text(page+"/"+totalPage);
+			if(page<=1)
+			{
+				$(".page_up_span").addClass("disabled");
+			}else{
+				$(".page_up_span").removeClass("disabled");
+			}
+			if(page>=totalPage)
+			{
+				$(".page_down_span").addClass("disabled");
+			}else{
+				$(".page_down_span").removeClass("disabled");
+			}
 		}
 		
 

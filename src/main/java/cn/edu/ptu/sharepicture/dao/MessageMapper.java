@@ -16,7 +16,7 @@ public interface MessageMapper {
 
 	boolean updateMessage(Message message);
 
-	List<User> getMsgsByPId(SearchForm sf);
+	List<Message> getMsgsByPId(SearchForm sf);
 
 	int getTotal(@Param(value = "key") String key);
 
