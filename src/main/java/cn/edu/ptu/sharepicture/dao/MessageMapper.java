@@ -19,5 +19,7 @@ public interface MessageMapper {
 	List<Message> getMsgsByPId(SearchForm sf);
 
 	int getTotal(@Param(value = "key") String key);
+	
+	List<Message> getMsgByKey(SearchForm sf);
 
 }

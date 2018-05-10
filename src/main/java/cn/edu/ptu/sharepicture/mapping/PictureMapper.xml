@@ -123,6 +123,18 @@
 		,pictures.isLock isLock FROM pictures INNER JOIN user ON
 		authorId=userId WHERE pictureId=#{pictureId}
 	</select>
+	
+	<select id="getDownload" resultType="Integer">
+		SELECT download FROM pictures WHERE pictureId=#{pictureId}
+	</select>
+	
+	<update id="updataClick">
+		UPDATE pictures SET clickCount=clickCount+1 WHERE pictureId=#{pictureId}
+	</update>
+	
+	<update id="updataDownload">
+		UPDATE pictures SET download=download+1 WHERE pictureId=#{pictureId}
+	</update>
 
 
 	<resultMap type="cn.edu.ptu.sharepicture.entity.User"

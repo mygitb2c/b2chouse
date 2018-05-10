@@ -3,6 +3,9 @@ package cn.edu.ptu.sharepicture.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+
+import cn.edu.ptu.sharepicture.entity.ReturnForm;
+import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
 
 /**
@@ -74,4 +77,7 @@ public interface UserMapper {
 
 	boolean changeUserImage(@Param(value = "userId") String userId, @Param(value = "userImage") String userImage);
 
+	List<User> getUserListByKey(SearchForm sf);
+
+	int getTotal(@Param(value = "key") String key);
 }

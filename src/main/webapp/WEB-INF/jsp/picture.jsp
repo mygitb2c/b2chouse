@@ -165,32 +165,38 @@
 			</div>
 
 			<div class="right_picture_info_area_div">
-				<!-- <div class="info_head_div">
-					<span class="fa fa-info fa-3x"></span>
-				</div> -->
-				
 				<div class="picture_info_area_div">
+				<div class="picture_info_content_div">
 			<div class="info_head_div">
 				<div class="head_caret_div left"></div>
 			
 				<div class="head_caret_div right"></div>
 			</div>
 			<div class="info_row_div">
-				<span class="info_row_value">作者： ${authorName}</span>
+				<span class="info_row_name">作者：</span>
+				<span class="info_row_value">${authorName}</span>
 			</div>
 			<div class="info_row_div">
-				<span class="info_row_value">上传时间：${picture.createTime}</span>
+				<span class="info_row_name">上传时间：</span>
+				<span class="info_row_value">${picture.createTime}</span>
 			</div>
 			<div class="info_row_div">
-				<span class="info_row_value">点击量：${picture.clickCount}</span>
+				<span class="info_row_name">点击量：</span>
+				<span class="info_row_value">${picture.clickCount}</span>
 			</div>
 			<div class="info_row_div">
-				<span class="info_row_value">收藏量：23</span>
+				<span class="info_row_name">下载量：</span>
+				<span class="info_row_value download_value">${picture.download}</span>
+				<a class="download_a"><span class="fa fa-download"></span></a>
 			</div>
-			<div class="info_footer_div">
+			<!-- <div class="info_footer_div">
 				<div class="footer_caret_div"></div>
+			</div> -->
 			</div>
 		</div>
+		<!-- <div class="download_btn_div">
+			
+		</div> -->
 			</div>
 		</div>
 
@@ -199,6 +205,7 @@
 
 	<script type="text/javascript">
 	var pId="${picture.pictureId}";
+	var cp="${pageContext.request.contextPath}";
 		$(function() {
 			
 			/*var  editor=iniEdit();*/
@@ -298,7 +305,11 @@
 				$(".msg_num_value").text(length);
 			})
 			$(".main_nav_link").click(function(){
-				location.href="../main";
+				location.href=cp+"/";
+			})
+			$(".download_a").click(function(){
+				location.href=cp+"/picture/"+pId+"/true";
+				setTimeout("getDownload()",200);
 			})
 		})
 		var editor,doc;
@@ -380,7 +391,7 @@
 		getMsg(1);
 		
 		function getMsg(page){
-			var config={"url":"../msg/pId","data":{"key":pId,"page":page,"pageSize":5},"dataType":"json"};
+			var config={"url":cp+"/msg/pId","data":{"key":pId,"page":page,"pageSize":5},"dataType":"json"};
 			$.ajax(config).done(function(json){
 				var datas=json.data;
 				getMsgHTML(datas)
@@ -402,7 +413,7 @@
 				}
 				var html='<div class="msg_row_div '+c+'">'
 					+'<div class="sender_img_div">'
-					+'<img src="../user/'+message.senderId+'" /></div>'
+					+'<img src="'+cp+'/user/'+message.senderId+'" /></div>'
 					+'<div class="alert" style="background:'+message.bgColor+';border-color:'+message.bgColor+'">'
 					+'<div class="msg_caret"></div>'
 					+'<span class="msg_value_span">'+message.content+'</span>'
@@ -451,7 +462,7 @@
 		
 		function sendMsg($el){
 			var data={"pictureId":pId,"content":$("#msg_edit_content_div").contents().find("body").html(),"star":$(".star_btn_div .fa_isselect").attr("data-point"),"bgColor":$("#msg_edit_content_div").attr("data-bgc")};
-			var config={"url":"../msg/insert","data":data,"dataType":"json","type":"Post","beforeSend":""};
+			var config={"url":cp+"/msg/insert","data":data,"dataType":"json","type":"Post","beforeSend":""};
 			config.beforeSend=function(){
 				$el.addClass("loading");
 			}
@@ -461,9 +472,21 @@
 			}).always(function(){
 				$el.removeClass("loading");
 			})
-			
 		}
 
+		function getDownload(){
+			$.ajax({
+				"url":cp+"/getDownload",
+				"data":{"pictureId":pId}
+			}).done(function(num){
+				/* if(num==$(".download_value").text())
+				{
+					num++;
+					
+				} */
+				$(".download_value").text(num);
+			})
+		}
 	</script>
 
 </html>

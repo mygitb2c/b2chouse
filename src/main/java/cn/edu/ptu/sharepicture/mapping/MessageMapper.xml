@@ -4,12 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.ptu.sharepicture.dao.MessageMapper">
 
-	<select id="getMsgsByPId" resultType="cn.edu.ptu.sharepicture.entity.Message">
+	<select id="getMsgsByPId"
+		resultType="cn.edu.ptu.sharepicture.entity.Message">
 		SELECT pictureId,
 		senderId,content,star,bgColor,messages.createTime createTime
-		FROM messages INNER JOIN user ON senderId=userId WHERE
-		pictureId=#{key} AND messages.isLock='N' ORDER BY messages.createTime
-		DESC LIMIT #{start},#{pageSize}
+		FROM
+		messages WHERE
+		pictureId=#{key}
+		ORDER BY messages.createTime
+		DESC LIMIT
+		#{start},#{pageSize}
 	</select>
 
 	<select id="getTotal" resultType="Integer">
@@ -17,24 +21,40 @@
 		WHERE pictureId=#{key}
 	</select>
 
+	<select id="getMsgByKey"
+		resultType="cn.edu.ptu.sharepicture.entity.Message">
+		SELECT messageId,pictureId,
+		senderId,content,star,bgColor,messages.createTime createTime
+		FROM
+		messages
+		ORDER BY messages.createTime
+		DESC LIMIT
+		#{start},#{pageSize}
+	</select>
+
 	<insert id="insertMessage">
 		INSERT INTO messages
 		VALUES(#{messageId},#{pictureId},#{senderId},#{content},#{star},#{bgColor},NOW(),"N");
 	</insert>
 
-	<resultMap type="cn.edu.ptu.sharepicture.entity.User" id="msg_user">
+	<resultMap type="cn.edu.ptu.sharepicture.entity.User"
+		id="msg_user">
 		<id property="userId" javaType="String" column="userId" />
 		<result property="userName" javaType="String" column="userName" />
-		<result property="userImage" javaType="String" column="userImage" />
+		<result property="userImage" javaType="String"
+			column="userImage" />
 		<collection property="messages"
 			ofType="cn.edu.ptu.sharepicture.entity.Message">
 			<id property="messageId" javaType="String" column="messageId" />
-			<result property="pictureId" javaType="String" column="pictureId" />
-			<result property="senderId" javaType="String" column="senderId" />
+			<result property="pictureId" javaType="String"
+				column="pictureId" />
+			<result property="senderId" javaType="String"
+				column="senderId" />
 			<result property="content" javaType="String" column="content" />
 			<result property="star" javaType="Integer" column="star" />
 			<result property="bgColor" javaType="String" column="bgColor" />
-			<result property="createTime" javaType="String" column="createTime" />
+			<result property="createTime" javaType="String"
+				column="createTime" />
 			<result property="isLock" javaType="String" column="isLock" />
 		</collection>
 	</resultMap>

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import cn.edu.ptu.sharepicture.dao.UserMapper;
+import cn.edu.ptu.sharepicture.entity.ReturnForm;
+import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
 import cn.edu.ptu.sharepicture.util.MD5Util;
 
@@ -114,6 +116,19 @@ public class UserService {
 	
 	public boolean changeUserImage(String userId,String userImage) {
 		return userMapper.changeUserImage(userId, userImage);
+	}
+	
+	public ReturnForm<User> getUserListByKey(SearchForm sf){
+		ReturnForm<User> rf=new ReturnForm<User>();
+		rf.setData(userMapper.getUserListByKey(sf));
+		rf.setPage(sf.getPage());
+		rf.setPageSize(sf.getPageSize());
+		rf.setTotal(userMapper.getTotal(sf.getKey()));
+		return rf;
+	}
+	
+	public int getTotal(String key) {
+		return userMapper.getTotal(key);
 	}
 
 }

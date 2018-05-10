@@ -102,7 +102,7 @@
 				top: 0.3em;
 				overflow: hidden;
 				display: none;
-				height: 700px;
+				height: 600px;
 			}
 			
 			.win_div.max {
@@ -722,14 +722,25 @@
 								<button class="win_search_btn run_eval" data-eval="">过 滤</button>
 							</div>
 						</div>
+						<div class="win_page_area_div">
+					<span class="page_span page_btn_span page_up_span" data-value="-1">
+					上一页
+					</span><span class="page_span  page_info_span" >
+						<span class="page_value"></span>
+						<span>/</span>
+						<span class="total_page_value">1</span>
+					</span><span class="page_span page_btn_span page_down_span" data-value="1">
+						下一页
+					</span>
+				</div>
 					</div>
-					<div class="data_content_div">
-						<div class="data_card_div">
+					<div class="data_content_div user_content">
+						<!-- <div class="data_card_div">
 							<div class="user_img_div">
 								<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
 							</div>
 							<div class="user_info_area_div">
-								<!--<div class="half_circle"></div>-->
+								<div class="half_circle"></div>
 								<div class="user_info_div">
 									<div class="info_row user_name_div">
 										<span class="info_name_span">用户名：</span>
@@ -762,7 +773,7 @@
 								<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
 							</div>
 							<div class="user_info_area_div">
-								<!--<div class="half_circle"></div>-->
+								<div class="half_circle"></div>
 								<div class="user_info_div">
 									<div class="info_row user_name_div">
 										<span class="info_name_span">用户名：</span>
@@ -789,13 +800,13 @@
 									<span class="fa fa-pencil"></span>
 								</div>
 							</div>
-						</div>
-						<div class="data_card_div">
+						</div> -->
+						<!-- <div class="data_card_div">
 							<div class="user_img_div">
 								<img src="static/img/萨尔茨卡默古特地区_10.jpg" />
 							</div>
 							<div class="user_info_area_div">
-								<!--<div class="half_circle"></div>-->
+								<div class="half_circle"></div>
 								<div class="user_info_div">
 									<div class="info_row user_name_div">
 										<span class="info_name_span">用户名：</span>
@@ -822,7 +833,7 @@
 									<span class="fa fa-pencil"></span>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -891,7 +902,7 @@
 					</span>
 				</div>
 					</div>
-					<div class="data_content_div pictures_content">
+					<div class="data_content_div picture_content">
 					
 					
 					</div>
@@ -945,23 +956,27 @@
 								<button class="win_search_btn run_eval" data-eval="">过 滤</button>
 							</div>
 						</div>
-						<div class="msg_footer_div">
-							<span class="page_span page_btn_span page_up_span">
-							上一页
-						</span>
-					<span class="page_span  page_info_span">
-						3/5
-					</span><span class="page_span page_btn_span page_down_span">
+						<div class="win_page_area_div">
+					<span class="page_span page_btn_span page_up_span" data-value="-1">
+					上一页
+					</span><span class="page_span  page_info_span" >
+						<span class="page_value"></span>
+						<span>/</span>
+						<span class="total_page_value"></span>
+					</span><span class="page_span page_btn_span page_down_span" data-value="1">
 						下一页
 					</span>
-				</div>
 					</div>
+				</div>
+				<div class="data_content_div message_content">
+				
 				</div>
 			</div>
 		</div>
 	</body>
 	<script type="text/javascript">
-		$(function() {
+	var cp="${pageContext.request.contextPath}";
+	$(function() {
 			var left, top;
 			var moving = false;
 			var changing = false;
@@ -1142,7 +1157,7 @@
 		 	var $load=$("#picturecenter_win .win_body_div .loading_area_div");
 			data.page=page;
 			$.ajax({
-				"url":"admin/pictures",
+				"url":cp+"/admin/pictures",
 				"data":data,
 				"dataType":"json",
 				 beforeSend:function(){
@@ -1182,7 +1197,7 @@
 		function createPicturesHTML(json){
 			var html="";
 			var data=json.data;
-			$(".data_content_div.pictures_content .data_card_div").remove()
+			$(".data_content_div.picture_content .data_card_div").remove()
 			for(var i=0;i<data.length;i++)
 			{
 				var el=data[i].pictures[0];
@@ -1194,29 +1209,29 @@
 				}
 				html+='<div class="data_card_div picture_card_div">'
 					+'<div class="user_img_div">'
-					+'<img src="user/'+el.authorId+'" /></div>'
+					+'<img src="'+cp+'/user/'+el.authorId+'" /></div>'
 					+'<div class="user_info_area_div">'
 					+'<div class="user_info_div">'
-					+'<div class="info_row user_name_div">'
+					+'<div class="info_row picture_pictureTitle_div">'
 					+'<span class="info_name_span">标题：</span>'
 					+'<span class="info_value_span small">'+el.pictureTitle+'</span></div>'
-					+'<div class="info_row  email_div">'
+					+'<div class="info_row  picture_authorId_div">'
 					+'<span class="info_name_span">作者：</span>'
 					+'<span class="info_value_span small">'+userName+'</span></div>'
-					+'<div class="info_row create_time_div">'
+					+'<div class="info_row picture_createtime_div">'
 					+'<span class="info_name_span">上传时间：</span>'
 					+'<span class="info_value_span small">'+el.createTime+'</span></div>'
 					+'<div class="user_is_lock_div '+state+'">'
 					+'</div></div></div>'
 					+'<div class="picture_div">'
-					+'<img src="picture/'+el.pictureId+'/false" /></div>'
+					+'<img src="'+cp+'/picture/'+el.pictureId+'/false" /></div>'
 					+'<div class="data_card_menu_div">'
 					+'<div class="show_info_btn_div">'
 					+'<span class="fa fa-info"></span></div>'
 					+'<div class="edit_info_btn_div">'
 					+'<span class="fa fa-pencil"></span></div></div></div>';
 			}
-			$(".data_content_div.pictures_content").append(html);
+			$(".data_content_div.picture_content").append(html);
 		}
 		
 		function setPageFoot($el,page,totalPage){
@@ -1234,7 +1249,107 @@
 				$el.next().removeClass("disabled");
 			}
 		}
+		getUserList(1);
+		function getUserList(page){
+			$.ajax({
+				"url":cp+"/getUserList",
+				"data":{"page":page,"pageSize":"15"},
+				"dataType":"json",
+				"success":function(json){
+					createUserHTML(json.data);
+					setPageFoot($("#usercenter_win .page_info_span"),page,json.totalPage)
+				}
+			})
+		}
 		
+		function createUserHTML(datas){
+			var html="";
+			$(".data_content_div.user_content .data_card_div").remove()
+			for(var i=0;i<datas.length;i++)
+			{
+				var user=datas[i];
+				var state="green";
+				if(state!="N")
+				{
+					state="red";
+				}
+				html+='<div class="data_card_div user_card_div">'
+					+'<div class="user_img_div">'
+					+'<img src="'+cp+'/user/'+user.userId+'" /></div>'
+					+'<div class="user_info_area_div">'
+					+'<div class="user_info_div">'
+					+'<div class="info_row user_name_div">'
+					+'<span class="info_name_span">用户名：</span>'
+					+'<span class="info_value_span small">'+user.userName+'</span></div>'
+					+'<div class="info_row  email_div">'
+					+'<span class="info_name_span">邮箱：</span>'
+					+'<span class="info_value_span small">'+user.email+'</span></div>'
+					+'<div class="info_row create_time_div">'
+					+'<span class="info_name_span">注册时间：</span>'
+					+'<span class="info_value_span small">'+user.createTime+'</span></div>'
+					+'<div class="user_is_lock_div '+state+'">'
+					+'</div></div></div>'
+					+'<div class="data_card_menu_div">'
+					+'<div class="show_info_btn_div">'
+					+'<span class="fa fa-info"></span></div>'
+					+'<div class="edit_info_btn_div">'
+					+'<span class="fa fa-pencil"></span></div></div></div>';
+			}
+			$(".data_content_div.user_content").append(html);
+		}
+		getMsgList(1);
+		function getMsgList(page){
+			$.ajax({
+				"url":cp+"/msg/key",
+				"data":{"page":page,"pageSize":"15"},
+				"dataType":"json",
+				"success":function(json){
+					createMsgHTML(json.data);
+					setPageFoot($("#messagecenter_win .page_info_span"),page,json.totalPage)
+				}
+			})
+		}
+		function createMsgHTML(datas){
+			var html="";
+			$(".data_content_div.user_content .data_card_div").remove()
+			for(var i=0;i<datas.length;i++)
+			{
+				var msg=datas[i];
+				var star="";
+				for(var j=0;j<msg.star;j++)
+				{
+					star+='<span class="fa fa-star" style="color:yellow"></span>';
+				}
+				var state="green";
+				if(state!="N")
+				{
+					state="red";
+				}
+				html+='<div class="data_card_div message_card_div">'
+					+'<div class="user_img_div">'
+					+'<img src="'+cp+'/user/'+msg.authorId+'" /></div>'
+					+'<div class="user_info_area_div">'
+					+'<div class="user_info_div">'
+					+'<div class="info_row message_star_div">'
+					+'<span class="info_name_span">星级：</span>'
+					+'<span class="info_value_span ">'+star+'</span></div>'
+					+'<div class="info_row  email_div">'
+					+'<div class="info_row create_time_div">'
+					+'<span class="info_name_span">发表时间：</span>'
+					+'<span class="info_value_span small">'+msg.createTime+'</span></div>'
+					+'<span class="info_name_span">内容：</span>'
+					+'<span class="info_value_span small">'+msg.content+'</span></div>'
+					+'<div class="user_is_lock_div '+state+'">'
+					+'</div></div></div>'
+					+'<div class="data_card_menu_div">'
+					+'<div class="show_info_btn_div">'
+					+'<span class="fa fa-info"></span></div>'
+					+'<div class="edit_info_btn_div">'
+					+'<span class="fa fa-pencil"></span></div></div></div>';
+			}
+			$(".data_content_div.message_content").append(html);
+		
+		}
 		
 	</script>
 

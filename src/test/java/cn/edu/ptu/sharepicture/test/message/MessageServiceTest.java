@@ -40,4 +40,11 @@ public class MessageServiceTest {
 		System.out.println(rf.getData());
 	}
 	
+	@Test
+	public void getMessageByKey() {
+		SearchForm sf=new SearchForm();
+		ReturnForm<Message> rf=ms.getMsgByKey(sf);
+		System.out.println(rf.getData());
+	}
+	
 }

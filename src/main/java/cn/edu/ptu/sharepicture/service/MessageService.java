@@ -31,7 +31,15 @@ public class MessageService {
 		rf.setPage(sf.getPage());
 		rf.setPageSize(sf.getPageSize());
 		return rf;
+	}
 
+	public ReturnForm<Message> getMsgByKey(SearchForm sf) {
+		ReturnForm<Message> rf = new ReturnForm<Message>();
+		rf.setData(mm.getMsgByKey(sf));
+		rf.setTotal(mm.getTotal(sf.getKey()));
+		rf.setPage(sf.getPage());
+		rf.setPageSize(sf.getPageSize());
+		return rf;
 	}
 
 }

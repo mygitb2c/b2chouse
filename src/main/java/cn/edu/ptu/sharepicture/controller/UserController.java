@@ -2,6 +2,7 @@ package cn.edu.ptu.sharepicture.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import cn.edu.ptu.sharepicture.entity.ReturnForm;
+import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
 import cn.edu.ptu.sharepicture.service.UserService;
 import cn.edu.ptu.sharepicture.util.ImageUtil;
@@ -133,6 +136,12 @@ public class UserController {
 	public boolean updatePassword(User user, @Param(value = "new_pwd") String new_pwd) {
 		boolean flag = userService.updatePassword(user, new_pwd);
 		return flag;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="getUserList")
+	public ReturnForm<User> getUserListByKey(SearchForm sf){
+		return userService.getUserListByKey(sf);
 	}
 
 }

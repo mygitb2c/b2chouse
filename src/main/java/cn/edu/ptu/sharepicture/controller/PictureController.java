@@ -66,6 +66,7 @@ public class PictureController {
 	@RequestMapping(value = "picture/{pId}")
 	public ModelAndView getPictureInfo(@PathVariable(value = "pId") String pictureId, ModelAndView modelAndView) {
 		modelAndView.setViewName("picture");
+		ps.updataClick(pictureId);
 		User u = ps.getPictureById(pictureId);
 		modelAndView.addObject("picture", u.getPictures().get(0));
 		modelAndView.addObject("authorName", u.getUserName());
@@ -117,14 +118,17 @@ public class PictureController {
 
 	// 通过图片编号获取图片名，并通过图片名从本地硬盘上获取图片返回给页面
 	@RequestMapping(value = "picture/{pictureId}/{download}")
+	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public void getPictureFromHD(@PathVariable(value = "pictureId") String pictureId,
 			@PathVariable(value = "download") boolean download, HttpServletRequest request,
 			HttpServletResponse response) {
 		String pictureName = ps.getPictureNameById(pictureId);
 		String picturePath = prePath + pictureName;
 		if (download == true) {
+			ps.updataDownload(pictureId);
 			response.setContentType("application/file-download");
 			response.addHeader("Content-Disposition", "attachment; filename=" + pictureName);
+			
 		}
 		ImageUtil.getImage(response, picturePath);
 	}
@@ -141,18 +145,9 @@ public class PictureController {
 		return ps.getPictureByPId_admin(pictureId);
 	}
 
-	@RequestMapping(value = "when")
-	public String when() {
-		return "forward:when.jsp";
-	}
-
-	@RequestMapping(value = "when_ajax")
 	@ResponseBody
-	public String when(@RequestParam(value = "value") int value) {
-		List<Page> list = new ArrayList<Page>();
-		Page page = new Page();
-		page.setPage(value);
-		list.add(page);
-		return value * 2 + "";
+	@RequestMapping(value="getDownload")
+	public int getDownload(@RequestParam(value="pictureId")String pictureId) {
+		return ps.getDownload(pictureId);
 	}
 }

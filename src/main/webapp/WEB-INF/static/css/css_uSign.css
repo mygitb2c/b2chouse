@@ -188,6 +188,7 @@ button.login_btn {
 	background: #00B271;
 	outline: none;
 	border: none;
+	cursor: pointer;
 }
 
 .login_area .alert {
@@ -230,7 +231,7 @@ button.login_btn {
 }
 
 .login_win {
-	padding-top: 2em;
+	padding: 2em 0em;
 	background: #fff;
 }
 

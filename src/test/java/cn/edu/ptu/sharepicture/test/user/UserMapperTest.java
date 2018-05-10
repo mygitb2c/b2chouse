@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.edu.ptu.sharepicture.dao.UserMapper;
+import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -72,6 +73,12 @@ public class UserMapperTest {
 		System.out.println(u.toString());
 	}
 	
-	
+	@Test
+	public void getUserListByKey() {
+		List<User> list=userMapper.getUserListByKey(new SearchForm());
+		for (User user : list) {
+			System.out.println(user);
+		}
+	}
 
 }

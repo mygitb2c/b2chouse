@@ -58,5 +58,17 @@ public class PictureService {
 	public User getPictureByPId_admin(String pictureId) {
 		return pm.getPictureByPId_admin(pictureId);
 	}
+	
+	public boolean updataClick(String pictureId) {
+		return pm.updataClick(pictureId);
+	}
+	
+	public boolean updataDownload(String pictureId) {
+		return pm.updataDownload(pictureId);
+	}
+	
+	public int getDownload(String pictureId) {
+		return pm.getDownload(pictureId);
+	}
 
 }

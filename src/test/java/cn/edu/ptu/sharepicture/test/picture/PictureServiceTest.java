@@ -34,12 +34,27 @@ public class PictureServiceTest {
 	public void getPicturesByKey_admin() {
 		Picture picture = new Picture();
 		picture.setPictureTitle("");
-		User user=new User();
+		User user = new User();
 		user.setUserName("");
 		picture.setAuthorId("8EA7EDE3A8AB4CBFB9819C5ED28460FB");
 		ReturnForm<User> rf = ps.getPicturesByKey_admin(user, picture, new SearchForm());
 		for (User u : rf.getData()) {
 			System.out.println(u);
 		}
+	}
+
+	@Test
+	public void updateNum() {
+		String pictureId = "B94AAB2B57B54B2C8E32439A7192DF5E";
+		boolean d = ps.updataDownload(pictureId);
+		boolean c = ps.updataClick(pictureId);
+		System.out.println(d + "," + c);
+	}
+	
+	@Test
+	public void getDownload() {
+		String pictureId = "B94AAB2B57B54B2C8E32439A7192DF5E";
+		int download=ps.getDownload(pictureId);
+		System.out.println(download);
 	}
 }

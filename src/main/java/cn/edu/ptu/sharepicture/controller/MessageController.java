@@ -31,4 +31,10 @@ public class MessageController {
 		return ms.getMsgsByPId(sf);
 	}
 
+	@ResponseBody
+	@RequestMapping(value="msg/key")
+	public ReturnForm<Message> getMsgByKey(SearchForm sf){
+		return ms.getMsgByKey(sf);
+	}
+	
 }
