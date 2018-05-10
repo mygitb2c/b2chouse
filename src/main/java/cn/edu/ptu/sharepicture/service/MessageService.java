@@ -26,10 +26,10 @@ public class MessageService {
 
 	public ReturnForm<Message> getMsgsByPId(SearchForm sf) {
 		ReturnForm<Message> rf = new ReturnForm<Message>();
+		rf.setPageSize(sf.getPageSize());
 		rf.setData(mm.getMsgsByPId(sf));
 		rf.setTotal(mm.getTotal(sf.getKey()));
 		rf.setPage(sf.getPage());
-		rf.setPageSize(sf.getPageSize());
 		return rf;
 	}
 
@@ -40,6 +40,10 @@ public class MessageService {
 		rf.setPage(sf.getPage());
 		rf.setPageSize(sf.getPageSize());
 		return rf;
+	}
+
+	public int getTotal(String key) {
+		return mm.getTotal(key);
 	}
 
 }

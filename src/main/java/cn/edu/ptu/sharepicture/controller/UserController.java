@@ -74,18 +74,16 @@ public class UserController {
 		return flag;
 	}
 
-	@ResponseBody
+	
 	@RequestMapping(value = "userRegister", method = RequestMethod.POST)
-	public boolean registered(User user, HttpSession session) {
-		boolean result = false;
+	public String registered(User user, HttpSession session) {
+		String path = "forward:uSign.jsp";
 		String userId = userService.insertUser(user);
 		if (userId != null) {
 			session.setAttribute("userId", userId);
-			result = true;
-		} /*
-			 * else { path += "register"; }
-			 */
-		return result;
+			path = "forward:main.jsp";
+		} 
+		return path;
 	}
 
 	@RequestMapping(value = "userLogin", method = RequestMethod.GET)

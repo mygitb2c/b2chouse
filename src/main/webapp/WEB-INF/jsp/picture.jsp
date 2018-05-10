@@ -154,11 +154,11 @@
 				</div> -->
 				</div>
 				<div class="msg_panel_footer_div">
-					<span class="page_span page_btn_span page_up_span">
+					<span class="page_span page_btn_span page_up_span" data-value="-1">
 					上一页
 					</span><span class="page_span  page_info_span">
-						0/0
-					</span><span class="page_span page_btn_span page_down_span">
+						<span class="page_value"></span><span class="">/</span><span class="total_page_value"></span>
+					</span><span class="page_span page_btn_span page_down_span"  data-value="1">
 						下一页
 					</span>
 				</div>
@@ -311,6 +311,11 @@
 				location.href=cp+"/picture/"+pId+"/true";
 				setTimeout("getDownload()",200);
 			})
+			$(document).on("click",".page_btn_span:not('.disabled')",function(){
+				var value=Number($(this).attr("data-value"));
+				var page=Number($(".page_value").text())+value;
+				getMsg(page);
+			})
 		})
 		var editor,doc;
 		ini();
@@ -437,7 +442,8 @@
 				$(".msg_panel_footer_div").remove("active");
 				return;
 			}
-			$(".page_info_span").text(page+"/"+totalPage);
+			$(".page_info_span .page_value").text(page);
+			$(".page_info_span .total_page_value").text(totalPage);
 			if(page<=1)
 			{
 				$(".page_up_span").addClass("disabled");
@@ -469,6 +475,7 @@
 			$.ajax(config).done(function(){
 				getMsg(1);
 				$("#msg_edit_content_div").contents().find("body").html("");
+				$(".edit_power_off_span").click();
 			}).always(function(){
 				$el.removeClass("loading");
 			})

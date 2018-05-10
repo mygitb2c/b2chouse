@@ -25,14 +25,18 @@ public class UserServiceTest {
 
 	@Test
 	public void insertTest() {
-		User user = new User("王王王","123", "512370345@qq.com");
-		String userId = userService.insertUser(user);
-		System.out.println(userId);
+		String[] names = new String[] { "王王王", "阿斯达", "考拉", "海艺大厦", "超级管理员", "史蒂夫" };
+		String[] emails = new String[] { "www", "asd", "kola", "stupid", "admin", "sdf" };
+		for (int i = 0; i < names.length; i++) {
+			User user = new User(names[i], "123456", emails[i]+"@qq.com");
+			String userId = userService.insertUser(user);
+			System.out.println(userId);
+		}
 	}
 
 	@Test
 	public void loginTest() {
-		boolean result = userService.login("512370345@qq.com", "123456",null);
+		boolean result = userService.login("512370345@qq.com", "123456", null);
 		System.out.println(result);
 	}
 
@@ -44,10 +48,10 @@ public class UserServiceTest {
 		boolean flag = userService.updateUser(user);
 		System.out.println(flag);
 	}
-	
+
 	@Test
 	public void isRepeatTest() {
-		boolean n=userService.isRepeat(null, "王王");
+		boolean n = userService.isRepeat(null, "王王");
 		System.out.println(n);
 	}
 

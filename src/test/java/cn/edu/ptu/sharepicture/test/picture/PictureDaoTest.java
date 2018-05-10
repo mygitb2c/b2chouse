@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.edu.ptu.sharepicture.dao.PictureMapper;
+import cn.edu.ptu.sharepicture.dao.UserMapper;
 import cn.edu.ptu.sharepicture.entity.Picture;
 import cn.edu.ptu.sharepicture.entity.SearchForm;
 import cn.edu.ptu.sharepicture.entity.User;
@@ -30,6 +31,8 @@ public class PictureDaoTest {
 
 	@Resource
 	private PictureMapper pm;
+	@Resource
+	private UserMapper um;
 	@Value("${picture_path}")
 	private String picPath;
 
@@ -51,22 +54,25 @@ public class PictureDaoTest {
 	}
 
 	public void getPicture(File file) {
-		String[] authors = new String[] { "8EA7EDE3A8AB4CBFB9819C5ED28460FB", "8EA7EDE3A8AB4CBFB9819C5ED28460FB",
-				"5ffcdf537ccb479c844459e47df4216e" };
+		List<User> list = um.getUserListByKey(new SearchForm());
 		Picture picture = null;
 		File[] files = file.listFiles();
+		String[] titles = new String[] { " 非常棒打发斯蒂芬！balabalabalabalaba...发顺丰三个人各安达市", "第三方坚实的讽德诵功梵蒂冈，水电费是否想找个地方",
+				"萨尔茨卡默古特地区山峦重叠，湖泊星罗棋布。优美的自然风景，曾吸引了无数艺术家和文人墨客。如今，这里清新的空气、清澈见底的湖水、以及名胜古迹和完善的运动设施，构成了人们理想的度假胜地。",
+				"包括244个岛屿、小岛和海岸区。CORTEZ海和它的岛屿被称为研究物种形成的自然实验室。而且，为几乎全部的海洋领域的海洋科学家提供了极其重要的研究场所。由悬崖和沙地海滩构成的给人深刻印象的自然美环境，与绿水环绕和沙漠形成强烈对比。" };
 		for (File f : files) {
 			if (f.isFile()) {
 				picture = new Picture();
 				String type = f.getName().substring(f.getName().lastIndexOf("."));
 				String id = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
-				int author = (int) (Math.random() * 3);
 				int clickCount = (int) (Math.random() * 99) + 1;
 				picture.setClickCount(clickCount + "");
 				int download = (int) (Math.random() * 99) + 1;
+				int user = (int) (Math.random() * list.size());
+				int tindex=(int)(Math.random()*titles.length);
 				picture.setDownload(download + "");
 				picture.setPictureId(id);
-				picture.setAuthorId(authors[author]);
+				picture.setAuthorId(list.get(user).getUserId());
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String createTime = dateFormat.format(new Date()).substring(0, 17);
 				int ss = (int) (Math.random() * 51) + 10;
@@ -79,6 +85,7 @@ public class PictureDaoTest {
 				}
 				String title = f.getName().split(" ")[0].split("_")[0];
 				picture.setPictureTitle(title);
+				picture.setRemark(titles[tindex]);
 				picture.setPictureName(id + type);
 				pm.insertPicture(picture);
 				try {

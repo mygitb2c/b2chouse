@@ -1327,7 +1327,7 @@
 				}
 				html+='<div class="data_card_div message_card_div">'
 					+'<div class="user_img_div">'
-					+'<img src="'+cp+'/user/'+msg.authorId+'" /></div>'
+					+'<img src="'+cp+'/user/'+msg.senderId+'" /></div>'
 					+'<div class="user_info_area_div">'
 					+'<div class="user_info_div">'
 					+'<div class="info_row message_star_div">'

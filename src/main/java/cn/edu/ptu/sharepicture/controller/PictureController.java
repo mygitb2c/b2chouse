@@ -88,11 +88,7 @@ public class PictureController {
 	@RequestMapping(value = "insert")
 	@ResponseBody
 	@Transactional(isolation = Isolation.REPEATABLE_READ, propagation = Propagation.REQUIRED)
-	public String insert(Picture picture, @RequestParam(value = "img") MultipartFile img, HttpServletRequest request) {
-		/*
-		 * HttpSession session=request.getSession(); String
-		 * authorId=session.getAttribute("userId")+"";
-		 */
+	public String insert(Picture picture, @RequestParam(value = "img") MultipartFile img, HttpSession session) {
 		int i = img.getOriginalFilename().lastIndexOf(".");
 		String type = img.getOriginalFilename().substring(i);
 		String pictureId = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
@@ -105,7 +101,7 @@ public class PictureController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		picture.setAuthorId("79DC6FA4F265451E8C2947E26FFC7713");
+		picture.setAuthorId(session.getAttribute("userId")+"");
 		picture.setPictureId(pictureId);
 		picture.setPictureName(fileName);
 		String result = null;
