@@ -954,7 +954,6 @@
 	</body>
 	<script type="text/javascript">
 		$(function() {
-
 			var left, top;
 			var moving = false;
 			var changing = false;
@@ -1129,7 +1128,7 @@
 		 	var $load=$("#picturecenter_win .win_body_div .loading_area_div");
 			data.page=page;
 			$.ajax({
-				"url":"admin/pictures",
+				"url":"pictures",
 				"data":data,
 				"dataType":"json",
 				 beforeSend:function(){
@@ -1181,7 +1180,7 @@
 				}
 				html+='<div class="data_card_div picture_card_div">'
 					+'<div class="user_img_div">'
-					+'<img src="picture/'+el.pictureId+'/false" /></div>'
+					+'<img src="../picture/'+el.pictureId+'/false" /></div>'
 					+'<div class="user_info_area_div">'
 					+'<div class="user_info_div">'
 					+'<div class="info_row user_name_div">'
@@ -1196,7 +1195,7 @@
 					+'<div class="user_is_lock_div '+state+'">'
 					+'</div></div></div>'
 					+'<div class="picture_div">'
-					+'<img src="picture/'+el.pictureId+'/false" /></div>'
+					+'<img src="../picture/'+el.pictureId+'/false" /></div>'
 					+'<div class="data_card_menu_div">'
 					+'<div class="show_info_btn_div">'
 					+'<span class="fa fa-info"></span></div>'
