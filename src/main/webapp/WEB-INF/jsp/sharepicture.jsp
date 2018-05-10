@@ -215,6 +215,7 @@
 				color: #fff;
 				border-radius: 0.3em;
 				border: 2px solid #32383E;
+				margin: 0.2em;
 			}
 			
 			.main_link_div>div {
@@ -270,6 +271,8 @@
 			height: 100%;
 			background:rgba(0,0,0,0.5);
 			display: none;
+			top:0em;
+			left:0em;
 			}
 			.loading_div.active{
 			display:block; 

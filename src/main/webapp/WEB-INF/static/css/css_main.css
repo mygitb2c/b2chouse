@@ -31,7 +31,15 @@ a,
 .card-text {
 	cursor: pointer;
 }
-
+.nav_userImage_img{
+	width: 3.5em;
+	height: 3.5em;
+	border-radius: 3.5em;
+	cursor: pointer;
+}
+.nav_userImage_input{
+	display: none;
+}
 .width_30 {
 	width: 30%;
 }

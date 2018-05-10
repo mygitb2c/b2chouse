@@ -49,7 +49,7 @@
 		</where>
 	</select>
 
-	<select id="getUserImage" resultType="String">
+	<select id="getUserImage" resultType="String" useCache="false">
 		SELECT userImage FROM user
 		WHERE userId=#{userId}
 	</select>

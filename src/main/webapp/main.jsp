@@ -44,8 +44,8 @@
 				</a>
 			</div>
 			<div class="col-md-4 nav_menu user_menu ">
-				<a class="userinfo_a " href="my"> <i class="fa fa-user-o fa-fw fa-lg"></i> 我的
-				</a>
+				<img class="nav_userImage_img" src="${pageContext.request.contextPath}/user/${userId}?"/>
+				<input type="file" accept="Image/*" size="1" class="nav_userImage_input" />
 				<a class="exit_a "> <i class="fa fa-sign-out fa-fw fa-lg"></i> 注销
 				</a>
 				<a class="sharepic_a " href="share"> <i class="fa fa-share-alt fa-fw fa-lg"></i> 发图
@@ -153,6 +153,23 @@
 	</body>
 	<script type="text/javascript">
 		var userId = "${userId}";
+		$(function(){
+			$(".nav_userImage_img").click(function(){
+				$(".nav_userImage_input").click();
+			})
+			$(".nav_userImage_input").change(function(){
+				var fd=new FormData();
+				fd.append("img",$(this).prop("files")[0]);
+				$.ajax({"url":"userImage","data":fd,"type":"Post","cache": false,"processData": false,"contentType": false	
+				}).done(function(json){
+					if(json)
+					{
+						var src=$(".nav_userImage_img").attr("src")+"1";
+						$(".nav_userImage_img").attr("src",src);
+					}
+				})
+			})
+		})
 	</script>
 	<script src="static/js/js_main.js" type="text/javascript" charset="utf-8"></script>
 

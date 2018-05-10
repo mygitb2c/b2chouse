@@ -95,8 +95,8 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping(value = "userImage")
-	public boolean changeUserImage(@RequestParam(value = "img") MultipartFile img) {
-		String userId = "79DC6FA4F265451E8C2947E26FFC7713";
+	public boolean changeUserImage(@RequestParam(value = "img") MultipartFile img,HttpSession session) {
+		String userId = session.getAttribute("userId")+"";
 		int i = img.getOriginalFilename().lastIndexOf(".");
 		String type = img.getOriginalFilename().substring(i);
 		String imageId = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
