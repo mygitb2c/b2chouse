@@ -21,13 +21,13 @@
 		FROM user
 	</select>
 
-	<select id="login"
-		resultType="cn.edu.ptu.sharepicture.entity.User">
-		SELECT USERID,ISLOCK FROM user
+	<select id="login" resultType="String">
+		SELECT userId FROM user
 		WHERE
 		EMAIL=#{email}
 		AND
 		PASSWORD=#{password}
+		AND ISLOCK="N"
 	</select>
 
 	<select id="getUserInfo"
@@ -49,7 +49,12 @@
 		</where>
 	</select>
 
-	<insert id="insertUser" >
+	<select id="getUserImage" resultType="String">
+		SELECT userImage FROM user
+		WHERE userId=#{userId}
+	</select>
+
+	<insert id="insertUser">
 		INSERT INTO user
 		(userId,userName,password,email,createTime)
 		values(#{userId},#{userName},#{password},#{email},#{createTime})
@@ -65,9 +70,14 @@
 	</update>
 
 	<update id="updatePassword">
-		UPDATE user SET PASSWORD=#{new_pwd}
+		UPDATE user SET password=#{new_pwd}
 		WHERE
-		USERID=#{userId} AND PASSWORD=#{password}
+		userId=#{userId} AND password=#{password}
+	</update>
+
+	<update id="changeUserImage">
+		UPDATE user SET userImage=#{userImage} WHERE
+		userId=#{userId}
 	</update>
 
 
