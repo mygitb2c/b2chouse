@@ -36,7 +36,7 @@ $(function() {
 	$(document).scroll(function() {
 		$foot = $(".footer_loading_div");
 		var scrollTop = $(this).scrollTop();
-		var height = $(document).height() - $(window).height();
+		var height = Number($(document).height() - $(window).height()-10);
 		if(scrollTop >= height && !$(".progress_div").hasClass("active")) {
 			$(this).scrollTop(scrollTop - 10);
 			var page = $(".page_btn_div.active").next().attr("data-page");
