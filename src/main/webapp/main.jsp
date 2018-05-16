@@ -6,13 +6,13 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Share Picture</title>
-		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="static/css/font-awesome.css" />
-		<link rel="stylesheet" type="text/css" href="static/css/buttons.css" />
-		<link rel="stylesheet" type="text/css" href="static/css/css_main.css" />
-		<script src="static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
-		<script src="static/js/popper.js" type="text/javascript" charset="utf-8"></script>
-		<script src="static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/buttons.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/css_main.css" />
+		<script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/js/popper.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
@@ -171,6 +171,6 @@
 			})
 		})
 	</script>
-	<script src="static/js/js_main.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${pageContext.request.contextPath}/static/js/js_main.js" type="text/javascript" charset="utf-8"></script>
 
 </html>

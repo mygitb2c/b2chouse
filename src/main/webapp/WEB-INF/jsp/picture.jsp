@@ -6,14 +6,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>${picture.pictureTitle}</title>
-		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.css" />
-		<link rel="stylesheet" type="text/css" href="../static/css/colorPicker.css" />
-		<link rel="stylesheet" type="text/css" href="../static/css/css_picture.css" />
-		<script src="../static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../static/js/popper.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../static/js/jquery.colorPicker.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/colorPicker.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/css_picture.css" />
+		<script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/js/popper.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/js/jquery.colorPicker.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 		function picLloadComplete(picture) {
 			console.log("加载完成:"+picture.offsetHeight);

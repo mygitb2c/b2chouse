@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>分享</title>
-		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="static/css/font-awesome.css" />
-		<script src="static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/font-awesome.css" />
+		<script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
 		<style type="text/css">
 			body {
 				position: relative;

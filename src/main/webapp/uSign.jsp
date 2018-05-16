@@ -6,13 +6,13 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>注册/登录</title>
-		<link rel="stylesheet" type="text/css" href="static/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="static/css/font-awesome.css" />
-		<link rel="stylesheet" type="text/css" href="static/css/css_uSign.css" />
-		<script src="static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
-		<script src="static/js/jquery.validate.js" type="text/javascript" charset="utf-8"></script>
-		<script src="static/js/tool.js" type="text/javascript" charset="utf-8"></script>
-		<script src="static/js/js_uSign.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/css_uSign.css" />
+		<script src="${pageContext.request.contextPath}/static/js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/js/jquery.validate.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/js/tool.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/static/js/js_uSign.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
