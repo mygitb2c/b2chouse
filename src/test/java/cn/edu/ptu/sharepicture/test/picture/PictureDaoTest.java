@@ -35,11 +35,13 @@ public class PictureDaoTest {
 	private UserMapper um;
 	@Value("${picture_path}")
 	private String picPath;
+	@Value("${hdd_path}")
+	private String hddPath;
 
 	@Test
 	public void insert() {
-		String fSPath = "D://potp截图/";
-		File file = new File(fSPath);
+		String path = hddPath;
+		File file = new File(path);
 		getPicture(file);
 
 	}

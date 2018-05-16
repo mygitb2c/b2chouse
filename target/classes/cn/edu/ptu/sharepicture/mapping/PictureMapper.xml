@@ -8,7 +8,7 @@
 		createTime
 	</sql>
 	<sql id="picture_detailed">
-		pictureId,authorId,pictureTitle,userName,userImage,pictures.createTime
+		pictureId,authorId,pictureTitle,userName,pictures.createTime
 		createTime,remark,clickCount,download
 	</sql>
 	<sql id="orderBy">
@@ -77,7 +77,7 @@
 	<select id="getPicturesByKey_admin" resultMap="pictures_User">
 		SELECT
 		<include refid="picture_simple"></include>
-		,userImage, pictures.isLock isLock From pictures
+		,authorId, pictures.isLock isLock From pictures
 		RIGHT JOIN user ON
 		authorId=userId
 		<where>
@@ -123,6 +123,18 @@
 		,pictures.isLock isLock FROM pictures INNER JOIN user ON
 		authorId=userId WHERE pictureId=#{pictureId}
 	</select>
+	
+	<select id="getDownload" resultType="Integer">
+		SELECT download FROM pictures WHERE pictureId=#{pictureId}
+	</select>
+	
+	<update id="updataClick">
+		UPDATE pictures SET clickCount=clickCount+1 WHERE pictureId=#{pictureId}
+	</update>
+	
+	<update id="updataDownload">
+		UPDATE pictures SET download=download+1 WHERE pictureId=#{pictureId}
+	</update>
 
 
 	<resultMap type="cn.edu.ptu.sharepicture.entity.User"

@@ -49,9 +49,20 @@
 		</where>
 	</select>
 
-	<select id="getUserImage" resultType="String">
-		SELECT userImage FROM user
+	<select id="getUserImage" resultType="String" useCache="false">
+		SELECT
+		userImage FROM user
 		WHERE userId=#{userId}
+	</select>
+
+	<select id="getUserListByKey"
+		resultType="cn.edu.ptu.sharepicture.entity.User">
+		SELECT * FROM user ORDER BY createTime DESC LIMIT
+		#{start},#{pageSize}
+	</select>
+	
+	<select id="getTotal" resultType="Integer">
+		SELECT COUNT(1) FROM user
 	</select>
 
 	<insert id="insertUser">
