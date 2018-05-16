@@ -48,10 +48,6 @@ public class PictureController {
 	@Resource
 	private PictureService ps;
 
-	@RequestMapping(value = "/form")
-	public String demo() {
-		return "form";
-	}
 
 	@RequestMapping(value = { "/", "main" })
 	public String index() {
@@ -59,8 +55,13 @@ public class PictureController {
 	}
 
 	@RequestMapping(value = "/share")
-	public String share() {
-		return "sharepicture";
+	public String share(HttpSession session) {
+		String path="sharepicture";
+		if(session.getAttribute("userId")==null)
+		{
+			path="forward:uSign.jsp";
+		}
+		return path;
 	}
 
 	@RequestMapping(value = "picture/{pId}")
