@@ -469,7 +469,12 @@
 				$el.addClass("data_error");
 				$el.val("");
 				return;
-			} else {
+			} else if(file.size>10485760){
+				showMsg("上传的图片大小不能超过10MB");
+				$el.addClass("data_error");
+				$el.val("");
+				return;
+			}else {
 				$(".picture_drop_load_area").addClass("active");
 				$el.removeClass("data_error");
 			}
